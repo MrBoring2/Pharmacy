@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,25 +23,62 @@ namespace PharmacyApp.CustomControls
     /// </summary>
     public partial class PasswordUserControl : UserControl, INotifyPropertyChanged
     {
-        public SecureString Password
+        bool isPasswordChanging;
+        private int maxLength;
+        private char passwordChar;
+        public string Password
         {
-            get { return (SecureString)GetValue(PasswordProperty); }
-            set { SetValue(PasswordProperty, value); }
+            get { return (string)GetValue(PasswordProperty); }
+            set { SetValue(PasswordProperty, value);}
         }
+
+
+        public char PasswordChar { get => passwordChar; set { passwordChar = value; OnPropertyChanged(); } }
+        public int MaxLength { get => maxLength; set { maxLength = value; OnPropertyChanged(); } }
+
         public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.Register("Password", typeof(SecureString), typeof(PasswordUserControl),
-                new PropertyMetadata(default(SecureString)));
+            DependencyProperty.Register("Password", typeof(string), typeof(PasswordUserControl),
+                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                    PasswordPropertyChanged, null, false, UpdateSourceTrigger.PropertyChanged));
+
+        private static void PasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if(d is PasswordUserControl passwordUserControl)
+            {
+                passwordUserControl.UpdatePassword();
+            }
+        }
+
+        private void UpdatePassword()
+        {
+            if (!isPasswordChanging)
+            {
+                PasswordBox.Password = Password;
+
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
         public PasswordUserControl()
         {
             InitializeComponent();
 
             // Update DependencyProperty whenever the password changes
-            PasswordBox.PasswordChanged += (sender, args) => {
-                Password = ((PasswordBox)sender).SecurePassword;
-            };
+            //PasswordBox.PasswordChanged += (sender, args) => {
+            //    Password = ((PasswordBox)sender).SecurePassword;
+            //};
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            isPasswordChanging = true;
+            Password = PasswordBox.Password;
+            isPasswordChanging = false;
         }
     }
 }

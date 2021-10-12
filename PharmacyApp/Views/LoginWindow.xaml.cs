@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmacyApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace PharmacyApp.Views
         public LoginWindow()
         {
             InitializeComponent();
+            this.DataContext = new LiginWindowVM();
         }
     }
 }
