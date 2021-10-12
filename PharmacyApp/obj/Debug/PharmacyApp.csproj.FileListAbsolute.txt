@@ -117,7 +117,6 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\System.Text.Json.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\System.Threading.Channels.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\System.ValueTuple.xml
-C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.AssemblyReference.cache
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\LoginWindow.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\App.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp_MarkupCompile.cache
@@ -130,3 +129,7 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.Co
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.CopyComplete
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.exe
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.pdb
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\CustomControls\PasswordUserControl.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\CustomControls\PasswordUserControl.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.AssemblyReference.cache

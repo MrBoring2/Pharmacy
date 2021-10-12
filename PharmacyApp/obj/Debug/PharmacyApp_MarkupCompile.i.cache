@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\App.xaml
-11390514949
+2172924388
 
-14480961124
+14-416307376
 144288511840
-Views\LoginWindow.xaml;
+CustomControls\PasswordUserControl.xaml;Views\LoginWindow.xaml;
 
 True
 

@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PharmacyApp.Views"
         mc:Ignorable="d"
+        xmlns:controls="clr-namespace:PharmacyApp.CustomControls"
         Title="Окно входа" Height="573" Width="300" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
     <Window.Resources>
-        <Style x:Key="PasswordHidden" TargetType="PasswordBox">
+        <Style x:Key="PasswordHidden" TargetType="controls:PasswordUserControl">
             <Style.Triggers>
                 <MultiDataTrigger></MultiDataTrigger>
                 <DataTrigger Binding="{Binding ElementName=ShowPassword, Path=IsChecked}" Value="True">
@@ -21,11 +22,11 @@
         </Style>
         <Style x:Key="PasswordShown" TargetType="TextBox">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=ShowPassword, Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=ShowPassword, Path=IsChecked}" Value="True">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Setter Property="Text" Value="{Binding Password}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=ShowPassword, Path=IsChecked}" Value="True">
+                <DataTrigger Binding="{Binding ElementName=ShowPassword, Path=IsChecked}" Value="False">
                     <Setter Property="Visibility" Value="Hidden"/>
                     <Setter Property="Text" Value="{Binding Password}"/>
                 </DataTrigger>
@@ -44,8 +45,8 @@
                 <TextBox FontSize="13" FontFamily="Comic Sans MS" Height="30" Text="{Binding a}" Margin="0,10,0,10"/>
                 <TextBlock FontSize="15" FontFamily="Comic Sans MS" Height="30" Text ="Пароль"/>
 
-                <PasswordBox Style="{StaticResource PasswordHidden}" FontSize="13" FontFamily="Comic Sans MS" Height="30" PasswordChar="*" Margin="0,10,0,10" MaxLength="13"/>
-                <TextBox Text="{Binding Password}" Style="{StaticResource PasswordShown}" Margin="0,-40,0, 10" Visibility="Hidden"></TextBox>
+                <controls:PasswordUserControl Password="{Binding Password}" x:Name="PasswordHidden" Style="{StaticResource PasswordHidden}" FontSize="13" FontFamily="Comic Sans MS" Height="30" PasswordChar="*" Margin="0,10,0,10" MaxLength="13"/>
+                <TextBox Text="{Binding Password}" x:Name="PasswordShown" Style="{StaticResource PasswordShown}" Margin="0,-40,0, 10" Visibility="Hidden"></TextBox>
                 <CheckBox x:Name="ShowPassword" Content="Показать пароль" Margin="0,-5,0,0" IsChecked="{Binding ShowPassword}">
                     
                 </CheckBox>

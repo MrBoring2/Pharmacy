@@ -179,6 +179,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\PasswordUserControl.xaml.cs">
+      <DependentUpon>PasswordUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Notofication.cs" />
     <Compile Include="Services\ApiServices\UserService.cs" />
     <Compile Include="Services\Common\DialogCloser.cs" />
@@ -226,6 +229,10 @@
     <Folder Include="Resources\ResourseDictionaries\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomControls\PasswordUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
