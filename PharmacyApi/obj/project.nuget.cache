@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2tHpFLJODiqhphXB6JCwnSEAS9GmjBP8mOXWKb0JG5c6tIjEX6NLCdfq9M8upUfjCq7TQhMafuvLPjFm4Ykx3A==",
+  "dgSpecHash": "papUVMfhIeO8Z8IGT0+QV5MOX/uzfQ7eujmeQIKuDplMCT74Sj3Ht5kWcmGiXMuVEbEF043Mfo94Y4gd+C8zuQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user452.CHENK\\source\\repos\\Pharmacy\\PharmacyApi\\PharmacyApi.csproj",
+  "projectFilePath": "C:\\Users\\user452.CHENK\\.ssh\\Pharmacy\\PharmacyApi\\PharmacyApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user452.CHENK\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\user452.CHENK\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\5.0.10\\microsoft.aspnetcore.connections.abstractions.5.0.10.nupkg.sha512",

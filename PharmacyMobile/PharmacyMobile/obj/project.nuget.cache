@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WDMv0/Bw9bWwVa9yq+NBolAQR++vLn6hv6mzb7vhs7dYHByzRdv6PC2B9/Nm8kXpwkyDtLyspf6vreQvoAd+iw==",
+  "dgSpecHash": "s/wohKCRczJP4cV1eYM1a/XZPn8ZlF5KF4FjRj1HLWe3zfXYB7P1uGdUeYYFsSHLFPL2mdiFpG4z/drL8I/FlQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user452.CHENK\\source\\repos\\Pharmacy\\PharmacyMobile\\PharmacyMobile\\PharmacyMobile.csproj",
+  "projectFilePath": "C:\\Users\\user452.CHENK\\.ssh\\Pharmacy\\PharmacyMobile\\PharmacyMobile\\PharmacyMobile.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user452.CHENK\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\5.0.10\\microsoft.aspnetcore.connections.abstractions.5.0.10.nupkg.sha512",
     "C:\\Users\\user452.CHENK\\.nuget\\packages\\microsoft.aspnetcore.http.connections.client\\5.0.10\\microsoft.aspnetcore.http.connections.client.5.0.10.nupkg.sha512",

@@ -188,6 +188,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\BaseVM.cs" />
+    <Compile Include="ViewModels\LiginWindowVM.cs" />
+    <Compile Include="Views\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -218,8 +223,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\POCOModels\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <Folder Include="Resources\ResourseDictionaries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
