@@ -80,6 +80,9 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.1\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -162,6 +165,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -182,7 +186,10 @@
     <Compile Include="CustomControls\PasswordUserControl.xaml.cs">
       <DependentUpon>PasswordUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Notofication.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Notification.cs" />
+    <Compile Include="Models\POCOModels\TokenModel.cs" />
+    <Compile Include="Services\ApiServices\AuthenticationService.cs" />
     <Compile Include="Services\ApiServices\UserService.cs" />
     <Compile Include="Services\Common\DialogCloser.cs" />
     <Compile Include="Services\Common\DIsplayRootRegistry.cs" />
@@ -225,7 +232,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\POCOModels\" />
     <Folder Include="Resources\ResourseDictionaries\" />
   </ItemGroup>
   <ItemGroup>

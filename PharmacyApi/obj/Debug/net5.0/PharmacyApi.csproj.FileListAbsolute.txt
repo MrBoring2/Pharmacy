@@ -93,7 +93,6 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Microsoft.Iden
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -132,3 +131,4 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\obj\Debug\net5.0\PharmacyApi.dl
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\obj\Debug\net5.0\ref\PharmacyApi.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\obj\Debug\net5.0\PharmacyApi.pdb
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\obj\Debug\net5.0\PharmacyApi.genruntimeconfig.cache
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

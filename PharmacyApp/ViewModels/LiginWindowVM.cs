@@ -1,5 +1,11 @@
-﻿using PharmacyApp.Services.Common;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using PharmacyApp.Helpers;
+using PharmacyApp.Models.POCOModels;
+using PharmacyApp.Services.ApiServices;
+using PharmacyApp.Services.Common;
+using RestSharp;
 using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -7,7 +13,18 @@ using System.Windows;
 namespace PharmacyApp.ViewModels
 {
     public class LiginWindowVM : BaseVM
-    {
+    {   
+        private AuthenticationService authenticationService;
+        private System.Timers.Timer timer;
+        private string login;
+        private string password;
+        private string userCapcha;
+        private string capcha;
+        private bool showPassword;
+        private bool capchaCheck;
+        private bool isNotBlock;
+        private int timerCount;
+
         public LiginWindowVM()
         {
             Password = string.Empty;
@@ -16,17 +33,14 @@ namespace PharmacyApp.ViewModels
             CapchaCheck = false;
             IsNotBlock = true;
             Capcha = CreateCapcha();
+            authenticationService = new AuthenticationService();
+            HubConnection hubConnection = new HubConnectionBuilder()
+                .WithUrl($"{Constants.apiAddress}/pharmacy")
+                .Build();
+            RestClient restClient = new RestClient(Constants.apiAddress);
+            UserService.Instance.InirializeService(hubConnection, restClient);
         }
-        System.Timers.Timer timer;
-        private string login;
-        private string password;
-        private string userCapcha;
-        private string capcha;
-        private bool showPassword;
-        private bool capchaCheck;
-        private bool isNotBlock;
-        private int loginTryCount;
-        private int timerCount;
+
 
         public string Password { get => password; set { password = value; OnPropertyChanged(); } }
         public string Login { get => login; set { login = value; OnPropertyChanged(); } }
@@ -44,27 +58,33 @@ namespace PharmacyApp.ViewModels
             {
                 return authorize ?? (authorize = new RelayCommand(obj =>
                 {
+                    Notification notification;
                     if (!CapchaCheck)
-                        if (Password == "123")
-                            MessageBox.Show("Вы вошли");
+                    {
+                        var request = authenticationService.Authorization(Login, Password);
+                        if (request.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var data = JsonSerializer.Deserialize<TokenModel>(request.Content);
+                            MessageBox.Show($"Добро пожаловать, {data.username}", "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
                         else
                         {
-                            MessageBox.Show("Ошибка входа");
+                            MessageBox.Show("Неверный логин или пароль!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                             CapchaCheck = true;
                         }
+                    }
                     else
                     {
                         if (UserCapcha.Equals(Capcha) && Password.Equals("123"))
-                            MessageBox.Show("Вы вошли");
+                            MessageBox.Show($"Добро пожаловать, {Login}", "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
                         else
                         {
                             IsNotBlock = false;
-                            // TimerCallback tm = new TimerCallback(TimerStepCount);
                             timer = new System.Timers.Timer(1000);
                             timer.AutoReset = true;
                             timer.Elapsed += async (sender, e) => await HandleTimer();
                             timer.Start();
-                            MessageBox.Show("Ждите 10 секунд");
+                            MessageBox.Show("Неверная капча, логин или пароль!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
 
