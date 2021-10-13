@@ -1,11 +1,16 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PharmacyApi.Data.DBData;
+using PharmacyApi.Helpers;
+using PharmacyApi.Services.Hubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +30,39 @@ namespace PharmacyApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PharmacyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ChenkConnection")));
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = AuthOptions.ISSUER,
+                        ValidateAudience = true,
+                        ValidAudience = AuthOptions.AUDIENCE,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true
+                    };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accesstoken = context.Request.Query["access_token"];
 
+                            var path = context.HttpContext.Request.Path;
+                            if (!string.IsNullOrEmpty(accesstoken) &&
+                                path.StartsWithSegments("/pharmacy"))
+                            {
+                                context.Token = accesstoken;
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+            services.AddSignalR();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -50,6 +87,7 @@ namespace PharmacyApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PharmacyHub>("/pharmacy");
             });
         }
     }
