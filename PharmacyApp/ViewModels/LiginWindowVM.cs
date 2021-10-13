@@ -75,8 +75,12 @@ namespace PharmacyApp.ViewModels
                     }
                     else
                     {
-                        if (UserCapcha.Equals(Capcha) && Password.Equals("123"))
+                        var request = authenticationService.Authorization(Login, Password);
+                        if (UserCapcha.Equals(Capcha) && request.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var data = JsonSerializer.Deserialize<TokenModel>(request.Content);
                             MessageBox.Show($"Добро пожаловать, {Login}", "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
                         else
                         {
                             IsNotBlock = false;

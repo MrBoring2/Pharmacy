@@ -14,6 +14,7 @@ namespace PharmacyApp.Services.ApiServices
 
         public HubConnection HubConnection { get; set; }
         public RestClient RestClient { get; set; }
+        private static object syncRoot = new Object();
 
         private UserService()
         {
@@ -30,8 +31,11 @@ namespace PharmacyApp.Services.ApiServices
         {
             get 
             {
-                if (instance == null)
-                    instance = new UserService();
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new UserService();
+                }
                 return instance;
             }
         }

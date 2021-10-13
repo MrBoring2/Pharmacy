@@ -193,6 +193,7 @@
     <Compile Include="Services\ApiServices\UserService.cs" />
     <Compile Include="Services\Common\DialogCloser.cs" />
     <Compile Include="Services\Common\DIsplayRootRegistry.cs" />
+    <Compile Include="Services\Common\NavigationService.cs" />
     <Compile Include="Services\Common\RelayCommand.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -200,8 +201,12 @@
     </Compile>
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\LiginWindowVM.cs" />
+    <Compile Include="ViewModels\MainAppWindowVM.cs" />
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainAppWindow.xaml.cs">
+      <DependentUpon>MainAppWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainAppWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

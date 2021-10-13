@@ -51,7 +51,8 @@ namespace PharmacyApi.Controllers
             var response = new
             {
                 access_token = encodedJwt,
-                username = identity.Name
+                username = identity.Name,
+                role = identity.FindFirst(ClaimsIdentity.DefaultRoleClaimType).Value.ToString()
             };
 
             return Ok(response);
@@ -67,7 +68,8 @@ namespace PharmacyApi.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.RoleName)
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Id.ToString()),
+         
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                 return claimsIdentity;

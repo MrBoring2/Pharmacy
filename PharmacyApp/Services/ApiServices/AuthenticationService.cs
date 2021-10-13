@@ -25,8 +25,7 @@ namespace PharmacyApp.Services.ApiServices
             //HttpClient client = new HttpClient();
           
             //request.AddParameter
-            var response = UserService.Instance.RestClient.Execute(request);
-            MessageBox.Show(response.StatusCode + " | " + response.Content);
+            var response = UserService.Instance.RestClient.Execute(request);         
             return response;
         }
     }
