@@ -10,6 +10,6 @@ namespace PharmacyApi.Services.Hubs
     [Authorize]
     public class PharmacyHub : Hub
     {
-
+        private void dsd() { }
     }
 }
