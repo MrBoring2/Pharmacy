@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using PharmacyApp.Helpers;
+using PharmacyApp.ViewModels;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,8 @@ namespace PharmacyApp.Services.ApiServices
     public class UserService
     {
         private static UserService instance;
-
+        public string UserName { get; private set; }
+        public Roles Role { get; private set; }
         public HubConnection HubConnection { get; set; }
         public RestClient RestClient { get; set; }
         private static object syncRoot = new Object();
@@ -27,17 +30,28 @@ namespace PharmacyApp.Services.ApiServices
             RestClient = restClient;
         }
 
+        public void SetUser(string username, Roles role)
+        {
+            UserName = username;
+            Role = role;
+        }
+
         public static UserService Instance
         {
             get 
             {
-                lock (syncRoot)
+                if (instance == null)
                 {
-                    if (instance == null)
-                        instance = new UserService();
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                            instance = new UserService();
+                    }
                 }
                 return instance;
             }
         }
+
+       
     }
 }
