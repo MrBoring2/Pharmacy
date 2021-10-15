@@ -6,10 +6,34 @@
       xmlns:local="clr-namespace:PharmacyApp.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Laboratorian">
+      Title="Лаборант" Background="White">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="265,198,0,0" TextWrapping="Wrap" Text="Лаборант тут" VerticalAlignment="Top"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="291*"/>
+            <ColumnDefinition Width="509*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="/PharmacyApp;component/Resources/AppResourses/laborant_1.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,20,0,0" Grid.Row="0"/>
+        <GroupBox Header="Личные данные" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Margin="10,20,10,0">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock FontSize="20" Text="Имя: "/>
+                    <TextBlock FontSize="20" Text="{Binding Name}"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock FontSize="20" Text="Фамилия: "/>
+                    <TextBlock FontSize="20" Text="{Binding Surname}"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock FontSize="20" Text="Роль: "/>
+                    <TextBlock FontSize="20" Text="{Binding RoleName}"/>
+                </StackPanel>
 
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Page>

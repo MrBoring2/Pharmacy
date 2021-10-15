@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:PharmacyApp"
              ShutdownMode="OnLastWindowClose">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/ResourseDictionaries/MainThemeStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

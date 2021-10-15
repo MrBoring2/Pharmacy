@@ -13,6 +13,6 @@ namespace PharmacyApp.ViewModels
     //Базовы класс для всех ViewModel
     public class BasePageVM : ObservableObject
     {
-       
+        public string PageName { get; set; }
     }
 }

@@ -211,10 +211,17 @@
     <Compile Include="ViewModels\BaseWindowVM.cs" />
     <Compile Include="ViewModels\ForPages\AccountantVM.cs" />
     <Compile Include="ViewModels\ForPages\AdministratorVM.cs" />
+    <Compile Include="ViewModels\ForPages\BaseMainPage.cs" />
     <Compile Include="ViewModels\ForPages\LaboratorianResearcherVM.cs" />
     <Compile Include="ViewModels\ForPages\LaboratorianVM.cs" />
     <Compile Include="ViewModels\ForWindows\LoginWindowVM.cs" />
     <Compile Include="ViewModels\ForWindows\MainAppWindowVM.cs" />
+    <Compile Include="Views\Pages\Accountant.xaml.cs">
+      <DependentUpon>Accountant.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Administrator.xaml.cs">
+      <DependentUpon>Administrator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Laboratorian.xaml.cs">
       <DependentUpon>Laboratorian.xaml</DependentUpon>
     </Compile>
@@ -256,10 +263,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\ResourseDictionaries\" />
+    <Resource Include="Resources\AppResourses\loader.gif" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="CustomControls\PasswordUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ResourseDictionaries\MainThemeStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Accountant.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Administrator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,6 +304,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\AppResourses\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\laborant_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\Администратор.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\laborant_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\Бухгалтер.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

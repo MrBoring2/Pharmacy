@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PharmacyApp.Views"
         mc:Ignorable="d"
         xmlns:controls="clr-namespace:PharmacyApp.CustomControls"
-        Title="Окно входа" Height="590" Width="300" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
+        Title="Окно входа" Height="597.623" Width="300" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
     <Window.Resources>
         <Style x:Key="PasswordHidden" TargetType="controls:PasswordUserControl">
             <Style.Triggers>
@@ -16,7 +16,7 @@
                 </DataTrigger>
                 <DataTrigger Binding="{Binding ElementName=ShowPassword, Path=IsChecked}" Value="False">
                     <Setter Property="Visibility" Value="Visible"/>
-         
+
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -46,35 +46,38 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <DockPanel>
             <Frame DockPanel.Dock="Top" Height="50"  Background="#FF76E383">
-               
+
             </Frame>
-            <StackPanel DockPanel.Dock="Left" Width="270" Margin="0,10,0,20">
+            <StackPanel DockPanel.Dock="Left" Width="270" Margin="0,10,0,10">
                 <Image Source="/PharmacyApp;component/Resources/AppResourses/logo.png" Height="120"/>
-                <TextBlock FontSize="15" FontFamily="Comic Sans MS" Height="30" Text="Логин" />
-                <TextBox FontSize="13" FontFamily="Comic Sans MS" Height="30" Text="{Binding Login}" Margin="0,10,0,10"/>
-                <TextBlock FontSize="15" FontFamily="Comic Sans MS" Height="30" Text ="Пароль"/>
+                <TextBlock FontSize="15" Text="Логин" />
+                <TextBox Text="{Binding Login}" Margin="0,10,0,10"/>
+                <TextBlock FontSize="15" Text ="Пароль"/>
 
                 <controls:PasswordUserControl PasswordChar="*" Password="{Binding Password}" x:Name="PasswordHidden" Style="{StaticResource PasswordHidden}" FontSize="13" FontFamily="Comic Sans MS" Height="30"  Margin="0,10,0,10"/>
-                <TextBox FontFamily="Comic Sans MS" FontSize="13" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" x:Name="PasswordShown" Style="{StaticResource PasswordShown}"  Height="30" Margin="0,-40,0,10"></TextBox>
-                <CheckBox FontFamily="Comic Sans MS" x:Name="ShowPassword" Content="Показать пароль" Margin="0,-5,0,0" IsChecked="{Binding ShowPassword}">
+                <TextBox  Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" x:Name="PasswordShown" Style="{StaticResource PasswordShown}"  Margin="0,-40,0,10"></TextBox>
+                <CheckBox FontFamily="Comic Sans MS" FontSize="13" x:Name="ShowPassword" Content="Показать пароль" Margin="0,-5,0,0" IsChecked="{Binding ShowPassword}">
                 </CheckBox>
                 <StackPanel Style="{StaticResource CapchaCheck}" x:Name="Capcha" Margin="0,10,0,0">
-                    <TextBlock FontSize="15" Height="30" FontFamily="Comic Sans MS" Text="Капча" LineStackingStrategy="BlockLineHeight"/>
-                    <TextBlock FontSize="20" TextDecorations="Strikethrough" FontFamily="Comic Sans MS" Text="{Binding Capcha}" HorizontalAlignment="Center" Width="200" TextAlignment="Center"/>
+                    <TextBlock FontSize="15"  Text="Капча" LineStackingStrategy="BlockLineHeight"/>
+                    <TextBlock FontSize="20" TextDecorations="Strikethrough"  Text="{Binding Capcha}" HorizontalAlignment="Center" Width="200" TextAlignment="Center"/>
                     <Button Command="{Binding ReCreateCapcha}" FontFamily="Comic Sans MS" x:Name="NewCapcha" Content="Новая капча" Width="100" Height="30"/>
-                    <TextBox FontFamily="Comic Sans MS" FontSize="13" Height="30" Margin="0,10,0,0" Text="{Binding UserCapcha}"></TextBox>
+                    <TextBox Margin="0,10,0,0" Text="{Binding UserCapcha}"></TextBox>
                 </StackPanel>
                 <StackPanel x:Name="Buttons" Margin="0,10,0,0">
                     <Button IsEnabled="{Binding IsNotBlock}" FontFamily="Comic Sans MS" Command="{Binding Authorize}" x:Name="Login" Height="30" Content="Авторизация"/>
                 </StackPanel>
             </StackPanel>
 
-            
+
         </DockPanel>
-      
+
     </Grid>
 </Window>

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.ViewModels.ForPages
 {
-    class LaboratorianResearcherVM : BasePageVM
+    class LaboratorianResearcherVM : BaseMainPage
     {
-        public string Name { get; set; }
         public LaboratorianResearcherVM()
         {
-            Name = "Лаборант-исследователь";
+            
         }
     }
 

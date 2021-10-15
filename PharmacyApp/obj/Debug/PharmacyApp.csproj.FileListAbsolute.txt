@@ -142,7 +142,11 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\LoginWi
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\MainAppWindow.baml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\Laboratorian.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\Laboratorian.baml
-C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.AssemblyReference.cache
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\LaboratorianResearcher.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\LaboratorianResearcher.baml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\App.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\Accountant.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\Administrator.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\Accountant.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\Administrator.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Resources\ResourseDictionaries\MainThemeStyle.baml

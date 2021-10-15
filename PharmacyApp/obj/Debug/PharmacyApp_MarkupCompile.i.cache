@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\App.xaml
-51088695472
+8880313163
 
-281271179513
+31658222285
 148659355521
-CustomControls\PasswordUserControl.xaml;Views\Pages\Laboratorian.xaml;Views\Pages\LaboratorianResearcher.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\MainAppWindow.xaml;
+CustomControls\PasswordUserControl.xaml;Resources\ResourseDictionaries\MainThemeStyle.xaml;Views\Pages\Accountant.xaml;Views\Pages\Administrator.xaml;Views\Pages\Laboratorian.xaml;Views\Pages\LaboratorianResearcher.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\MainAppWindow.xaml;
 
-False
+True
 

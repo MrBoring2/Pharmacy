@@ -7,7 +7,7 @@
         xmlns:pagesvm="clr-namespace:PharmacyApp.ViewModels.ForPages"
         xmlns:pages="clr-namespace:PharmacyApp.Views.Pages"
         mc:Ignorable="d"
-        Title="MainAppWindow" Height="450" Width="800">
+        Title="Главное окно" Height="450" Width="800" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
     <Window.Resources>
         <DataTemplate DataType="{x:Type pagesvm:LaboratorianVM}">
             <pages:Laboratorian />
@@ -15,21 +15,30 @@
         <DataTemplate DataType="{x:Type pagesvm:LaboratorianResearcherVM}">
             <pages:LaboratorianResearcher />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type pagesvm:AccountantVM}">
+            <pages:Accountant />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type pagesvm:AdministratorVM}">
+            <pages:Administrator />
+        </DataTemplate>
     </Window.Resources>
     <DockPanel>
         <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0,0,1,0">
-            <ItemsControl ItemsSource="{Binding PageVMs}">
+            <ItemsControl MinWidth="100" ItemsSource="{Binding PageVMs}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding Name}"
+                        <Button Content="{Binding PageName}"
                                 Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                 CommandParameter="{Binding }"
-                                Margin="2,5"/>
+                                Margin="10,10"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Border>
+        <TextBlock Margin="0, 0, 40, 20" Text="{Binding DisplayTime}"  DockPanel.Dock="Right" VerticalAlignment="Bottom"/>
+        <TextBlock Margin="0, 0, 40, 20" Text="{Binding Test}"  DockPanel.Dock="Right" VerticalAlignment="Bottom"/>
 
-        <Frame NavigationUIVisibility="Hidden"  Content="{Binding CurentPageVM}" />
+        <Frame NavigationUIVisibility="Hidden"  VerticalAlignment="Top"  Content="{Binding CurentPageVM}" />
+        
     </DockPanel>
 </Window>

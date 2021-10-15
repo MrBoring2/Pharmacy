@@ -9,7 +9,9 @@ namespace PharmacyApp.Models.POCOModels
     public class TokenModel
     {
         public string access_token { get; set; }
-        public string username { get; set; }
-        public string role { get; set; }
+        public string user_name_surname { get; set; }
+        public string role_name { get; set; }
+        public string role_id { get; set; }
+        public string user_login { get; set; }
     }
 }

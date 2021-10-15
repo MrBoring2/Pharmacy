@@ -61,6 +61,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             {
                 return authorize ?? (authorize = new RelayCommand(obj =>
                 {
+
                     try
                     {
                         if (!CapchaCheck)
@@ -69,9 +70,11 @@ namespace PharmacyApp.ViewModels.ForWindows
                             if (request.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 var data = JsonSerializer.Deserialize<TokenModel>(request.Content);
-                                UserService.Instance.SetUser(data.username, (Roles)Convert.ToInt32(data.role));
-                                WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role)));
-                                MessageBox.Show($"Добро пожаловать, {data.username}", "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                UserService.Instance.SetUser(data.user_name_surname, data.user_login, data.role_name, 
+                                    (Roles)Convert.ToInt32(data.role_id));
+                                WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role_id)));
+                                MessageBox.Show($"Добро пожаловать, {data.user_name_surname}",
+                                    "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                             else
                             {
@@ -85,9 +88,11 @@ namespace PharmacyApp.ViewModels.ForWindows
                             if (UserCapcha.Equals(Capcha) && request.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 var data = JsonSerializer.Deserialize<TokenModel>(request.Content);
-                                UserService.Instance.SetUser(data.username, (Roles)Convert.ToInt32(data.role));
-                                WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role)));
-                                MessageBox.Show($"Добро пожаловать, {Login}", "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                UserService.Instance.SetUser(data.user_name_surname, data.user_login, data.role_name, 
+                                    (Roles)Convert.ToInt32(data.role_id));
+                                WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role_id)));
+                                MessageBox.Show($"Добро пожаловать, {data.user_name_surname}", 
+                                    "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                             else
                             {
@@ -100,10 +105,11 @@ namespace PharmacyApp.ViewModels.ForWindows
                             }
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
+                    
                 }));
             }
         }
