@@ -2909,11 +2909,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user452.CHENK\\source\\repos\\Pharmacy\\PharmacyMobile\\PharmacyMobile.Android\\PharmacyMobile.Android.csproj",
+      "projectUniqueName": "C:\\Users\\user452.CHENK\\.ssh\\Pharmacy\\PharmacyMobile\\PharmacyMobile.Android\\PharmacyMobile.Android.csproj",
       "projectName": "PharmacyMobile.Android",
-      "projectPath": "C:\\Users\\user452.CHENK\\source\\repos\\Pharmacy\\PharmacyMobile\\PharmacyMobile.Android\\PharmacyMobile.Android.csproj",
+      "projectPath": "C:\\Users\\user452.CHENK\\.ssh\\Pharmacy\\PharmacyMobile\\PharmacyMobile.Android\\PharmacyMobile.Android.csproj",
       "packagesPath": "C:\\Users\\user452.CHENK\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user452.CHENK\\source\\repos\\Pharmacy\\PharmacyMobile\\PharmacyMobile.Android\\obj\\",
+      "outputPath": "C:\\Users\\user452.CHENK\\.ssh\\Pharmacy\\PharmacyMobile\\PharmacyMobile.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -2936,8 +2936,8 @@
       "frameworks": {
         "monoandroid11.0": {
           "projectReferences": {
-            "C:\\Users\\user452.CHENK\\source\\repos\\Pharmacy\\PharmacyMobile\\PharmacyMobile\\PharmacyMobile.csproj": {
-              "projectPath": "C:\\Users\\user452.CHENK\\source\\repos\\Pharmacy\\PharmacyMobile\\PharmacyMobile\\PharmacyMobile.csproj"
+            "C:\\Users\\user452.CHENK\\.ssh\\Pharmacy\\PharmacyMobile\\PharmacyMobile\\PharmacyMobile.csproj": {
+              "projectPath": "C:\\Users\\user452.CHENK\\.ssh\\Pharmacy\\PharmacyMobile\\PharmacyMobile\\PharmacyMobile.csproj"
             }
           }
         }

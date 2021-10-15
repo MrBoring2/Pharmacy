@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\user452.CHENK\source\repos\Pharmacy\PharmacyApp\obj\Debug\
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\
 PharmacyApp
 none
 false
 DEBUG;TRACE
-C:\Users\user452.CHENK\source\repos\Pharmacy\PharmacyApp\App.xaml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\App.xaml
+51088695472
 
-
-10-146455620
-1441924854032
-
+281271179513
+148659355521
+CustomControls\PasswordUserControl.xaml;Views\Pages\Laboratorian.xaml;Views\Pages\LaboratorianResearcher.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\MainAppWindow.xaml;
 
 False
 

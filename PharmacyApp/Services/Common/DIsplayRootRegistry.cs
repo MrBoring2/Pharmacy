@@ -7,11 +7,13 @@ using System.Windows;
 
 namespace PharmacyApp.Services.Common
 {
-    public class DIsplayRootRegistry
+    public class DisplayRootRegistry
     {
         Dictionary<Type, Type> vmToWindowMapping = new Dictionary<Type, Type>();
 
-        public void RegisterWindowType<VM, Win>() where Win : Window, new() where VM : class
+        public void RegisterWindowType<VM, Win>()
+            where Win : Window
+            where VM : class
         {
             var vmType = typeof(VM);
             if (vmType.IsInterface)
