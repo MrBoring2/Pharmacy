@@ -49,7 +49,7 @@ namespace PharmacyApp.ViewModels.ForWindows
 
         public string DispayTime
         {
-            get => $"{Time.Hours}:{Time.Minutes}";
+            get => $"Время (ч:м) - {Time.Hours}:{Time.Minutes}";
         }
 
         public string Test
