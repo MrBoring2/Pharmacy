@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PharmacyApi.Data.DBData;
 using PharmacyApi.Helpers;
+using PharmacyApi.Services;
 using PharmacyApi.Services.Hubs;
 using System;
 using System.Collections.Generic;
@@ -62,6 +64,7 @@ namespace PharmacyApi
                         }
                     };
                 });
+            services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
             services.AddSignalR();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -83,6 +86,7 @@ namespace PharmacyApi
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

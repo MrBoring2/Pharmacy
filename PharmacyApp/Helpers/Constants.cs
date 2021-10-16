@@ -9,6 +9,9 @@ namespace PharmacyApp.Helpers
     public class Constants
     {
         public const string apiAddress = "http://localhost:50764";
+        public const int seans_end_notification = 5;
+        public const int quartzization_time_minutes = 30;
+        public static readonly TimeSpan seans_time = new TimeSpan(0, 10, 0);
     }
 
     public enum Roles

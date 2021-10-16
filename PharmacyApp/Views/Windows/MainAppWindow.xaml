@@ -30,15 +30,16 @@
                         <Button Content="{Binding PageName}"
                                 Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                 CommandParameter="{Binding }"
-                                Margin="10,10"/>
+                                Margin="5,5"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Border>
-        <TextBlock Margin="0, 0, 40, 20" Text="{Binding DisplayTime}"  DockPanel.Dock="Right" VerticalAlignment="Bottom"/>
-        <TextBlock Margin="0, 0, 40, 20" Text="{Binding Test}"  DockPanel.Dock="Right" VerticalAlignment="Bottom"/>
 
-        <Frame NavigationUIVisibility="Hidden"  VerticalAlignment="Top"  Content="{Binding CurentPageVM}" />
+        <Grid DockPanel.Dock="Bottom">
+            <TextBlock Width="auto" HorizontalAlignment="Right" Margin="0, 0, 30, 20" Text="{Binding DisplayTime}"  VerticalAlignment="Bottom"/>
+        </Grid>
+        <Frame NavigationUIVisibility="Hidden" VerticalAlignment="Top"  Content="{Binding CurentPageVM}" />
         
     </DockPanel>
 </Window>

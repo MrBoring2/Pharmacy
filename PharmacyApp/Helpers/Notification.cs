@@ -10,23 +10,12 @@ namespace PharmacyApp.Helpers
 
     public class Notification
     {
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public NotificationType NotificationType { get; set; }
-
-        public Notification(string title, string content, NotificationType notificationType)
-        {
-            Title = title;
-            Content = content;
-            NotificationType = notificationType;
-        }
-
-        public void ShowNotification()
+        public static void ShowNotification(string message, string title, NotificationType type)
         {
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage image;
 
-            switch (NotificationType)
+            switch (type)
             {
                 case NotificationType.Ok:
                     image = MessageBoxImage.Information;
@@ -42,7 +31,7 @@ namespace PharmacyApp.Helpers
                     break;
             }
 
-            MessageBox.Show(Content, Title, button, image);
+            MessageBox.Show(message, title, button, image);
         }
     }
 

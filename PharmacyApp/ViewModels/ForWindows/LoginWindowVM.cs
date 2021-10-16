@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace PharmacyApp.ViewModels.ForWindows
 {
@@ -24,24 +25,41 @@ namespace PharmacyApp.ViewModels.ForWindows
         private bool showPassword;
         private bool capchaCheck;
         private bool isNotBlock;
-        private int timerCount;
+        private TimeSpan time;
+        private Dispatcher dispatcher;
 
         public LoginWindowVM()
         {
-            Password = string.Empty;
-            Login = string.Empty; ;
-            UserCapcha = string.Empty; ;
-            CapchaCheck = false;
-            IsNotBlock = true;
-            Capcha = CreateCapcha();
-            authenticationService = new AuthenticationService();
-            HubConnection hubConnection = new HubConnectionBuilder()
-                .WithUrl($"{Constants.apiAddress}/pharmacy")
-                .Build();
-            RestClient restClient = new RestClient(Constants.apiAddress);
-            UserService.Instance.InirializeService(hubConnection, restClient);
+            Initiazlize();
         }
 
+        public LoginWindowVM(bool block) : this()
+        {
+            dispatcher = Dispatcher.CurrentDispatcher;
+            IsNotBlock = false;
+            timer.AutoReset = true;
+            timer.Elapsed += async (sender, e) => await Quartzization();
+            timer.Start();
+            
+            dispatcher.Invoke(DispatcherPriority.Normal,
+                new Action(()=> Notification.ShowNotification($"Блокировка на {Constants.quartzization_time_minutes} минут, происходит кварцевание помещения!",
+                "Оповещение", NotificationType.Ok)));
+        }
+
+        private Task Quartzization()
+        {
+            return Task.Run(() =>
+            {
+                time.Add(new TimeSpan(0, 0, 1));
+
+                if (time.Minutes == Constants.quartzization_time_minutes)
+                {
+                    IsNotBlock = true;
+                    timer.Stop();
+                    Notification.ShowNotification("Кварцевание помещения закончено!", "Оповещение", NotificationType.Ok);
+                }
+            });
+        }
 
         public string Password { get => password; set { password = value; OnPropertyChanged(); } }
         public string Login { get => login; set { login = value; OnPropertyChanged(); } }
@@ -66,19 +84,16 @@ namespace PharmacyApp.ViewModels.ForWindows
                     {
                         if (!CapchaCheck)
                         {
+                            UserService.Instance.HubConnection.StartAsync();
                             var request = authenticationService.Authorization(Login, Password);
                             if (request.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 var data = JsonSerializer.Deserialize<TokenModel>(request.Content);
-                                UserService.Instance.SetUser(data.user_name_surname, data.user_login, data.role_name, 
-                                    (Roles)Convert.ToInt32(data.role_id));
-                                WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role_id)));
-                                MessageBox.Show($"Добро пожаловать, {data.user_name_surname}",
-                                    "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                LoginUser(data);
                             }
                             else
                             {
-                                MessageBox.Show("Неверный логин или пароль!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                Notification.ShowNotification("Неверный логин или пароль", "Внимание", NotificationType.Warning);
                                 CapchaCheck = true;
                             }
                         }
@@ -88,20 +103,16 @@ namespace PharmacyApp.ViewModels.ForWindows
                             if (UserCapcha.Equals(Capcha) && request.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 var data = JsonSerializer.Deserialize<TokenModel>(request.Content);
-                                UserService.Instance.SetUser(data.user_name_surname, data.user_login, data.role_name, 
-                                    (Roles)Convert.ToInt32(data.role_id));
-                                WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role_id)));
-                                MessageBox.Show($"Добро пожаловать, {data.user_name_surname}", 
-                                    "Оповещение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                LoginUser(data);
                             }
                             else
                             {
                                 IsNotBlock = false;
-                                timer = new System.Timers.Timer(1000);
+                                
                                 timer.AutoReset = true;
                                 timer.Elapsed += async (sender, e) => await HandleTimer();
                                 timer.Start();
-                                MessageBox.Show("Неверная капча, логин или пароль!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                Notification.ShowNotification("Неверная капча, логин или пароль", "Внимание", NotificationType.Warning);
                             }
                         }
                     }
@@ -118,17 +129,44 @@ namespace PharmacyApp.ViewModels.ForWindows
         {
             return Task.Run(() =>
             {
-               
-                timerCount++;
 
-                if (timerCount == 10)
+                time = time.Add(new TimeSpan(0, 0, 1));
+
+                if (time.Seconds == 10)
                 {
                     timer.Stop();
                     IsNotBlock = true;
-                    timerCount = 0;
+                    time = TimeSpan.Zero;
                 }
               
             });
+        }
+        private void Initiazlize()
+        {
+            Password = string.Empty;
+            Login = string.Empty; ;
+            UserCapcha = string.Empty; ;
+            CapchaCheck = false;
+            IsNotBlock = true;
+            timer = new System.Timers.Timer(1000);
+            Capcha = CreateCapcha();
+            authenticationService = new AuthenticationService();
+            HubConnection hubConnection = new HubConnectionBuilder()
+                .WithUrl($"{Constants.apiAddress}/pharmacy",
+                options =>
+                {
+                    options.AccessTokenProvider = () => Task.FromResult(UserService.Instance.Token);
+                }).Build();
+            RestClient restClient = new RestClient(Constants.apiAddress);
+            UserService.Instance.InirializeService(hubConnection, restClient);
+            SetSignalREvents();
+        }
+
+        private void LoginUser(TokenModel data)
+        {
+            UserService.Instance.SetUser(data.user_name_surname, data.user_login, data.role_name,
+                                    (Roles)Convert.ToInt32(data.role_id), data.access_token);
+            WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role_id)));          
         }
 
         public RelayCommand ReCreateCapcha
@@ -154,6 +192,12 @@ namespace PharmacyApp.ViewModels.ForWindows
 
             return capcha;
         }
-      
+
+        private void SetSignalREvents()
+        {
+            UserService.Instance.HubConnection.On<string>("Welcome", (message) => Notification.ShowNotification(message, "Оповещение", NotificationType.Ok));
+        }      
+
+
     }
 }

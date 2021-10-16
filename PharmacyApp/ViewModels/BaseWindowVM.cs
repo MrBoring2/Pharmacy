@@ -9,6 +9,6 @@ namespace PharmacyApp.ViewModels
 {
     public class BaseWindowVM : ObservableObject
     {
-      
+        protected virtual void OnLoad() { }
     }
 }

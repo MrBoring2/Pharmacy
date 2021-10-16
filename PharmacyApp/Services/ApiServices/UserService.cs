@@ -18,6 +18,9 @@ namespace PharmacyApp.Services.ApiServices
 
         public Roles Role { get; private set; }
         public string RoleName { get; private set; }
+
+        public string Token { get; private set; }
+
         public HubConnection HubConnection { get; set; }
         public RestClient RestClient { get; set; }
         private static object syncRoot = new Object();
@@ -33,12 +36,13 @@ namespace PharmacyApp.Services.ApiServices
             RestClient = restClient;
         }
 
-        public void SetUser(string user_name_surname, string login, string roleName, Roles role)
+        public void SetUser(string user_name_surname, string login, string roleName, Roles role, string token)
         {
             UserNameSurname = user_name_surname;
             UserLogin = login;
             RoleName = roleName;
             Role = role;
+            Token = token;
         }
 
         public static UserService Instance

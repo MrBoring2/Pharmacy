@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.Input;
 using PharmacyApp.Helpers;
+using PharmacyApp.Services.ApiServices;
 using PharmacyApp.Services.Common;
 using PharmacyApp.ViewModels.ForPages;
 using System;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace PharmacyApp.ViewModels.ForWindows
 {
     public class MainAppWindowVM : BaseWindowVM
     {
-        
-        private double minutes;
-        private TimeSpan hours;
+
+        private Dispatcher dispatcher;
         private Timer timer;
         private TimeSpan Time = new TimeSpan();
         private BasePageVM _currentPageVM;
@@ -30,7 +31,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             PagesRegistrator = new PagesRegistrator();
             PagesRegistrator.RegisterPagesForRole(role);
             PageVMs.AddRange(PagesRegistrator.RolePages);
-            
+            dispatcher = Dispatcher.CurrentDispatcher;
             CurentPageVM = PageVMs[0];
         }
         private Services.Common.RelayCommand _changePageCommand;
@@ -47,7 +48,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             }
         }
 
-        public string DispayTime
+        public string DisplayTime
         {
             get => $"Время (ч:м) - {Time.Hours}:{Time.Minutes}";
         }
@@ -90,14 +91,36 @@ namespace PharmacyApp.ViewModels.ForWindows
         }
 
         private Task HandleTimer()
-        {          
+        {
             return Task.Run(() =>
             {
-                Time = Time.Add(new TimeSpan(0, 0, 15));
-                //MessageBox.Show(Time.Seconds.ToString());
-                OnPropertyChanged("Test");
-                OnPropertyChanged("DisplayTime");           
+                Time = Time.Add(new TimeSpan(0, 0, 30));
+
+                if (Constants.seans_time.Subtract(Time) == TimeSpan.FromMinutes(Constants.seans_end_notification))
+                {
+                    Notification.ShowNotification($"Внимание, время сеанса походит к концу, выход из приложения произойдёт через {Constants.seans_time}!",
+                        "Внимание", NotificationType.Ok);
+                }
+
+                if (Constants.seans_time.Subtract(Time) > TimeSpan.Zero)
+                {
+                    OnPropertyChanged("DisplayTime");
+                }
+                else
+                {
+                    timer.Stop();
+                    OnPropertyChanged("DisplayTime");
+                    Notification.ShowNotification("Время сейнса вышло, вкоре будет проверено кварцевание помещения!", "Внимание", NotificationType.Ok);
+                    dispatcher.Invoke(ReturnToLogin);
+                }
             });
+        }
+
+
+        private void ReturnToLogin()
+        {
+            UserService.Instance.HubConnection.StopAsync();
+            WindowNavigation.Instance.OpenAndHideWindow(this, new LoginWindowVM(true));
         }
 
         private void ChangePageVM(BasePageVM pageVM)

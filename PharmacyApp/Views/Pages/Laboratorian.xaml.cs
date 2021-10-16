@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmacyApp.Services.ApiServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace PharmacyApp.Views.Pages
         public Laboratorian()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(UserService.Instance.HubConnection.State.ToString());
         }
     }
 }

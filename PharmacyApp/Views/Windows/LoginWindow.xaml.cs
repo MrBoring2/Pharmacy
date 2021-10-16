@@ -1,4 +1,5 @@
-﻿using PharmacyApp.ViewModels;
+﻿using PharmacyApp.Services.ApiServices;
+using PharmacyApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +25,6 @@ namespace PharmacyApp.Views.Windows
         {
             InitializeComponent();
         }
+
     }
 }
