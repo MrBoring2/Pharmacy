@@ -1,4 +1,5 @@
-﻿using PharmacyApp.ViewModels;
+﻿using PharmacyApp.Services.ApiServices;
+using PharmacyApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,11 @@ namespace PharmacyApp.Views.Windows
         public MainAppWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(UserService.Instance.HubConnection.State.ToString());
         }
     }
 }

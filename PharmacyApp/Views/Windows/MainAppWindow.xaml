@@ -9,18 +9,11 @@
         mc:Ignorable="d"
         Title="Главное окно" Height="450" Width="800" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type pagesvm:LaboratorianVM}">
-            <pages:Laboratorian />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type pagesvm:LaboratorianResearcherVM}">
-            <pages:LaboratorianResearcher />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type pagesvm:AccountantVM}">
-            <pages:Accountant />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type pagesvm:AdministratorVM}">
-            <pages:Administrator />
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PharmacyApp;component/Resources/ResourseDictionaries/PageToPageVM.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <DockPanel>
         <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0,0,1,0">

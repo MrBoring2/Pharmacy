@@ -60,6 +60,29 @@ namespace PharmacyApi.Migrations
                     b.ToTable("AnalizerWork");
                 });
 
+            modelBuilder.Entity("PharmacyApi.Data.DBData.EntityModels.AuthenticationLogger", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Attempt")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LoginDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AuthenticationLoggers");
+                });
+
             modelBuilder.Entity("PharmacyApi.Data.DBData.EntityModels.InsuranceСompany", b =>
                 {
                     b.Property<int>("Id")
@@ -401,6 +424,15 @@ namespace PharmacyApi.Migrations
                     b.Navigation("Analizer");
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("PharmacyApi.Data.DBData.EntityModels.AuthenticationLogger", b =>
+                {
+                    b.HasOne("PharmacyApi.Data.DBData.EntityModels.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PharmacyApi.Data.DBData.EntityModels.InvoicesIssued", b =>

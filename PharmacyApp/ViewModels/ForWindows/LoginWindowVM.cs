@@ -16,7 +16,7 @@ namespace PharmacyApp.ViewModels.ForWindows
 {
     public class LoginWindowVM : BaseWindowVM
     {   
-        private AuthenticationService authenticationService;
+        private RestService restService;
         private System.Timers.Timer timer;
         private string login;
         private string password;
@@ -85,7 +85,7 @@ namespace PharmacyApp.ViewModels.ForWindows
                         if (!CapchaCheck)
                         {
                             UserService.Instance.HubConnection.StartAsync();
-                            var request = authenticationService.Authorization(Login, Password);
+                            var request = restService.Authorization(Login, Password);
                             if (request.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 var data = JsonSerializer.Deserialize<TokenModel>(request.Content);
@@ -99,7 +99,7 @@ namespace PharmacyApp.ViewModels.ForWindows
                         }
                         else
                         {
-                            var request = authenticationService.Authorization(Login, Password);
+                            var request = restService.Authorization(Login, Password);
                             if (UserCapcha.Equals(Capcha) && request.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 var data = JsonSerializer.Deserialize<TokenModel>(request.Content);
@@ -150,7 +150,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             IsNotBlock = true;
             timer = new System.Timers.Timer(1000);
             Capcha = CreateCapcha();
-            authenticationService = new AuthenticationService();
+            restService = new RestService();
             HubConnection hubConnection = new HubConnectionBuilder()
                 .WithUrl($"{Constants.apiAddress}/pharmacy",
                 options =>
@@ -166,6 +166,9 @@ namespace PharmacyApp.ViewModels.ForWindows
         {
             UserService.Instance.SetUser(data.user_name_surname, data.user_login, data.role_name,
                                     (Roles)Convert.ToInt32(data.role_id), data.access_token);
+
+            UserService.Instance.HubConnection.StartAsync();
+
             WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role_id)));          
         }
 

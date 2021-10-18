@@ -31,6 +31,7 @@ namespace PharmacyApp.Services.Common
                     break;
                 case Roles.Administrator:
                     RolePages.Add(new AdministratorVM());
+                    RolePages.Add(new LogginUsersLoginVM());
                     break;
                 default:
                     break;

@@ -12,7 +12,7 @@ namespace PharmacyApi.Helpers
         public const string ISSUER = "PharmacyAuthServer";
         public const string AUDIENCE = "PharmacyAuthClient";
         private const string KEY = "pharmacysecretkey";
-        public const int LIFETIME = 1;
+        public const int LIFETIME = 3;
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));

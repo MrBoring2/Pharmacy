@@ -194,10 +194,16 @@
       <DependentUpon>PasswordUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Converters\EnterStatusConverter.cs" />
     <Compile Include="Helpers\Notification.cs" />
     <Compile Include="Helpers\WindowNavigation.cs" />
+    <Compile Include="Models\POCOModels\AuthenticationLogger.cs" />
+    <Compile Include="Models\POCOModels\InsuranceCompany.cs" />
+    <Compile Include="Models\POCOModels\Patient.cs" />
+    <Compile Include="Models\POCOModels\Role.cs" />
     <Compile Include="Models\POCOModels\TokenModel.cs" />
-    <Compile Include="Services\ApiServices\AuthenticationService.cs" />
+    <Compile Include="Models\POCOModels\User.cs" />
+    <Compile Include="Services\ApiServices\RestSerivce.cs" />
     <Compile Include="Services\ApiServices\UserService.cs" />
     <Compile Include="Services\Common\DialogCloser.cs" />
     <Compile Include="Services\Common\DisplayRootRegistry.cs" />
@@ -214,6 +220,7 @@
     <Compile Include="ViewModels\ForPages\BaseMainPage.cs" />
     <Compile Include="ViewModels\ForPages\LaboratorianResearcherVM.cs" />
     <Compile Include="ViewModels\ForPages\LaboratorianVM.cs" />
+    <Compile Include="ViewModels\ForPages\LogginUsersLoginVM.cs" />
     <Compile Include="ViewModels\ForWindows\LoginWindowVM.cs" />
     <Compile Include="ViewModels\ForWindows\MainAppWindowVM.cs" />
     <Compile Include="Views\Pages\Accountant.xaml.cs">
@@ -227,6 +234,9 @@
     </Compile>
     <Compile Include="Views\Pages\LaboratorianResearcher.xaml.cs">
       <DependentUpon>LaboratorianResearcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\LoggingUsersLogin.xaml.cs">
+      <DependentUpon>LoggingUsersLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -274,6 +284,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\ResourseDictionaries\PageToPageVM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\Accountant.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -287,6 +301,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\LaboratorianResearcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\LoggingUsersLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

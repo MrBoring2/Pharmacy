@@ -35,7 +35,6 @@
 
         <Style x:Key="CapchaCheck" TargetType="StackPanel">
             <Style.Triggers>
-                <MultiDataTrigger></MultiDataTrigger>
                 <DataTrigger Binding="{Binding CapchaCheck}" Value="True">
                     <Setter Property="Visibility" Value="Visible"/>
                 </DataTrigger>

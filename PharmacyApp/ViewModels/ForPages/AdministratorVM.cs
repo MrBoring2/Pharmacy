@@ -8,5 +8,6 @@ namespace PharmacyApp.ViewModels.ForPages
 {
     public class AdministratorVM : BaseMainPage
     {
+        public AdministratorVM() { }
     }
 }

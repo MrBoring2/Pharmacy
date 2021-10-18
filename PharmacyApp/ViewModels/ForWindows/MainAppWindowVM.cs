@@ -94,7 +94,7 @@ namespace PharmacyApp.ViewModels.ForWindows
         {
             return Task.Run(() =>
             {
-                Time = Time.Add(new TimeSpan(0, 0, 30));
+                Time = Time.Add(new TimeSpan(0, 0, 1));
 
                 if (Constants.seans_time.Subtract(Time) == TimeSpan.FromMinutes(Constants.seans_end_notification))
                 {

@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:pagesvm="clr-namespace:PharmacyApp.ViewModels.ForPages"
+                    xmlns:pages="clr-namespace:PharmacyApp.Views.Pages">
+    <DataTemplate DataType="{x:Type pagesvm:LaboratorianVM}">
+        <pages:Laboratorian />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type pagesvm:LaboratorianResearcherVM}">
+        <pages:LaboratorianResearcher />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type pagesvm:AccountantVM}">
+        <pages:Accountant />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type pagesvm:AdministratorVM}">
+        <pages:Administrator />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type pagesvm:LogginUsersLoginVM}">
+        <pages:LoggingUsersLogin />
+    </DataTemplate>
+</ResourceDictionary>
