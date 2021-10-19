@@ -17,4 +17,7 @@
     <DataTemplate DataType="{x:Type pagesvm:LogginUsersLoginVM}">
         <pages:LoggingUsersLogin />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type pagesvm:ReceptionOFMaterialVM}">
+        <pages:ReceptionOfMaterial/>
+    </DataTemplate>
 </ResourceDictionary>

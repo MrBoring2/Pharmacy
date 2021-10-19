@@ -22,6 +22,13 @@ namespace PharmacyApp.Services.ApiServices
             return response;
         }
 
+        public void Exit()
+        {
+            UserService.Instance.HubConnection.StopAsync();
+            UserService.Instance.HubConnection = null;
+            UserService.Instance.RestClient = null;
+        }
+
         public IRestResponse SendRequest(RestRequest request)
         {
             var response = UserService.Instance.RestClient.Execute(request);

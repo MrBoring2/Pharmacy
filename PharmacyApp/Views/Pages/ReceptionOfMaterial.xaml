@@ -1,0 +1,54 @@
+﻿<Page x:Class="PharmacyApp.Views.Pages.ReceptionOfMaterial"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PharmacyApp.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReceptionOfMaterial" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="13*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" FontSize="15" VerticalAlignment="Top" Grid.Column="0" Margin="20,10,0,0"><Run Text="Код пробирки"/></TextBlock>
+        <TextBox Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="0" Margin="20,50,0,0" Width="128" />
+        <Button Content="Считать штрих код" HorizontalAlignment="Left" Margin="20,90,0,0" VerticalAlignment="Top" Width="129" Height="30"/>
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Margin="10,10,10,0" Text="Штрих код" VerticalAlignment="Top"/>
+            <Image Source="{Binding Image}"  Height="70" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,10,10"></Image>
+        </StackPanel>
+
+        <GroupBox Header="Пациент" HorizontalAlignment="Stretch" Grid.Column="0" Margin="20,10,20,10" Grid.Row="1" VerticalAlignment="Stretch">
+            <StackPanel>
+                <DockPanel>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" DockPanel.Dock="Left" Text="ФИО" VerticalAlignment="Top"/>
+                    <TextBox Text="" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,0,10,0" />
+                </DockPanel>
+                <DockPanel Margin="0,10,0,0">
+                    <Button Content="Добавить нового пациента" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Header="Услуги" HorizontalAlignment="Stretch" Margin="20,10,20,10" Grid.Row="1" VerticalAlignment="Stretch">
+            <StackPanel>
+                <ComboBox Height="30" Margin="10,0,10,0">
+
+                </ComboBox>
+                <Button Margin="10,10,10,0" Content="Добавить услугу"/>
+                <ListView Margin="10,10,10,0" Height="150">
+
+                </ListView>
+                <Button Margin="10,10,10,0" Content="Удалить услугу из списка"/>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</Page>

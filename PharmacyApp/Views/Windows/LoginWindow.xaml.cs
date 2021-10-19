@@ -24,6 +24,7 @@ namespace PharmacyApp.Views.Windows
         public LoginWindow()
         {
             InitializeComponent();
+            
         }
 
     }

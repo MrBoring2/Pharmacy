@@ -1,4 +1,4 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
+﻿
 using PharmacyApp.Helpers;
 using PharmacyApp.Services.ApiServices;
 using PharmacyApp.Services.Common;
@@ -17,7 +17,7 @@ namespace PharmacyApp.ViewModels.ForWindows
 {
     public class MainAppWindowVM : BaseWindowVM
     {
-
+        private RestService restService;
         private Dispatcher dispatcher;
         private Timer timer;
         private TimeSpan Time = new TimeSpan();
@@ -28,12 +28,28 @@ namespace PharmacyApp.ViewModels.ForWindows
         public MainAppWindowVM(Roles role)
         {
             SetTimer();
+            restService = new RestService();
             PagesRegistrator = new PagesRegistrator();
             PagesRegistrator.RegisterPagesForRole(role);
             PageVMs.AddRange(PagesRegistrator.RolePages);
             dispatcher = Dispatcher.CurrentDispatcher;
             CurentPageVM = PageVMs[0];
         }
+
+        private RelayCommand exit;
+        public RelayCommand Exit
+        {
+            get 
+            {
+                return exit ??
+                    (exit = new Services.Common.RelayCommand(obj =>
+                    {
+                        restService.Exit();
+                        WindowNavigation.Instance.OpenAndHideWindow(this, new LoginWindowVM());
+                    }));
+            }
+        }
+
         private Services.Common.RelayCommand _changePageCommand;
 
         public Services.Common.RelayCommand ChangePageCommand

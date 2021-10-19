@@ -22,6 +22,7 @@ namespace PharmacyApp.Services.Common
             {
                 case Roles.Laboratorian:
                     RolePages.Add(new LaboratorianVM());
+                    RolePages.Add(new ReceptionOFMaterialVM());
                     break;
                 case Roles.LaboratorianResearcher:
                     RolePages.Add(new LaboratorianResearcherVM());

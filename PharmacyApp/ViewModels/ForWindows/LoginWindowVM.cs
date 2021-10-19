@@ -108,7 +108,7 @@ namespace PharmacyApp.ViewModels.ForWindows
                             else
                             {
                                 IsNotBlock = false;
-                                
+                                Capcha = CreateCapcha();
                                 timer.AutoReset = true;
                                 timer.Elapsed += async (sender, e) => await HandleTimer();
                                 timer.Start();
