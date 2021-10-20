@@ -15,16 +15,55 @@ namespace PharmacyApp.ViewModels.ForPages
     public class LogginUsersLoginVM : BasePageVM
     {
         private RestService restSevice;
-
+        private DateTime dateStart;
+        private DateTime dateEnd;
         public LogginUsersLoginVM()
         {
             PageName = "История входа";
             restSevice = new RestService();
             LoadLogs();
+            DateEnd = DateTime.Now;
+            DateStart = Logs.Min(p => p.LoginDate); 
+            
         }
 
-      
-        
+        public DateTime DateStart
+        {
+            get => dateStart;
+            set
+            {
+                if (dateStart != DateTime.MinValue)
+                {
+                    if (value.Date <= DateEnd.Date)
+                    {
+                        dateStart = value;
+                        OnPropertyChanged();
+                        OnPropertyChanged("FilterLogs");
+                    }
+                    else Notification.ShowNotification("Дата начала не может быть больше даты конца!", "Внимание", NotificationType.Warning);
+                }
+                else dateStart = value;
+            }
+        }
+        public DateTime DateEnd
+        {
+            get => dateEnd;
+            set
+            {
+                if (dateEnd != DateTime.MinValue)
+                {
+                    if (value.Date >= DateStart.Date)
+                    {
+                        dateEnd = value;
+                        OnPropertyChanged();
+                        OnPropertyChanged("FilterLogs");
+                    }
+                    else Notification.ShowNotification("Дата конца не может быть меньше даты начала!", "Внимание", NotificationType.Warning);
+                }
+                else dateEnd = value;
+            }
+        }
+
         private ObservableCollection<AuthenticationLogger> logs;
 
         public ObservableCollection<AuthenticationLogger> Logs
@@ -37,6 +76,11 @@ namespace PharmacyApp.ViewModels.ForPages
             }
         }
 
+        public ObservableCollection<AuthenticationLogger> FilterLogs
+        {
+            get => new ObservableCollection<AuthenticationLogger>(Logs.Where(p => p.LoginDate.Date >= DateStart.Date && p.LoginDate.Date <= DateEnd.Date));
+        }
+
         private void LoadLogs()
         {
             var request = new RestRequest(Constants.apiAddress + "/api/AuthenticationLoggers", Method.GET);
@@ -47,5 +91,7 @@ namespace PharmacyApp.ViewModels.ForPages
                 Logs = new ObservableCollection<AuthenticationLogger>(data);
             }
         }
+
+ 
     }
 }

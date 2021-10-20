@@ -229,13 +229,17 @@
     </Compile>
     <Compile Include="ViewModels\BasePageVM.cs" />
     <Compile Include="ViewModels\BaseWindowVM.cs" />
-    <Compile Include="ViewModels\ForPages\AccountantVM.cs" />
-    <Compile Include="ViewModels\ForPages\AdministratorVM.cs" />
+    <Compile Include="ViewModels\ForPages\AccountantVMMainPage.cs" />
+    <Compile Include="ViewModels\ForPages\AdministratorVMMainPage.cs" />
     <Compile Include="ViewModels\ForPages\BaseMainPage.cs" />
-    <Compile Include="ViewModels\ForPages\LaboratorianResearcherVM.cs" />
-    <Compile Include="ViewModels\ForPages\LaboratorianVM.cs" />
+    <Compile Include="ViewModels\ForPages\LaboratorianResearcherMainPageVM.cs" />
+    <Compile Include="ViewModels\ForPages\LaboratorianMainPageVM.cs" />
     <Compile Include="ViewModels\ForPages\LogginUsersLoginVM.cs" />
-    <Compile Include="ViewModels\ForPages\ReceptionOFMaterialVM.cs" />
+    <Compile Include="ViewModels\ForPages\ReceptionOfMaterialVM.cs" />
+    <Compile Include="ViewModels\ForWindows\AccountantVM.cs" />
+    <Compile Include="ViewModels\ForWindows\AdministratorVM.cs" />
+    <Compile Include="ViewModels\ForWindows\LaboratorianResearcherVM.cs" />
+    <Compile Include="ViewModels\ForWindows\LaboratorianVM.cs" />
     <Compile Include="ViewModels\ForWindows\LoginWindowVM.cs" />
     <Compile Include="ViewModels\ForWindows\MainAppWindowVM.cs" />
     <Compile Include="Views\Pages\Accountant.xaml.cs">

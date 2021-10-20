@@ -21,17 +21,17 @@ namespace PharmacyApp.Services.Common
             switch (role)
             {
                 case Roles.Laboratorian:
-                    RolePages.Add(new LaboratorianVM());
-                    RolePages.Add(new ReceptionOFMaterialVM());
+                    RolePages.Add(new LaboratorianMainPageVM());
+                    RolePages.Add(new ReceptionOfMaterialVM());
                     break;
                 case Roles.LaboratorianResearcher:
-                    RolePages.Add(new LaboratorianResearcherVM());
+                    RolePages.Add(new LaboratorianResearcherMainPageVM());
                     break;
                 case Roles.Accountant:
-                    RolePages.Add(new AccountantVM());
+                    RolePages.Add(new AccountantVMMainPage());
                     break;
                 case Roles.Administrator:
-                    RolePages.Add(new AdministratorVM());
+                    RolePages.Add(new AdministratorVMMainPage());
                     RolePages.Add(new LogginUsersLoginVM());
                     break;
                 default:

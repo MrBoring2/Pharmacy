@@ -17,32 +17,23 @@ namespace PharmacyApp.ViewModels.ForWindows
 {
     public class MainAppWindowVM : BaseWindowVM
     {
-        private RestService restService;
-        private Dispatcher dispatcher;
-        private Timer timer;
-        private TimeSpan Time = new TimeSpan();
-        private BasePageVM _currentPageVM;
-        private List<BasePageVM> _pageVMs;
-        private PagesRegistrator PagesRegistrator { get; set; }
+        protected RestService restService;
+        protected BasePageVM _currentPageVM;
+        protected List<BasePageVM> _pageVMs;
+        protected PagesRegistrator PagesRegistrator { get; set; }
 
-        public MainAppWindowVM(Roles role)
+        public MainAppWindowVM()
         {
-            SetTimer();
             restService = new RestService();
-            PagesRegistrator = new PagesRegistrator();
-            PagesRegistrator.RegisterPagesForRole(role);
-            PageVMs.AddRange(PagesRegistrator.RolePages);
-            dispatcher = Dispatcher.CurrentDispatcher;
-            CurentPageVM = PageVMs[0];
         }
 
-        private RelayCommand exit;
+        protected RelayCommand exit;
         public RelayCommand Exit
         {
             get 
             {
                 return exit ??
-                    (exit = new Services.Common.RelayCommand(obj =>
+                    (exit = new RelayCommand(obj =>
                     {
                         restService.Exit();
                         WindowNavigation.Instance.OpenAndHideWindow(this, new LoginWindowVM());
@@ -50,9 +41,9 @@ namespace PharmacyApp.ViewModels.ForWindows
             }
         }
 
-        private Services.Common.RelayCommand _changePageCommand;
+        protected RelayCommand _changePageCommand;
 
-        public Services.Common.RelayCommand ChangePageCommand
+        public RelayCommand ChangePageCommand
         {
             get
             {
@@ -64,15 +55,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             }
         }
 
-        public string DisplayTime
-        {
-            get => $"Время (ч:м) - {Time.Hours}:{Time.Minutes}";
-        }
-
-        public string Test
-        {
-            get => $"{Time.Seconds}";
-        }
+  
 
         public List<BasePageVM> PageVMs
         {
@@ -97,49 +80,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             }
         }
 
-
-        private void SetTimer()
-        {
-            timer = new Timer(1000);
-            timer.AutoReset = true;
-            timer.Elapsed += async (sender, e) => await HandleTimer();
-            timer.Start();
-        }
-
-        private Task HandleTimer()
-        {
-            return Task.Run(() =>
-            {
-                Time = Time.Add(new TimeSpan(0, 0, 1));
-
-                if (Constants.seans_time.Subtract(Time) == TimeSpan.FromMinutes(Constants.seans_end_notification))
-                {
-                    Notification.ShowNotification($"Внимание, время сеанса походит к концу, выход из приложения произойдёт через {Constants.seans_time}!",
-                        "Внимание", NotificationType.Ok);
-                }
-
-                if (Constants.seans_time.Subtract(Time) > TimeSpan.Zero)
-                {
-                    OnPropertyChanged("DisplayTime");
-                }
-                else
-                {
-                    timer.Stop();
-                    OnPropertyChanged("DisplayTime");
-                    Notification.ShowNotification("Время сейнса вышло, вкоре будет проверено кварцевание помещения!", "Внимание", NotificationType.Ok);
-                    dispatcher.Invoke(ReturnToLogin);
-                }
-            });
-        }
-
-
-        private void ReturnToLogin()
-        {
-            UserService.Instance.HubConnection.StopAsync();
-            WindowNavigation.Instance.OpenAndHideWindow(this, new LoginWindowVM(true));
-        }
-
-        private void ChangePageVM(BasePageVM pageVM)
+        protected void ChangePageVM(BasePageVM pageVM)
         {
             if (!PageVMs.Contains(pageVM))
                 PageVMs.Add(pageVM);

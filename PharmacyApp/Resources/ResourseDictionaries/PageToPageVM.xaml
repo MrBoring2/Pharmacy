@@ -2,22 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:pagesvm="clr-namespace:PharmacyApp.ViewModels.ForPages"
                     xmlns:pages="clr-namespace:PharmacyApp.Views.Pages">
-    <DataTemplate DataType="{x:Type pagesvm:LaboratorianVM}">
+    <DataTemplate DataType="{x:Type pagesvm:LaboratorianMainPageVM}">
         <pages:Laboratorian />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type pagesvm:LaboratorianResearcherVM}">
+    <DataTemplate DataType="{x:Type pagesvm:LaboratorianResearcherMainPageVM}">
         <pages:LaboratorianResearcher />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type pagesvm:AccountantVM}">
+    <DataTemplate DataType="{x:Type pagesvm:AccountantVMMainPage}">
         <pages:Accountant />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type pagesvm:AdministratorVM}">
+    <DataTemplate DataType="{x:Type pagesvm:AdministratorVMMainPage}">
         <pages:Administrator />
     </DataTemplate>
     <DataTemplate DataType="{x:Type pagesvm:LogginUsersLoginVM}">
         <pages:LoggingUsersLogin />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type pagesvm:ReceptionOFMaterialVM}">
+    <DataTemplate DataType="{x:Type pagesvm:ReceptionOfMaterialVM}">
         <pages:ReceptionOfMaterial/>
     </DataTemplate>
 </ResourceDictionary>

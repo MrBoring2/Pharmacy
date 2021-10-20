@@ -64,6 +64,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Height" Value="30"/>
         <Setter Property="Background" Value="{StaticResource Button}"/>
     </Style>
 

@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.ViewModels.ForPages
 {
-    public class LaboratorianVM : BaseMainPage
+    public class AccountantVMMainPage : BaseMainPage
     {
-        public LaboratorianVM()
-        {
-          
-        }
     }
 }

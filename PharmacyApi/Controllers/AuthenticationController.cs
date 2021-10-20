@@ -55,7 +55,7 @@ namespace PharmacyApi.Controllers
                 user_name_surname = identity.FindFirst("user_name_surname").Value.ToString(),
                 user_login = identity.FindFirst("user_login").Value.ToString(),
                 role_id = identity.FindFirst("role_id").Value.ToString(),
-                role_name = identity.FindFirst("role_name").Value.ToString()
+                role_name = identity.FindFirst(x=>x.Type == ClaimsIdentity.DefaultRoleClaimType).Value.ToString()
             };
 
             return Ok(response);
@@ -99,7 +99,7 @@ namespace PharmacyApi.Controllers
                     new Claim("user_login", user.Login),
                     new Claim("user_name_surname", user.FullName),
                     new Claim("role_id", user.Role.Id.ToString()),
-                    new Claim("role_name", user.Role.RoleName.ToString())
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.RoleName.ToString())
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                 return claimsIdentity;

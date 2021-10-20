@@ -15,18 +15,26 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="29*"/>
-            <RowDefinition Height="196*"/>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding Logs}" AutoGenerateColumns="False"  Margin="5"  Grid.Row="1">
+        <DataGrid ItemsSource="{Binding FilterLogs}" AutoGenerateColumns="False"  Margin="5,5,5,5"  Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Логин пользователя" MinWidth="200" Binding="{Binding User.Login}"/>
                 <DataGridTextColumn Header="Дата и время входа" MinWidth="150" Binding="{Binding LoginDate}"/>
                 <DataGridTextColumn Header="Статус входа" MinWidth="150" Binding="{Binding Attempt, Converter={StaticResource enterStatus}}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox HorizontalAlignment="Left" Margin="404,26,0,0" VerticalAlignment="Top" Width="120" Grid.Row="0" />
+
+        <GroupBox Header="Сортировка" HorizontalAlignment="Left" Height="112" Margin="10,10,0,0" VerticalAlignment="Stretch" Width="267">
+            <Grid>
+                <DatePicker SelectedDate="{Binding DateStart}" FontFamily="Comic Sans MS" FontSize="13" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Height="32" Width="118"/>
+                <DatePicker SelectedDate="{Binding DateEnd}" FontFamily="Comic Sans MS" FontSize="13" HorizontalAlignment="Left" Margin="133,42,0,0" VerticalAlignment="Top" Height="32" Width="120"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,12,0,0" TextWrapping="Wrap" Text="Дата начала" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="133,12,0,0" TextWrapping="Wrap" Text="Дата конца" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Page>

@@ -14,5 +14,6 @@ namespace PharmacyApp.ViewModels
     public class BasePageVM : ObservableObject
     {
         public string PageName { get; set; }
+
     }
 }

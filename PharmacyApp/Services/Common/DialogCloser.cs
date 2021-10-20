@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Services.Common
 {
-    class DialogCloser
+    public class DialogCloser
     {
     }
 }

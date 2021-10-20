@@ -155,7 +155,6 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.exe
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.pdb
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\ReceptionOfMaterial.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\ReceptionOfMaterial.baml
-C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.AssemblyReference.cache
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\System.Drawing.Common.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Aspose.BarCode.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\IronBarCode.dll
@@ -163,3 +162,4 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Aspose.BarCode.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\IronBarCode.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\NetBarcode.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\NetBarcode.xml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.AssemblyReference.cache

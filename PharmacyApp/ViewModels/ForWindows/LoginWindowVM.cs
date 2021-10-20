@@ -169,7 +169,7 @@ namespace PharmacyApp.ViewModels.ForWindows
 
             UserService.Instance.HubConnection.StartAsync();
 
-            WindowNavigation.Instance.OpenAndHideWindow(this, new MainAppWindowVM((Roles)Convert.ToInt32(data.role_id)));          
+            WindowNavigation.Instance.OpenAndHideWindow(this, SelectWindow((Roles)Convert.ToInt32(data.role_id)));          
         }
 
         public RelayCommand ReCreateCapcha
@@ -180,6 +180,23 @@ namespace PharmacyApp.ViewModels.ForWindows
                 {
                     Capcha = CreateCapcha();
                 }));
+            }
+        }
+
+        private MainAppWindowVM SelectWindow(Roles role)
+        {
+            switch (role)
+            {
+                case Roles.Laboratorian:
+                    return new LaboratorianVM();
+                case Roles.LaboratorianResearcher:
+                    return new LaboratorianResearcherVM();
+                case Roles.Accountant:
+                    return new AccountantVM();
+                case Roles.Administrator:
+                    return new AdministratorVM();
+                default:
+                    throw new ArgumentException("Роль не найдена!");
             }
         }
 

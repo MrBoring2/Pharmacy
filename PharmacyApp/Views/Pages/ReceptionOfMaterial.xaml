@@ -10,27 +10,28 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="13*"/>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200*"/>
-            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" FontSize="15" VerticalAlignment="Top" Grid.Column="0" Margin="20,10,0,0"><Run Text="Код пробирки"/></TextBlock>
-        <TextBox Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="0" Margin="20,50,0,0" Width="128" />
-        <Button Content="Считать штрих код" HorizontalAlignment="Left" Margin="20,90,0,0" VerticalAlignment="Top" Width="129" Height="30"/>
+        <TextBlock Text="Код пробирки" Grid.Row="0" FontSize="15" VerticalAlignment="Top" Grid.Column="0" Margin="20,10,0,0"/>
+        <TextBox Text="{Binding BarcodeInput}" Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="0" Margin="20,50,0,0" Width="200" />
+        <Button Command="{Binding ReadBarcode}" Content="Считать штрих код" HorizontalAlignment="Right" Margin="20,50,20,0" VerticalAlignment="Top" Width="150"/>
+        <Button Command="{Binding CreateBarcode}" Content="Создать штрих код" HorizontalAlignment="Left" Margin="20, 0, 0, 10" Width="200" VerticalAlignment="Bottom"/>
 
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Margin="10,10,10,0" Text="Штрих код" VerticalAlignment="Top"/>
-            <Image Source="{Binding Image}"  Height="70" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,10,10"></Image>
-        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <TextBlock FontSize="15" Margin="10,10,10,0" Text="Штрих код" VerticalAlignment="Top"/>
+            <Image Source="{Binding BarcodeImage}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,40,10,10"></Image>
+        </Grid>
 
         <GroupBox Header="Пациент" HorizontalAlignment="Stretch" Grid.Column="0" Margin="20,10,20,10" Grid.Row="1" VerticalAlignment="Stretch">
-            <StackPanel>
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <DockPanel>
-                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" DockPanel.Dock="Left" Text="ФИО" VerticalAlignment="Top"/>
-                    <TextBox Text="" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,0,10,0" />
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Margin="10,10,0,0" DockPanel.Dock="Left" Text="ФИО" VerticalAlignment="Top"/>
+                    <TextBox Text="" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
                 </DockPanel>
                 <DockPanel Margin="0,10,0,0">
                     <Button Content="Добавить нового пациента" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
@@ -38,16 +39,16 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Услуги" HorizontalAlignment="Stretch" Margin="20,10,20,10" Grid.Row="1" VerticalAlignment="Stretch">
-            <StackPanel>
+            <Grid>
                 <ComboBox Height="30" Margin="10,0,10,0">
 
                 </ComboBox>
-                <Button Margin="10,10,10,0" Content="Добавить услугу"/>
-                <ListView Margin="10,10,10,0" Height="150">
+                <Button Margin="10,10,10,0" VerticalAlignment="Top" Content="Добавить услугу"/>
+                <ListView Margin="10,55,10,45" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
                 </ListView>
-                <Button Margin="10,10,10,0" Content="Удалить услугу из списка"/>
-            </StackPanel>
+                <Button Margin="10,10,10,0" VerticalAlignment="Bottom" Content="Удалить услугу из списка"/>
+            </Grid>
         </GroupBox>
 
     </Grid>
