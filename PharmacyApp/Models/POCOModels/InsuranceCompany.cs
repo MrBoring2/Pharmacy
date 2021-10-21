@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Models.POCOModels
 {
-    public class InsuranceCompany
+    public class InsuranceCompany : BaseModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

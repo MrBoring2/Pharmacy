@@ -163,3 +163,9 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\IronBarCode.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\NetBarcode.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\NetBarcode.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.AssemblyReference.cache
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\AddPatient.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\PatientsList.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\ServicesList.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\AddPatient.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\PatientsList.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\ServicesList.baml

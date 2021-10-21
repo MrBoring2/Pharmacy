@@ -31,10 +31,10 @@
             <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <DockPanel>
                     <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Margin="10,10,0,0" DockPanel.Dock="Left" Text="ФИО" VerticalAlignment="Top"/>
-                    <TextBox Text="" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
+                    <TextBox Text="{Binding PatientFullName}" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
                 </DockPanel>
                 <DockPanel Margin="0,10,0,0">
-                    <Button Content="Добавить нового пациента" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
+                    <Button Content="Найти пациента" Command="{Binding FindPatient, ConverterParameter=PatientFullName}" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
                 </DockPanel>
             </StackPanel>
         </GroupBox>
@@ -44,9 +44,9 @@
 
                 </ComboBox>
                 <Button Margin="10,10,10,0" VerticalAlignment="Top" Content="Добавить услугу"/>
-                <ListView Margin="10,55,10,45" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
-                </ListView>
+                <TextBox x:Name="serviceName" VerticalAlignment="Top" Margin="10,45,70,0" Text=""/>
+                <Button Content="Найти" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,45,10,0"/>
+                <ListView Margin="10,80,10,45" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 <Button Margin="10,10,10,0" VerticalAlignment="Bottom" Content="Удалить услугу из списка"/>
             </Grid>
         </GroupBox>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Models.POCOModels
 {
-    public class AuthenticationLogger
+    public class AuthenticationLogger : BaseModel
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

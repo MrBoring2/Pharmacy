@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Models.POCOModels
 {
-    public class Patient
+    public class Patient : BaseModel
     {
         [JsonPropertyName("patientId")]
         public int PatientId { get; set; }
@@ -31,7 +31,7 @@ namespace PharmacyApp.Models.POCOModels
         public string Telephone { get; set; }
         [JsonPropertyName("passportSeries")]
         public string PassportSeries { get; set; }
-        [JsonPropertyName("passwordNumber")]
+        [JsonPropertyName("passpordNumber")]
         public string PassportNumber { get; set; }
         [JsonPropertyName("dateOfBirth")]
         public byte[] DateOfBirth { get; set; }

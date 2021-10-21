@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Models.POCOModels
 {
-    public class Role
+    public class Role : BaseModel
     {
         public int Id { get; set; }
         public string RoleName { get; set; }

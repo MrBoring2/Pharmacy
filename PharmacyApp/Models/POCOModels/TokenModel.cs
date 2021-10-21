@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Models.POCOModels
 {
-    public class TokenModel
+    public class TokenModel : BaseModel
     {
         public string access_token { get; set; }
         public string user_name_surname { get; set; }

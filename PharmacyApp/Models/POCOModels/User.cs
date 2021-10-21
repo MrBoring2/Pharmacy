@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Models.POCOModels
 {
-    public class User
+    public class User : BaseModel
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

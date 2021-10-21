@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using PharmacyApi.Data.DBData.EntityModels;
 namespace PharmacyApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = "Администратор")]
     [ApiController]
     public class AuthenticationLoggersController : ControllerBase
     {

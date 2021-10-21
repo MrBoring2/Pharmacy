@@ -18,8 +18,7 @@ namespace PharmacyApp.Services.ApiServices
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
             request.AddParameter("Login", login);
             request.AddParameter("Password", password);
-            var response = UserService.Instance.RestClient.Execute(request);         
-            return response;
+            return UserService.Instance.RestClient.Execute(request);
         }
 
         public void Exit()
@@ -31,6 +30,7 @@ namespace PharmacyApp.Services.ApiServices
 
         public IRestResponse SendRequest(RestRequest request)
         {
+            request.AddHeader("Authorization", "Bearer " + UserService.Instance.Token);
             var response = UserService.Instance.RestClient.Execute(request);
             return response;
         }

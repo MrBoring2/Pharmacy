@@ -209,9 +209,11 @@
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\Converters\EnterStatusConverter.cs" />
+    <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\Notification.cs" />
     <Compile Include="Helpers\WindowNavigation.cs" />
     <Compile Include="Models\POCOModels\AuthenticationLogger.cs" />
+    <Compile Include="Models\POCOModels\BaseModel.cs" />
     <Compile Include="Models\POCOModels\InsuranceCompany.cs" />
     <Compile Include="Models\POCOModels\Patient.cs" />
     <Compile Include="Models\POCOModels\Role.cs" />
@@ -237,11 +239,14 @@
     <Compile Include="ViewModels\ForPages\LogginUsersLoginVM.cs" />
     <Compile Include="ViewModels\ForPages\ReceptionOfMaterialVM.cs" />
     <Compile Include="ViewModels\ForWindows\AccountantVM.cs" />
+    <Compile Include="ViewModels\ForWindows\AddPatientVM.cs" />
     <Compile Include="ViewModels\ForWindows\AdministratorVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianResearcherVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianVM.cs" />
     <Compile Include="ViewModels\ForWindows\LoginWindowVM.cs" />
     <Compile Include="ViewModels\ForWindows\MainAppWindowVM.cs" />
+    <Compile Include="ViewModels\ForWindows\PatientsListVM.cs" />
+    <Compile Include="ViewModels\ForWindows\ServicesListVM.cs" />
     <Compile Include="Views\Pages\Accountant.xaml.cs">
       <DependentUpon>Accountant.xaml</DependentUpon>
     </Compile>
@@ -260,11 +265,20 @@
     <Compile Include="Views\Pages\ReceptionOfMaterial.xaml.cs">
       <DependentUpon>ReceptionOfMaterial.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\AddPatient.xaml.cs">
+      <DependentUpon>AddPatient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainAppWindow.xaml.cs">
       <DependentUpon>MainAppWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\PatientsList.xaml.cs">
+      <DependentUpon>PatientsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ServicesList.xaml.cs">
+      <DependentUpon>ServicesList.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -334,11 +348,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\AddPatient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\MainAppWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\PatientsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ServicesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
