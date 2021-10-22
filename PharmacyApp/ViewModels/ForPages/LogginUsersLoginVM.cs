@@ -1,4 +1,6 @@
-﻿using PharmacyApp.Helpers;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
+using PharmacyApp.Helpers;
 using PharmacyApp.Models.POCOModels;
 using PharmacyApp.Services.ApiServices;
 using RestSharp;
@@ -7,7 +9,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PharmacyApp.ViewModels.ForPages
@@ -23,8 +24,13 @@ namespace PharmacyApp.ViewModels.ForPages
             restSevice = new RestService();
             LoadLogs();
             DateEnd = DateTime.Now;
-            DateStart = Logs.Min(p => p.LoginDate); 
-            
+            DateStart = Logs.Min(p => p.LoginDate);
+
+            UserService.Instance.HubConnection.On<string>("UpdateLogs", (logs) =>
+            {
+                Logs = new ObservableCollection<AuthenticationLogger>(JsonConvert.DeserializeObject<List<AuthenticationLogger>>(logs));
+                OnPropertyChanged(nameof(FilterLogs));
+            });
         }
 
         public DateTime DateStart
@@ -78,7 +84,7 @@ namespace PharmacyApp.ViewModels.ForPages
 
         public ObservableCollection<AuthenticationLogger> FilterLogs
         {
-            get => new ObservableCollection<AuthenticationLogger>(Logs.Where(p => p.LoginDate.Date >= DateStart.Date && p.LoginDate.Date <= DateEnd.Date));
+            get => new ObservableCollection<AuthenticationLogger>(Logs.Where(p => p.LoginDate.Date >= DateStart.Date && p.LoginDate.Date <= DateEnd.Date).OrderBy(p=>p.LoginDate));
         }
 
         private void LoadLogs()
@@ -87,7 +93,7 @@ namespace PharmacyApp.ViewModels.ForPages
             var response = restSevice.SendRequest(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                var data = JsonSerializer.Deserialize<List<AuthenticationLogger>>(response.Content);
+                var data = JsonConvert.DeserializeObject<List<AuthenticationLogger>>(response.Content);
                 Logs = new ObservableCollection<AuthenticationLogger>(data);
             }
         }

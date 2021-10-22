@@ -79,12 +79,11 @@ namespace PharmacyApp.ViewModels.ForWindows
             {
                 return authorize ?? (authorize = new RelayCommand(obj =>
                 {
-
+                    //UserService.Instance.HubConnection.StartAsync();
                     try
                     {
                         if (!CapchaCheck)
                         {
-                            UserService.Instance.HubConnection.StartAsync();
                             var request = restService.Authorization(Login, Password);
                             if (request.StatusCode == System.Net.HttpStatusCode.OK)
                             {
@@ -168,7 +167,7 @@ namespace PharmacyApp.ViewModels.ForWindows
                                     (Roles)Convert.ToInt32(data.role_id), data.access_token);
 
             UserService.Instance.HubConnection.StartAsync();
-
+            //var d = UserService.Instance.HubConnection.ConnectionId.ToString();
             WindowNavigation.Instance.OpenAndHideWindow(this, SelectWindow((Roles)Convert.ToInt32(data.role_id)));          
         }
 

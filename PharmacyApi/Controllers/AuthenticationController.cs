@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
 using PharmacyApi.Data.DBData;
 using PharmacyApi.Data.DBData.EntityModels;
 using PharmacyApi.Helpers;
+using PharmacyApi.Services.Hubs;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,11 +21,14 @@ namespace PharmacyApi.Controllers
 {
     public class AuthenticationController : ControllerBase
     {
+        private IHubContext<PharmacyHub> _hubContext;
+
         private PharmacyContext _context;
 
-        public AuthenticationController(PharmacyContext context)
+        public AuthenticationController(PharmacyContext context, IHubContext<PharmacyHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         // POST api/<AuthenticationController>
@@ -71,8 +76,7 @@ namespace PharmacyApi.Controllers
 
             _context.AuthenticationLoggers.Add(logger);
             _context.SaveChanges();
-            
-          
+            _hubContext.Clients.Group(HubGroups.admins).SendAsync("UpdateLogs", JsonSerializer.Serialize(_context.AuthenticationLoggers.Include(p=>p.User).ToList()));
         }
 
         private async Task<ClaimsIdentity> GetIdentity(string login, string password)
@@ -102,10 +106,41 @@ namespace PharmacyApi.Controllers
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.RoleName.ToString())
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+                await AddUserToGroup((Roles)Convert.ToInt32(claimsIdentity.FindFirst("role_id").Value), claimsIdentity);
                 return claimsIdentity;
             }
 
             return null;
+        }
+
+        private async Task AddUserToGroup(Roles userRole, ClaimsIdentity identity)
+        {
+            string group = string.Empty;
+            switch (userRole)
+            {
+                case Roles.Administrator:
+                    group = HubGroups.admins;
+                    break;
+                case Roles.Laboratorian:
+                    group = HubGroups.laboratorians;
+                    break;
+                case Roles.LaboratorianResearcher:
+                    group = HubGroups.laboratorians;
+                    break;
+                case Roles.Accountant:
+                    group = HubGroups.accountents;
+                    break;
+                case Roles.Patient:
+                    group = HubGroups.patients;
+                    break;
+                default:
+                    break;
+            }
+
+           // var d = HttpContext.Request.Cookies["connectionId"];
+
+
+            await _hubContext.Groups.AddToGroupAsync(identity.FindFirst("user_login").Value, group);
         }
     }
 }

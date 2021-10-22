@@ -169,3 +169,5 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\Service
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\AddPatient.baml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\PatientsList.baml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\ServicesList.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Newtonsoft.Json.xml

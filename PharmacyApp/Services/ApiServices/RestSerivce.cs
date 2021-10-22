@@ -16,6 +16,7 @@ namespace PharmacyApp.Services.ApiServices
         {
             RestRequest request = new RestRequest($"{Constants.apiAddress}/token", Method.POST);
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            request.AddCookie("connectionId", UserService.Instance.HubConnection.ConnectionId);
             request.AddParameter("Login", login);
             request.AddParameter("Password", password);
             return UserService.Instance.RestClient.Execute(request);
