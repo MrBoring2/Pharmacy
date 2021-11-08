@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.BarCode, Version=21.9.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.BarCode.21.9.0\lib\net47\Aspose.BarCode.dll</HintPath>
+    </Reference>
+    <Reference Include="IronBarCode, Version=2021.9.0.0, Culture=neutral, PublicKeyToken=b971bb3971bdf306, processorArchitecture=MSIL">
+      <HintPath>..\packages\BarCode.2021.9.0\lib\net40\IronBarCode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Connections.Abstractions, Version=5.0.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Connections.Abstractions.5.0.10\lib\net461\Microsoft.AspNetCore.Connections.Abstractions.dll</HintPath>
     </Reference>
@@ -80,14 +86,35 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.1\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Toolkit.Mvvm, Version=7.1.0.0, Culture=neutral, PublicKeyToken=4aff67a105548ee2, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Toolkit.Mvvm.7.1.0\lib\netstandard2.0\Microsoft.Toolkit.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="NetBarcode, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetBarcode.1.4.4\lib\netstandard2.0\NetBarcode.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
@@ -162,6 +189,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -179,14 +207,83 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helpers\Notofication.cs" />
+    <Compile Include="CustomControls\PasswordUserControl.xaml.cs">
+      <DependentUpon>PasswordUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Converters\ConvertTimeStamp.cs" />
+    <Compile Include="Helpers\Converters\EnterStatusConverter.cs" />
+    <Compile Include="Helpers\Filter.cs" />
+    <Compile Include="Helpers\Notification.cs" />
+    <Compile Include="Helpers\WindowNavigation.cs" />
+    <Compile Include="Models\POCOModels\AuthenticationLogger.cs" />
+    <Compile Include="Models\POCOModels\BaseModel.cs" />
+    <Compile Include="Models\POCOModels\InsuranceCompany.cs" />
+    <Compile Include="Models\POCOModels\LaboratoryService.cs" />
+    <Compile Include="Models\POCOModels\Patient.cs" />
+    <Compile Include="Models\POCOModels\Role.cs" />
+    <Compile Include="Models\POCOModels\TokenModel.cs" />
+    <Compile Include="Models\POCOModels\User.cs" />
+    <Compile Include="Services\ApiServices\RestSerivce.cs" />
     <Compile Include="Services\ApiServices\UserService.cs" />
     <Compile Include="Services\Common\DialogCloser.cs" />
-    <Compile Include="Services\Common\DIsplayRootRegistry.cs" />
+    <Compile Include="Services\Common\DisplayRootRegistry.cs" />
+    <Compile Include="Services\Common\PagesRegistrator.cs" />
     <Compile Include="Services\Common\RelayCommand.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\BasePageVM.cs" />
+    <Compile Include="ViewModels\BaseWindowVM.cs" />
+    <Compile Include="ViewModels\ForPages\AccountantVMMainPage.cs" />
+    <Compile Include="ViewModels\ForPages\AdministratorVMMainPage.cs" />
+    <Compile Include="ViewModels\ForPages\BaseMainPage.cs" />
+    <Compile Include="ViewModels\ForPages\LaboratorianResearcherMainPageVM.cs" />
+    <Compile Include="ViewModels\ForPages\LaboratorianMainPageVM.cs" />
+    <Compile Include="ViewModels\ForPages\LogginUsersLoginVM.cs" />
+    <Compile Include="ViewModels\ForPages\ReceptionOfMaterialVM.cs" />
+    <Compile Include="ViewModels\ForWindows\AccountantVM.cs" />
+    <Compile Include="ViewModels\ForWindows\AddPatientVM.cs" />
+    <Compile Include="ViewModels\ForWindows\AdministratorVM.cs" />
+    <Compile Include="ViewModels\ForWindows\LaboratorianResearcherVM.cs" />
+    <Compile Include="ViewModels\ForWindows\LaboratorianVM.cs" />
+    <Compile Include="ViewModels\ForWindows\LoginWindowVM.cs" />
+    <Compile Include="ViewModels\ForWindows\MainAppWindowVM.cs" />
+    <Compile Include="ViewModels\ForWindows\PatientsListVM.cs" />
+    <Compile Include="ViewModels\ForWindows\ServicesListVM.cs" />
+    <Compile Include="Views\Pages\Accountant.xaml.cs">
+      <DependentUpon>Accountant.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Administrator.xaml.cs">
+      <DependentUpon>Administrator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Laboratorian.xaml.cs">
+      <DependentUpon>Laboratorian.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\LaboratorianResearcher.xaml.cs">
+      <DependentUpon>LaboratorianResearcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\LoggingUsersLogin.xaml.cs">
+      <DependentUpon>LoggingUsersLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ReceptionOfMaterial.xaml.cs">
+      <DependentUpon>ReceptionOfMaterial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\AddPatient.xaml.cs">
+      <DependentUpon>AddPatient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MainAppWindow.xaml.cs">
+      <DependentUpon>MainAppWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\PatientsList.xaml.cs">
+      <DependentUpon>PatientsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ServicesList.xaml.cs">
+      <DependentUpon>ServicesList.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -217,9 +314,83 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\POCOModels\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <Resource Include="Resources\AppResourses\loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CustomControls\PasswordUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ResourseDictionaries\MainThemeStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ResourseDictionaries\PageToPageVM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Accountant.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Administrator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Laboratorian.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\LaboratorianResearcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\LoggingUsersLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ReceptionOfMaterial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\AddPatient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainAppWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\PatientsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ServicesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\laborant_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\Администратор.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\laborant_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppResourses\Бухгалтер.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,64 @@
+﻿<Page x:Class="PharmacyApp.Views.Pages.ReceptionOfMaterial"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PharmacyApp.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReceptionOfMaterial" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="53*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Код пробирки" Grid.Row="0" FontSize="15" VerticalAlignment="Top" Grid.Column="0" Margin="20,10,0,0"/>
+        <TextBox Text="{Binding BarcodeInput}" Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="0" Margin="20,50,0,0" Width="200" />
+        <Button Command="{Binding ReadBarcode}" Content="Считать штрих код" HorizontalAlignment="Right" Margin="20,50,20,0" VerticalAlignment="Top" Width="150"/>
+        <Button Command="{Binding CreateBarcode}" Content="Создать штрих код" HorizontalAlignment="Left" Margin="20, 0, 0, 10" Width="200" VerticalAlignment="Bottom"/>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <TextBlock FontSize="15" Margin="10,10,10,0" Text="Штрих код" VerticalAlignment="Top"/>
+            <Image Source="{Binding BarcodeImage}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,40,10,10"></Image>
+        </Grid>
+
+        <GroupBox Header="Пациент" HorizontalAlignment="Stretch" Grid.Column="0" Margin="20,10,20,10" Grid.Row="1" VerticalAlignment="Stretch">
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <DockPanel>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Margin="10,10,0,0" DockPanel.Dock="Left" Text="ФИО" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding PatientFullName}" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
+                </DockPanel>
+                <DockPanel Margin="0,10,0,0">
+                    <Button Content="Найти пациента" Command="{Binding FindPatient, ConverterParameter=PatientFullName}" VerticalAlignment="Top" DockPanel.Dock="Left" Margin="10,10,10,0" />
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Header="Услуги" HorizontalAlignment="Stretch" Margin="20,10,20,10" Grid.Row="1" VerticalAlignment="Stretch">
+            <Grid>
+                <ComboBox Height="30" Margin="10,0,10,0">
+
+                </ComboBox>
+                <Button Command="{Binding AddService}" Margin="10,10,10,0" VerticalAlignment="Top" Content="Добавить услугу в список"/>
+                <TextBox x:Name="serviceName" VerticalAlignment="Top" Margin="10,45,70,0" Text="{Binding ServiceName}"/>
+                <Button Command="{Binding FindService}" Content="Найти" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,45,10,0"/>
+                <ListView HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Margin="10,80,10,45" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type ListViewItem}">
+                            <Grid>
+                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Price}" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Command="{Binding RemoveService}" Margin="10,10,10,0" VerticalAlignment="Bottom" Content="Удалить услугу из списка"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Page>

@@ -10,8 +10,11 @@ namespace PharmacyApi.Helpers
     }
 
     public enum Roles
-    {
+    {  
         Laboratorian = 1,
-
+        LaboratorianResearcher = 2,
+        Accountant = 3,
+        Administrator = 4,
+        Patient = 5
     }
 }

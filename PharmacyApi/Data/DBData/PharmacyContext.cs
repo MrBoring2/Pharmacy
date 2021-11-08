@@ -22,20 +22,17 @@ namespace PharmacyApi.Data.DBData
         public virtual DbSet<AnalizerWork> AnalizerWorks { get; set; }
         public virtual DbSet<InsuranceСompany> InsuranceСompanies { get; set; }
         public virtual DbSet<InvoicesIssued> InvoicesIssueds { get; set; }
-        public virtual DbSet<LaboratiryService> LaboratiryServices { get; set; }
+        public virtual DbSet<LaboratoryService> LaboratoryServices { get; set; }
         public virtual DbSet<LaboratoryServicesToOrder> LaboratoryServicesToOrders { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<AuthenticationLogger> AuthenticationLoggers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=PK452-12\\SQLEXPRESS;Database=Pharmacy;Trusted_Connection=True;");
-            }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -133,7 +130,7 @@ namespace PharmacyApi.Data.DBData
                     .HasConstraintName("FK_InvoicesIssued_InsuranceСompany");
             });
 
-            modelBuilder.Entity<LaboratiryService>(entity =>
+            modelBuilder.Entity<LaboratoryService>(entity =>
             {
                 entity.HasKey(e => e.Code);
 
@@ -211,11 +208,10 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<Patient>(entity =>
             {
-                entity.Property(e => e.PatientId).ValueGeneratedNever();
+                entity.Property(e => e.PatientId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.DateOfBirth)
                     .IsRequired()
-                    .IsRowVersion()
                     .IsConcurrencyToken();
 
                 entity.Property(e => e.Ein)
@@ -295,6 +291,8 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<User>(entity =>
             {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
                 entity.Property(e => e.FullName)
                     .IsRequired()
                     .HasMaxLength(100)
