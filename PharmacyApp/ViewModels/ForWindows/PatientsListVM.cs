@@ -10,11 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PharmacyApp.ViewModels.ForWindows
 {
     public class PatientsListVM : BaseWindowVM
     {
+        private bool? dialogResult;
+        public bool? DialogResult { get=>dialogResult; set { dialogResult = value; OnPropertyChanged(); } }
         private string seartchText;
         private Patient selectedPatient;
         private Filter searchParameter;
@@ -43,6 +46,25 @@ namespace PharmacyApp.ViewModels.ForWindows
             };
 
             LoadPatients();
+            SearchText = string.Empty;
+            AddPatient = new RelayCommand(AddPatientAsync);
+        }
+
+        private async void AddPatientAsync(object obj)
+        {
+            var addPatientVM = new AddPatientVM();
+            await Task.Run(() => WindowNavigation.Instance.OpenModalWindow(addPatientVM));
+
+            if(addPatientVM.DialogResult == true)
+            {
+                var request = new RestRequest("api/patients", Method.POST).AddJsonBody(JsonSerializer.Serialize(addPatientVM.NewPatient));
+                var response = restService.SendRequest(request);
+                if(response.StatusCode == System.Net.HttpStatusCode.Created)
+                {
+                    LoadPatients();
+                    OnPropertyChanged(nameof(FilteredPatients));
+                }
+            }
         }
 
         public PatientsListVM(string fullName) : this()
@@ -68,6 +90,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             {
                 seartchText = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(FilteredPatients));
             }
         }
 
@@ -78,6 +101,8 @@ namespace PharmacyApp.ViewModels.ForWindows
             {
                 selectedPatient = value;
                 OnPropertyChanged();
+               
+
             }
         }
 
@@ -88,22 +113,39 @@ namespace PharmacyApp.ViewModels.ForWindows
             {
                 searchParameter = value;
                 OnPropertyChanged();
+                SearchText = string.Empty;
+                OnPropertyChanged(nameof(FilteredPatients));
             }
         }
         public ObservableCollection<Patient> FilteredPatients
         {
-            get => SearchParameter != null ? 
+            get => SearchParameter != null && SearchParameter.Property != string.Empty ? 
                 new ObservableCollection<Patient>(Patients.Where(p => SearchParameter.IsEqual(p, SearchText))) 
                 : new ObservableCollection<Patient>(Patients);
         }
-
+        public RelayCommand AddPatient { get; set; }
         public RelayCommand Select
         {
             get
             {
                 return select ?? (select = new RelayCommand(obj =>
                 {
-
+                    if (SelectedPatient != null)
+                    {
+                        DialogResult = true;
+                    }
+                    else Notification.ShowNotification("Пациент не выбран!", "Внимание", NotificationType.Warning);
+                }));
+            }
+        }
+        private RelayCommand cancel;
+        public RelayCommand Cancel
+        {
+            get
+            {
+                return cancel ?? (cancel = new RelayCommand(obj =>
+                {
+                    DialogResult = false;
                 }));
             }
         }

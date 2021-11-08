@@ -16,6 +16,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             PagesRegistrator.RegisterPagesForRole(Roles.LaboratorianResearcher);
             PageVMs.AddRange(PagesRegistrator.RolePages);
             CurentPageVM = PageVMs[0];
+            SetTimer();
         }
     }
 }

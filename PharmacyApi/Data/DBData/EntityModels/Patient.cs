@@ -14,7 +14,7 @@ namespace PharmacyApi.Data.DBData.EntityModels
         }
 
         public int PatientId { get; set; }
-        public Guid Guid { get; set; }
+        public string Guid { get; set; }
         public string FullName { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
@@ -25,7 +25,7 @@ namespace PharmacyApi.Data.DBData.EntityModels
         public string Telephone { get; set; }
         public string PassportSeries { get; set; }
         public string PassportNumber { get; set; }
-        public byte[] DateOfBirth { get; set; }
+        public double DateOfBirth { get; set; }
         public string Ua { get; set; }
         public int? InsuranceCompanyId { get; set; }
         public string IpAddress { get; set; }

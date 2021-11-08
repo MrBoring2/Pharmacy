@@ -17,7 +17,7 @@ namespace PharmacyApi.Data.DBData.EntityModels
         public int UserId { get; set; }
 
         public virtual Analizer Analyzer { get; set; }
-        public virtual LaboratiryService LaboratoryService { get; set; }
+        public virtual LaboratoryService LaboratoryService { get; set; }
         public virtual Order Order { get; set; }
         public virtual User User { get; set; }
     }

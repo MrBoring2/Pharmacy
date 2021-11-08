@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PharmacyApi.Data.DBData.EntityModels
 {
-    public partial class LaboratiryService
+    public partial class LaboratoryService
     {
         public int Code { get; set; }
         public string Name { get; set; }

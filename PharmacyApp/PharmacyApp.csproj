@@ -211,6 +211,7 @@
       <DependentUpon>PasswordUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Converters\ConvertTimeStamp.cs" />
     <Compile Include="Helpers\Converters\EnterStatusConverter.cs" />
     <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\Notification.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Models\POCOModels\AuthenticationLogger.cs" />
     <Compile Include="Models\POCOModels\BaseModel.cs" />
     <Compile Include="Models\POCOModels\InsuranceCompany.cs" />
+    <Compile Include="Models\POCOModels\LaboratoryService.cs" />
     <Compile Include="Models\POCOModels\Patient.cs" />
     <Compile Include="Models\POCOModels\Role.cs" />
     <Compile Include="Models\POCOModels\TokenModel.cs" />

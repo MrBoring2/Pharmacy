@@ -24,6 +24,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             PageVMs.AddRange(PagesRegistrator.RolePages);
             CurentPageVM = PageVMs[0];
             dispatcher = Dispatcher.CurrentDispatcher;
+            SetTimer();
         }
         protected void SetTimer()
         {

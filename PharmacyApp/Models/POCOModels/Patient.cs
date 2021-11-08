@@ -12,7 +12,7 @@ namespace PharmacyApp.Models.POCOModels
         [JsonPropertyName("patientId")]
         public int PatientId { get; set; }
         [JsonPropertyName("guid")]
-        public Guid Guid { get; set; }
+        public string Guid { get; set; }
         [JsonPropertyName("fullName")]
         public string FullName { get; set; }
         [JsonPropertyName("login")]
@@ -31,10 +31,10 @@ namespace PharmacyApp.Models.POCOModels
         public string Telephone { get; set; }
         [JsonPropertyName("passportSeries")]
         public string PassportSeries { get; set; }
-        [JsonPropertyName("passpordNumber")]
+        [JsonPropertyName("passportNumber")]
         public string PassportNumber { get; set; }
         [JsonPropertyName("dateOfBirth")]
-        public byte[] DateOfBirth { get; set; }
+        public double DateOfBirth { get; set; }
         [JsonPropertyName("ua")]
         public string Ua { get; set; }
         [JsonPropertyName("insuranceCompanyId")]

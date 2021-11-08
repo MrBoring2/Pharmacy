@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PharmacyApp.Views.Windows"
         mc:Ignorable="d"
-        Title="ServicesList" Height="450" Width="800">
+        xmlns:dr="clr-namespace:PharmacyApp.Services.Common"
+        xmlns:conv="clr-namespace:PharmacyApp.Helpers.Converters"
+        Title="Список пациентов" Height="550" MinHeight="550" MinWidth="750" Width="750"
+        dr:DialogCloser.DialogResult="{Binding DialogResult}">
+    <Window.Resources>
+        <conv:ConvertTimeStamp x:Key="timestampConv"/>
+    </Window.Resources>
     <Grid>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="122"/>
+            <RowDefinition Height="335*"/>
+            <RowDefinition Height="62"/>
+        </Grid.RowDefinitions>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding FilterLaboratoryServices}" HorizontalAlignment="Stretch" SelectedItem="{Binding SelectedService}"  Grid.Row="1" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Код услуги" Binding="{Binding Code}" MinWidth="250" Width="*"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" MinWidth="150" Width="*"/>
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding Price}" MinWidth="100" Width="*"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="421*"/>
+                <ColumnDefinition Width="133*"/>
+                <ColumnDefinition Width="238*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Поиск" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Stretch">
+                <Grid>
+                    <StackPanel HorizontalAlignment="Left">
+                        <TextBlock Margin="5,5,5,0" Text="Строка поиска"/>
+                        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" MinWidth="180" Margin="5,0,5,5"/>
+                    </StackPanel>
+                    <StackPanel Margin="200,0,0,0" HorizontalAlignment="Right">
+                        <TextBlock  Margin="5,5,5,0" Text="Параметр поиска"/>
+                        <ComboBox SelectedItem="{Binding SearchParameter}" DisplayMemberPath="Title" ItemsSource="{Binding FilterParameters}" SelectedIndex="0" MinWidth="150" Margin="5,0,5,5" Height="30"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <Button Command="{Binding Select}" Content="Выбрать" HorizontalAlignment="Left" Margin="10,0,0,10" Grid.Row="2" VerticalAlignment="Bottom" Width="124"/>
+        <Button Command="{Binding Cancel}" Content="Отмена" HorizontalAlignment="Left" Margin="150,0,0,10" Grid.Row="2" VerticalAlignment="Bottom" Width="124"/>
     </Grid>
 </Window>

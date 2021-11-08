@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,52 +11,49 @@ using PharmacyApi.Data.DBData.EntityModels;
 namespace PharmacyApi.Controllers
 {
     [Route("api/[controller]")]
- 
     [ApiController]
-    public class PatientsController : ControllerBase
+    public class InsuranceСompaniesController : ControllerBase
     {
         private readonly PharmacyContext _context;
 
-        public PatientsController(PharmacyContext context)
+        public InsuranceСompaniesController(PharmacyContext context)
         {
             _context = context;
         }
 
-        // GET: api/Patients
+        // GET: api/InsuranceСompanies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
+        public async Task<ActionResult<IEnumerable<InsuranceСompany>>> GetInsuranceСompanies()
         {
-            return await _context.Patients.Include(p=>p.InsuranceCompany).Include(p=>p.Orders).ToListAsync();
+            return await _context.InsuranceСompanies.ToListAsync();
         }
 
-        // GET: api/Patients/5
+        // GET: api/InsuranceСompanies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Patient>> GetPatient(int id)
+        public async Task<ActionResult<InsuranceСompany>> GetInsuranceСompany(int id)
         {
-            var patient = await _context.Patients.FindAsync(id);
-            _context.Entry(patient).Reference("InsuranceСompany").Load();
-            _context.Entry(patient).Collection("Orders").Load();
-            if (patient == null)
+            var insuranceСompany = await _context.InsuranceСompanies.FindAsync(id);
+
+            if (insuranceСompany == null)
             {
                 return NotFound();
             }
 
-            return patient;
+            return insuranceСompany;
         }
+        
 
-
-
-        // PUT: api/Patients/5
+        // PUT: api/InsuranceСompanies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPatient(int id, Patient patient)
+        public async Task<IActionResult> PutInsuranceСompany(int id, InsuranceСompany insuranceСompany)
         {
-            if (id != patient.PatientId)
+            if (id != insuranceСompany.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(patient).State = EntityState.Modified;
+            _context.Entry(insuranceСompany).State = EntityState.Modified;
 
             try
             {
@@ -65,7 +61,7 @@ namespace PharmacyApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PatientExists(id))
+                if (!InsuranceСompanyExists(id))
                 {
                     return NotFound();
                 }
@@ -78,20 +74,19 @@ namespace PharmacyApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Patients
+        // POST: api/InsuranceСompanies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Patient>> PostPatient(Patient patient)
+        public async Task<ActionResult<InsuranceСompany>> PostInsuranceСompany(InsuranceСompany insuranceСompany)
         {
-            _context.Patients.Add(patient);
+            _context.InsuranceСompanies.Add(insuranceСompany);
             try
             {
-                _context.Entry(patient).State = EntityState.Added;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (PatientExists(patient.PatientId))
+                if (InsuranceСompanyExists(insuranceСompany.Id))
                 {
                     return Conflict();
                 }
@@ -101,28 +96,28 @@ namespace PharmacyApi.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPatient", new { id = patient.PatientId }, patient);
+            return CreatedAtAction("GetInsuranceСompany", new { id = insuranceСompany.Id }, insuranceСompany);
         }
 
-        // DELETE: api/Patients/5
+        // DELETE: api/InsuranceСompanies/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePatient(int id)
+        public async Task<IActionResult> DeleteInsuranceСompany(int id)
         {
-            var patient = await _context.Patients.FindAsync(id);
-            if (patient == null)
+            var insuranceСompany = await _context.InsuranceСompanies.FindAsync(id);
+            if (insuranceСompany == null)
             {
                 return NotFound();
             }
 
-            _context.Patients.Remove(patient);
+            _context.InsuranceСompanies.Remove(insuranceСompany);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PatientExists(int id)
+        private bool InsuranceСompanyExists(int id)
         {
-            return _context.Patients.Any(e => e.PatientId == id);
+            return _context.InsuranceСompanies.Any(e => e.Id == id);
         }
     }
 }

@@ -56,11 +56,11 @@ namespace PharmacyApp.Helpers
             }
         }
 
-        public async void OpenModalWindow(BaseWindowVM windowVM)
+        public void OpenModalWindow(BaseWindowVM windowVM)
         {
             if (windowVM != null)
             {
-               await displayRootRegistry.ShowModalPresentation(windowVM);
+               displayRootRegistry.ShowModalPresentation(windowVM);
             }
         }
 

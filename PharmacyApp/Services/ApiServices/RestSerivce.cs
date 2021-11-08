@@ -29,7 +29,7 @@ namespace PharmacyApp.Services.ApiServices
             UserService.Instance.RestClient = null;
         }
 
-        public IRestResponse SendRequest(RestRequest request)
+        public IRestResponse SendRequest(IRestRequest request)
         {
             request.AddHeader("Authorization", "Bearer " + UserService.Instance.Token);
             var response = UserService.Instance.RestClient.Execute(request);

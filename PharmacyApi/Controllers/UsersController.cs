@@ -12,7 +12,7 @@ using PharmacyApi.Data.DBData.EntityModels;
 namespace PharmacyApi.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+
     [ApiController]
     public class UsersController : ControllerBase
     {

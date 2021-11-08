@@ -43,11 +43,20 @@
                 <ComboBox Height="30" Margin="10,0,10,0">
 
                 </ComboBox>
-                <Button Margin="10,10,10,0" VerticalAlignment="Top" Content="Добавить услугу"/>
-                <TextBox x:Name="serviceName" VerticalAlignment="Top" Margin="10,45,70,0" Text=""/>
-                <Button Content="Найти" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,45,10,0"/>
-                <ListView Margin="10,80,10,45" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Button Margin="10,10,10,0" VerticalAlignment="Bottom" Content="Удалить услугу из списка"/>
+                <Button Command="{Binding AddService}" Margin="10,10,10,0" VerticalAlignment="Top" Content="Добавить услугу в список"/>
+                <TextBox x:Name="serviceName" VerticalAlignment="Top" Margin="10,45,70,0" Text="{Binding ServiceName}"/>
+                <Button Command="{Binding FindService}" Content="Найти" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,45,10,0"/>
+                <ListView HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Margin="10,80,10,45" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type ListViewItem}">
+                            <Grid>
+                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Price}" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Command="{Binding RemoveService}" Margin="10,10,10,0" VerticalAlignment="Bottom" Content="Удалить услугу из списка"/>
             </Grid>
         </GroupBox>
 

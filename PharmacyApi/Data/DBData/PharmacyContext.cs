@@ -22,7 +22,7 @@ namespace PharmacyApi.Data.DBData
         public virtual DbSet<AnalizerWork> AnalizerWorks { get; set; }
         public virtual DbSet<InsuranceСompany> InsuranceСompanies { get; set; }
         public virtual DbSet<InvoicesIssued> InvoicesIssueds { get; set; }
-        public virtual DbSet<LaboratiryService> LaboratiryServices { get; set; }
+        public virtual DbSet<LaboratoryService> LaboratoryServices { get; set; }
         public virtual DbSet<LaboratoryServicesToOrder> LaboratoryServicesToOrders { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
@@ -32,10 +32,7 @@ namespace PharmacyApi.Data.DBData
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=PK452-12\\SQLEXPRESS;Database=Pharmacy;Trusted_Connection=True;");
-            }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -133,7 +130,7 @@ namespace PharmacyApi.Data.DBData
                     .HasConstraintName("FK_InvoicesIssued_InsuranceСompany");
             });
 
-            modelBuilder.Entity<LaboratiryService>(entity =>
+            modelBuilder.Entity<LaboratoryService>(entity =>
             {
                 entity.HasKey(e => e.Code);
 
@@ -211,11 +208,10 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<Patient>(entity =>
             {
-                entity.Property(e => e.PatientId).ValueGeneratedNever();
+                entity.Property(e => e.PatientId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.DateOfBirth)
                     .IsRequired()
-                    .IsRowVersion()
                     .IsConcurrencyToken();
 
                 entity.Property(e => e.Ein)
@@ -295,6 +291,8 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<User>(entity =>
             {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
                 entity.Property(e => e.FullName)
                     .IsRequired()
                     .HasMaxLength(100)
