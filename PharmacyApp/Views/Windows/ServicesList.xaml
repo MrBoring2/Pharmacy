@@ -8,7 +8,7 @@
         xmlns:dr="clr-namespace:PharmacyApp.Services.Common"
         xmlns:conv="clr-namespace:PharmacyApp.Helpers.Converters"
         Title="Список пациентов" Height="550" MinHeight="550" MinWidth="750" Width="750"
-        dr:DialogCloser.DialogResult="{Binding DialogResult}">
+        dr:DialogCloser.DialogResult="{Binding DialogResult}" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
     <Window.Resources>
         <conv:ConvertTimeStamp x:Key="timestampConv"/>
     </Window.Resources>

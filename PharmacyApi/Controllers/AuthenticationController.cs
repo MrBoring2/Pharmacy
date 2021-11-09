@@ -37,7 +37,7 @@ namespace PharmacyApi.Controllers
         {
             var identity = await GetIdentity(login, password);
 
-            if(identity == null)
+            if (identity == null)
             {
                 return BadRequest("Неверное имя пользователя или пароль");
             }
@@ -60,7 +60,7 @@ namespace PharmacyApi.Controllers
                 user_name_surname = identity.FindFirst("user_name_surname").Value.ToString(),
                 user_login = identity.FindFirst("user_login").Value.ToString(),
                 role_id = identity.FindFirst("role_id").Value.ToString(),
-                role_name = identity.FindFirst(x=>x.Type == ClaimsIdentity.DefaultRoleClaimType).Value.ToString()
+                role_name = identity.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value.ToString()
             };
 
             return Ok(response);
@@ -76,7 +76,9 @@ namespace PharmacyApi.Controllers
 
             _context.AuthenticationLoggers.Add(logger);
             _context.SaveChanges();
-            _hubContext.Clients.All.SendAsync("UpdateLogs", JsonSerializer.Serialize(_context.AuthenticationLoggers.Include(p=>p.User).ToList()));
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            _hubContext.Clients.All.SendAsync("UpdateLogs", JsonSerializer.Serialize(_context.AuthenticationLoggers.Include(p => p.User).ToList(), options));
         }
 
         private async Task<ClaimsIdentity> GetIdentity(string login, string password)
@@ -92,7 +94,7 @@ namespace PharmacyApi.Controllers
             LogUser(login, atempt);
 
 
-            if(user != null)
+            if (user != null)
             {
                 user.LastEnterDate = DateTime.Now;
                 _context.Entry(user).State = EntityState.Modified;
@@ -107,7 +109,7 @@ namespace PharmacyApi.Controllers
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                 //await AddUserToGroup((Roles)Convert.ToInt32(claimsIdentity.FindFirst("role_id").Value), claimsIdentity);
-                
+
                 return claimsIdentity;
             }
 

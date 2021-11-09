@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -22,9 +21,7 @@ namespace PharmacyApi.Data.DBData.EntityModels
         public string Bic { get; set; }
         public string Country { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<InvoicesIssued> InvoicesIssueds { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Patient> Patients { get; set; }
     }
 }

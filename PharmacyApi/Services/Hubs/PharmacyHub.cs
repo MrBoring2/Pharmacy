@@ -10,17 +10,11 @@ using System.Threading.Tasks;
 namespace PharmacyApi.Services.Hubs
 {
 
-    [Authorize]
     public class PharmacyHub : Hub
-    {
-
-
-
-        public override Task OnConnectedAsync()
+    { 
+       public override Task OnConnectedAsync()
         {
             Clients.Caller.SendAsync("Welcome", $"Добро пожаловать, {Context.User.FindFirst("user_name_surname")?.Value}!");
-           
-
             return base.OnConnectedAsync();
         }
     }

@@ -12,7 +12,7 @@ using PharmacyApi.Data.DBData.EntityModels;
 namespace PharmacyApi.Controllers
 {
     [Route("api/[controller]")]
- 
+
     [ApiController]
     public class PatientsController : ControllerBase
     {
@@ -27,7 +27,7 @@ namespace PharmacyApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
         {
-            return await _context.Patients.Include(p=>p.InsuranceCompany).Include(p=>p.Orders).ToListAsync();
+            return await _context.Patients.Include(p => p.InsuranceCompany).Include(p => p.Orders).ToListAsync();
         }
 
         // GET: api/Patients/5

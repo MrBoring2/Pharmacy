@@ -43,6 +43,7 @@ namespace PharmacyApp.Models.POCOModels
         public string IpAddress { get; set; }
         [JsonPropertyName("insuranceCompany")]
         public InsuranceCompany InsuranceCompany { get; set; }
-               
+        [JsonPropertyName("orders")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

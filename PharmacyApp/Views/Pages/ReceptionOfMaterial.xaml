@@ -5,13 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PharmacyApp.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="800"
       Title="ReceptionOfMaterial" Background="White">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="22*"/>
-            <RowDefinition Height="53*"/>
+            <RowDefinition Height="191*"/>
+            <RowDefinition Height="399*"/>
+            <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -19,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Код пробирки" Grid.Row="0" FontSize="15" VerticalAlignment="Top" Grid.Column="0" Margin="20,10,0,0"/>
         <TextBox Text="{Binding BarcodeInput}" Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="0" Margin="20,50,0,0" Width="200" />
-        <Button Command="{Binding ReadBarcode}" Content="Считать штрих код" HorizontalAlignment="Right" Margin="20,50,20,0" VerticalAlignment="Top" Width="150"/>
+        <Button Command="{Binding ReadBarcode}" Content="Считать штрих код" HorizontalAlignment="Right" Margin="0,50,20,0" VerticalAlignment="Top" Width="150"/>
         <Button Command="{Binding CreateBarcode}" Content="Создать штрих код" HorizontalAlignment="Left" Margin="20, 0, 0, 10" Width="200" VerticalAlignment="Bottom"/>
 
         <Grid Grid.Row="0" Grid.Column="1">
@@ -27,7 +28,7 @@
             <Image Source="{Binding BarcodeImage}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,40,10,10"></Image>
         </Grid>
 
-        <GroupBox Header="Пациент" HorizontalAlignment="Stretch" Grid.Column="0" Margin="20,10,20,10" Grid.Row="1" VerticalAlignment="Stretch">
+        <GroupBox Header="Пациент" HorizontalAlignment="Stretch" Grid.Column="0" Margin="20,10,20,1" Grid.Row="1" VerticalAlignment="Stretch">
             <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <DockPanel>
                     <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Margin="10,10,0,0" DockPanel.Dock="Left" Text="ФИО" VerticalAlignment="Top"/>
@@ -38,7 +39,7 @@
                 </DockPanel>
             </StackPanel>
         </GroupBox>
-        <GroupBox Grid.Column="1" Header="Услуги" HorizontalAlignment="Stretch" Margin="20,10,20,10" Grid.Row="1" VerticalAlignment="Stretch">
+        <GroupBox Grid.Column="1" Header="Услуги" HorizontalAlignment="Stretch" Margin="20,10,20,1" Grid.Row="1" VerticalAlignment="Stretch">
             <Grid>
                 <ComboBox Height="30" Margin="10,0,10,0">
 
@@ -59,6 +60,7 @@
                 <Button Command="{Binding RemoveService}" Margin="10,10,10,0" VerticalAlignment="Bottom" Content="Удалить услугу из списка"/>
             </Grid>
         </GroupBox>
+        <Button Command="{Binding CreateOrder}" Content="Сформировать заказ"  Margin="20,10,20,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="auto"/>
 
     </Grid>
 </Page>

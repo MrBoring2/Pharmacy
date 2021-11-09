@@ -171,3 +171,4 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\Patient
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\ServicesList.baml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.ResolveComReference.cache

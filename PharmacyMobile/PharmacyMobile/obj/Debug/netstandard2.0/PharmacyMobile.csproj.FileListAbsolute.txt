@@ -16,7 +16,6 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\bin\Debug\net
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\bin\Debug\netstandard2.0\PharmacyMobile.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\bin\Debug\netstandard2.0\ref\PharmacyMobile.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\bin\Debug\netstandard2.0\PharmacyMobile.pdb
-C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\netstandard2.0\PharmacyMobile.csproj.AssemblyReference.cache
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\netstandard2.0\App.xaml.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\netstandard2.0\PharmacyMobile.AssemblyInfoInputs.cache
@@ -26,3 +25,4 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\net
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\netstandard2.0\PharmacyMobile.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\netstandard2.0\ref\PharmacyMobile.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\netstandard2.0\PharmacyMobile.pdb
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile\obj\Debug\netstandard2.0\PharmacyMobile.csproj.AssemblyReference.cache

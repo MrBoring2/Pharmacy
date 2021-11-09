@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PharmacyApp.Views.Windows"
         mc:Ignorable="d"
         xmlns:controls="clr-namespace:PharmacyApp.CustomControls"
-        Title="Окно входа" Height="597.623" Width="300" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
+        Title="Окно входа" Height="600" MinHeight="600" MinWidth="300" Width="300" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
     <Window.Resources>
         <Style x:Key="PasswordHidden" TargetType="controls:PasswordUserControl">
             <Style.Triggers>

@@ -20,6 +20,7 @@ namespace PharmacyApi.Data.DBData
 
         public virtual DbSet<Analizer> Analizers { get; set; }
         public virtual DbSet<AnalizerWork> AnalizerWorks { get; set; }
+        public virtual DbSet<AuthenticationLogger> AuthenticationLoggers { get; set; }
         public virtual DbSet<InsuranceСompany> InsuranceСompanies { get; set; }
         public virtual DbSet<InvoicesIssued> InvoicesIssueds { get; set; }
         public virtual DbSet<LaboratoryService> LaboratoryServices { get; set; }
@@ -28,7 +29,6 @@ namespace PharmacyApi.Data.DBData
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<AuthenticationLogger> AuthenticationLoggers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -70,6 +70,17 @@ namespace PharmacyApi.Data.DBData
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AnalizerWork_Order");
+            });
+
+            modelBuilder.Entity<AuthenticationLogger>(entity =>
+            {
+                entity.HasIndex(e => e.UserId, "IX_AuthenticationLoggers_UserId");
+
+                entity.Property(e => e.LoginDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AuthenticationLoggers)
+                    .HasForeignKey(d => d.UserId);
             });
 
             modelBuilder.Entity<InsuranceСompany>(entity =>
@@ -132,7 +143,8 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<LaboratoryService>(entity =>
             {
-                entity.HasKey(e => e.Code);
+                entity.HasKey(e => e.Code)
+                    .HasName("PK_LaboratiryServices");
 
                 entity.Property(e => e.Code).ValueGeneratedNever();
 
@@ -146,12 +158,11 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<LaboratoryServicesToOrder>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.OrderId, e.LaboratoryServiceId });
 
                 entity.ToTable("LaboratoryServicesToOrder");
 
                 entity.Property(e => e.DateOfFinished)
-                    .IsRequired()
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
@@ -161,27 +172,25 @@ namespace PharmacyApi.Data.DBData
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Analyzer)
-                    .WithMany()
+                    .WithMany(p => p.LaboratoryServicesToOrders)
                     .HasForeignKey(d => d.AnalyzerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LaboratoryServicesToOrder_Analizers");
 
                 entity.HasOne(d => d.LaboratoryService)
-                    .WithMany()
+                    .WithMany(p => p.LaboratoryServicesToOrders)
                     .HasForeignKey(d => d.LaboratoryServiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LaboratoryServicesToOrder_LaboratiryServices");
 
                 entity.HasOne(d => d.Order)
-                    .WithMany()
+                    .WithMany(p => p.LaboratoryServicesToOrders)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LaboratoryServicesToOrder_Order");
 
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.LaboratoryServicesToOrders)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LaboratoryServicesToOrder_Users");
             });
 
@@ -208,12 +217,6 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<Patient>(entity =>
             {
-                entity.Property(e => e.PatientId).ValueGeneratedOnAdd();
-
-                entity.Property(e => e.DateOfBirth)
-                    .IsRequired()
-                    .IsConcurrencyToken();
-
                 entity.Property(e => e.Ein)
                     .IsRequired()
                     .HasMaxLength(10)
@@ -230,7 +233,11 @@ namespace PharmacyApi.Data.DBData
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Guid).HasColumnName("GUID");
+                entity.Property(e => e.Guid)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("GUID");
 
                 entity.Property(e => e.IpAddress)
                     .HasMaxLength(50)
@@ -291,8 +298,6 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
                 entity.Property(e => e.FullName)
                     .IsRequired()
                     .HasMaxLength(100)

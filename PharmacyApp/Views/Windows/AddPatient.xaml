@@ -7,7 +7,7 @@
         xmlns:dr="clr-namespace:PharmacyApp.Services.Common"
         dr:DialogCloser.DialogResult="{Binding DialogResult}"
         mc:Ignorable="d"
-        Title="Добавление пациента" Height="645" Width="950" MinWidth="950" MinHeight="645">
+        Title="Добавление пациента" Height="645" Width="950" MinWidth="950" MinHeight="645" Icon="/PharmacyApp;component/Resources/AppResourses/logo.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="75*"/>
