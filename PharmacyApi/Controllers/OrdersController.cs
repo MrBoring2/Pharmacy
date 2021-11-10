@@ -25,7 +25,7 @@ namespace PharmacyApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-            return await _context.Orders.ToListAsync();
+            return await _context.Orders.Include(p => p.LaboratoryServicesToOrders).Include("LaboratoryServicesToOrder.LaboratoryService").ToListAsync();
         }
 
         // GET: api/Orders/5
@@ -78,6 +78,10 @@ namespace PharmacyApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
+            for (int i = 0; i < order.LaboratoryServicesToOrders.Count(); i++)
+            {
+                order.LaboratoryServicesToOrders.ToList()[i].LaboratoryService = _context.LaboratoryServices.First(p => p.Code == order.LaboratoryServicesToOrders.ToList()[i].LaboratoryService.Code);
+            }
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 

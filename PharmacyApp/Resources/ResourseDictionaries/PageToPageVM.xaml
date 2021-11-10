@@ -20,4 +20,7 @@
     <DataTemplate DataType="{x:Type pagesvm:ReceptionOfMaterialVM}">
         <pages:ReceptionOfMaterial/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type pagesvm:AnalizerWork}">
+        <pages:AnalizerWork/>
+    </DataTemplate>
 </ResourceDictionary>

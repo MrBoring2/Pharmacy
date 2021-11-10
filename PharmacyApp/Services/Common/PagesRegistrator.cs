@@ -26,6 +26,7 @@ namespace PharmacyApp.Services.Common
                     break;
                 case Roles.LaboratorianResearcher:
                     RolePages.Add(new LaboratorianResearcherMainPageVM());
+                    RolePages.Add(new AnalizerWork());
                     break;
                 case Roles.Accountant:
                     RolePages.Add(new AccountantVMMainPage());

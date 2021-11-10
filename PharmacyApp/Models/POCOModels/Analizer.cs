@@ -13,7 +13,7 @@ namespace PharmacyApp.Models.POCOModels
         public int Id { get; set; }
         [JsonPropertyName("analizerName")]
         public string AnalizerName { get; set; }
-        [JsonPropertyName("laboratoryServicesToOrders")]
-        public ICollection<LaboratoryServicesToOrder> LaboratoryServicesToOrders { get; set; }
+        [JsonPropertyName("laboratoryServiceToAnalizers")]
+        public ICollection<LaboratoryServiceToAnalizer> LaboratoryServiceToAnalizer { get; set; }
     }
 }

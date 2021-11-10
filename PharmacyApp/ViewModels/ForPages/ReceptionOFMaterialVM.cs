@@ -10,11 +10,15 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace PharmacyApp.ViewModels.ForPages
@@ -35,7 +39,7 @@ namespace PharmacyApp.ViewModels.ForPages
         private Patient CurrentPatient { get; set; }
         private ObservableCollection<LaboratoryService> services;
         public ObservableCollection<LaboratoryService> Services { get => services; set { services = value; OnPropertyChanged(); } }
-        public LaboratoryService SelectedService { get => selectedService; set { selectedService = value; OnPropertyChanged(); } } 
+        public LaboratoryService SelectedService { get => selectedService; set { selectedService = value; OnPropertyChanged(); } }
 
         public string BarcodeInput
         {
@@ -66,7 +70,7 @@ namespace PharmacyApp.ViewModels.ForPages
             }
         }
 
-        public byte[] BarcodeImage { get=>barcodeImage; set { barcodeImage = value; OnPropertyChanged(); }}
+        public byte[] BarcodeImage { get => barcodeImage; set { barcodeImage = value; OnPropertyChanged(); } }
 
         public RelayCommand CreateBarcode
         {
@@ -103,9 +107,9 @@ namespace PharmacyApp.ViewModels.ForPages
                         var request = new RestRequest($"api/LaboratoryServices/getByName/{ServiceName}", Method.GET);
                         var response = restSerivce.SendRequest(request);
 
-                        if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            if(!IsExistService(JsonSerializer.Deserialize<LaboratoryService>(response.Content)))
+                            if (!IsExistService(JsonSerializer.Deserialize<LaboratoryService>(response.Content)))
                                 Services.Add(JsonSerializer.Deserialize<LaboratoryService>(response.Content));
                             else Notification.ShowNotification("Сервис уже находится в списке!", "Внимание", NotificationType.Warning);
                         }
@@ -166,70 +170,171 @@ namespace PharmacyApp.ViewModels.ForPages
             CreateOrder = new RelayCommand(CreateNewOrder);
         }
 
-        private void CreateNewOrder(object obj)
+        private async void CreateNewOrder(object obj)
         {
-            decimal totalPrice = 0;
-            foreach (var item in Services)
+            if (Validate())
             {
-                totalPrice += item.Price;
+                decimal totalPrice = 0;
+                foreach (var item in Services)
+                {
+                    totalPrice += item.Price;
+                }
+
+                var dateRequest = new RestRequest("api/helper/time", Method.GET);
+                var date = JsonSerializer.Deserialize<DateTime>(restSerivce.SendRequest(dateRequest).Content);
+
+                Order order = new Order
+                {
+                    DateOfCreation = new DateTimeOffset(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, date.Millisecond, TimeSpan.Zero).ToUnixTimeSeconds().ToString(),
+                    Barcode = BarcodeInput,
+                    PatientId = CurrentPatient.PatientId
+                };
+
+                List<LaboratoryServicesToOrder> ServicesInOrder = new List<LaboratoryServicesToOrder>();
+                foreach (var item in Services)
+                {
+                    ServicesInOrder.Add(
+                        new LaboratoryServicesToOrder
+                        {
+                            LaboratoryService = item,
+                            Result = null,
+                            DateOfFinished = null,
+                            Accepted = null,
+                            Status = "Not completed",
+                            AnalyzerId = null,
+                            UserId = null
+                        });
+                }
+                order.LaboratoryServicesToOrders = ServicesInOrder;
+
+                var createOrderRequest = new RestRequest("api/Orders", Method.POST).AddJsonBody(order);
+                var response = restSerivce.SendRequest(createOrderRequest);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                {
+                    var createdOrder = JsonSerializer.Deserialize<Order>(response.Content);
+                    await Task.Run(() => CreatePdfDocument(CurrentPatient, createdOrder));
+                    Notification.ShowNotification("Заказа успешно оформлен, документ создан в папке Электронные документы", "Оповещение", NotificationType.Ok);
+
+                    BarcodeInput = string.Empty;
+                    PatientFullName = string.Empty;
+                    Services = new ObservableCollection<LaboratoryService>();
+                    BarcodeImage = CreateBarcodeFromString("0000000000000").GetByteArray();
+                    var temp = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+                    var orderDate = temp.AddMilliseconds(Convert.ToDouble(order.DateOfCreation));
+                    string line = $"https://wsrussia.ru/?data=base64(дата_заказа={orderDate.Year}-{date.Month}-{orderDate.Day}T{orderDate.Hour}:{orderDate.Minute}:{orderDate.Second}&номер_заказа={createdOrder.Id})\n";
+                    File.WriteAllText("../../Ссылки о заказах/link.txt", line);
+                }
             }
+            else Notification.ShowNotification("Не все поля заполнены!", "Внимание", NotificationType.Ok);
+        }
 
-            var dateRequest = new RestRequest("api/helper/time", Method.GET);
-            var date = JsonSerializer.Deserialize<DateTime>(restSerivce.SendRequest(dateRequest).Content);
+        private bool Validate()
+        {
+            var standartBarcode = CreateBarcodeFromString("0000000000000").GetByteArray(); ;
+            if (BarcodeImage != standartBarcode
+                && !string.IsNullOrEmpty(PatientFullName)
+                && Services.Count > 0)
+                return true;
+            return false;
+                  
 
-            Order order = new Order
+        }
+
+        private void CreatePdfDocument(Patient patient, Order order)
+        {
+            var app = new Word.Application();
+            Word.Document document = app.Documents.Add();
+
+
+            Word.Paragraph title = document.Paragraphs.Add();
+            title.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+            title.Range.Font.Size = 25;
+            title.Range.Text = $"Заказ №{order.Id}";
+            title.Range.InsertParagraphAfter();
+
+            Word.Paragraph paragraph1 = document.Paragraphs.Add();
+            paragraph1.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+            paragraph1.Range.Font.Size = 16;
+            var temp = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            paragraph1.Range.Text = $"Дата заказа: {temp.AddMilliseconds(Convert.ToDouble(order.DateOfCreation))}";
+            paragraph1.Range.InsertParagraphAfter();
+
+            Word.Paragraph paragraph2 = document.Paragraphs.Add();
+            paragraph2.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+            paragraph2.Range.Font.Size = 16;
+            paragraph2.Range.Text = $"Номер пробирки: {order.Barcode}";
+            paragraph2.Range.InsertAfter("\nШтрих-код: ");
+            paragraph2.Range.InsertParagraphAfter();
+            using (var ms = new MemoryStream(BarcodeImage))
             {
-                DateOfCreation = new DateTimeOffset(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, date.Millisecond, TimeSpan.Zero).ToUnixTimeSeconds().ToString(),
-                Barcode = BarcodeInput,
-                PatientId = CurrentPatient.PatientId
-            };
-
-            List<LaboratoryServicesToOrder> ServicesInOrder = new List<LaboratoryServicesToOrder>();
-            foreach (var item in Services)
-            {
-                ServicesInOrder.Add(
-                    new LaboratoryServicesToOrder
-                    {
-                        LaboratoryServiceId = item.Code,
-                        Result = null,
-                        DateOfFinished = null,
-                        Accepted = null,
-                        Status = "Not completed",
-                        AnalyzerId = null,
-                        UserId = null
-                    });
+                var img = Image.FromStream(ms);
+                img.Save(@"barcode.png", ImageFormat.Png);
+                Word.InlineShape barcodeShape = paragraph2.Range.InlineShapes.AddPicture(AppDomain.CurrentDomain.BaseDirectory + "barcode.png");
+                barcodeShape.Title = "Штрих-код";
+                File.Delete(@"barcode.png");
             }
-            order.LaboratoryServicesToOrders = ServicesInOrder;
+            paragraph2.Range.InsertParagraphAfter();
 
-            var createOrderRequest = new RestRequest("api/Orders", Method.POST).AddJsonBody(order);
-            var response = restSerivce.SendRequest(createOrderRequest);
+            Word.Paragraph paragraph3 = document.Paragraphs.Add();
+            paragraph3.Range.Font.Size = 16;
+            paragraph3.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+            paragraph3.Range.Text = $"Номер страхового полиса: {CurrentPatient.SosialSecNumber}";
+            paragraph3.Range.InsertParagraphAfter();
 
-            if(response.StatusCode == System.Net.HttpStatusCode.Created)
+            Word.Paragraph paragraph4 = document.Paragraphs.Add();
+            paragraph4.Range.Font.Size = 16;
+            paragraph4.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+            paragraph4.Range.Text = $"ФИО: {CurrentPatient.FullName}";
+            paragraph4.Range.InsertParagraphAfter();
+
+            Word.Paragraph paragraph5 = document.Paragraphs.Add();
+            paragraph5.Range.Font.Size = 16;
+            paragraph5.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+            paragraph5.Range.Text = $"Дата рождения: {temp.AddMilliseconds(CurrentPatient.DateOfBirth)}";
+            paragraph5.Range.InsertParagraphAfter();
+
+            Word.Paragraph paragraph6 = document.Paragraphs.Add();
+            paragraph6.Range.Font.Size = 16;
+            paragraph6.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+            paragraph6.Range.Text = $"Услуги: ";
+            Word.Table table = document.Tables.Add(paragraph6.Range, Services.Count() + 1, 3);
+            table.Borders.InsideLineStyle = table.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+            table.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+            Word.Range cellRange;
+            cellRange = table.Cell(1, 1).Range;
+            cellRange.Text = "Код";
+            cellRange = table.Cell(1, 2).Range;
+            cellRange.Text = "Название";
+            cellRange = table.Cell(1, 3).Range;
+            cellRange.Text = "Стоимость";
+
+            table.Rows[1].Range.Bold = 1;
+            table.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+            int index = 1;
+            foreach (var item in order.LaboratoryServicesToOrders)
             {
-                var createdOrder = JsonSerializer.Deserialize<Order>(response.Content);
-                var app = new Word.Application();
-                Word.Document document = app.Documents.Add();
+                cellRange = table.Cell(index + 1, 1).Range;
+                cellRange.Text = item.LaboratoryService.Code.ToString();
 
-                Word.Paragraph title = document.Paragraphs.Add();
-                title.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = table.Cell(index + 1, 2).Range;
+                cellRange.Text = item.LaboratoryService.Name.ToString();
 
-                Word.Range range = title.Range;
-                range.set_Style("Title");
-                range.Text = $"Заказ №{createdOrder.Id}";
-
-                Word.Paragraph basePart1 = document.Paragraphs.Add();
-                basePart1.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
-                Word.Range basePartRange1 = basePart1.Range;
-                var temp = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-                basePartRange1.Text = $"Дата заказа: {temp.AddMilliseconds(CurrentPatient.DateOfBirth)}";
-
-                Word.Paragraph basePart2 = document.Paragraphs.Add();
-                basePart2.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
-                Word.Range basePartRange2 = basePart1.Range;           
-                basePartRange2.Text = $"Номер пробирки: {temp.AddMilliseconds(CurrentPatient.DateOfBirth)}";
-
-                document.SaveAs2(@"C:\Users\user452.CHENK\123.pdf", Word.WdExportFormat.wdExportFormatPDF);
+                cellRange = table.Cell(index + 1, 3).Range;
+                cellRange.Text = item.LaboratoryService.Price.ToString() + " руб.";
+                index++;
             }
+            paragraph6.Range.InsertParagraphAfter();
+
+            Word.Paragraph priceParagraph = document.Paragraphs.Add();
+            priceParagraph.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+            priceParagraph.Range.Font.Size = 25;
+            priceParagraph.Range.Text = $"Полная стоиомть: {order.LaboratoryServicesToOrders.Sum(p => p.LaboratoryService.Price)} руб.";
+
+            document.SaveAs2(AppDomain.CurrentDomain.BaseDirectory + $@"../../Электронные документы/Заказ №{order.Id}.pdf", Word.WdExportFormat.wdExportFormatPDF);
+
         }
 
         private async void AddServiceAsync(object obj)
@@ -248,12 +353,12 @@ namespace PharmacyApp.ViewModels.ForPages
         {
             var patientsVM = new PatientsListVM();
             await Task.Run(() => WindowNavigation.Instance.OpenModalWindow(patientsVM));
-            if(patientsVM.DialogResult == true)
+            if (patientsVM.DialogResult == true)
             {
                 CurrentPatient = patientsVM.SelectedPatient;
                 PatientFullName = CurrentPatient.FullName;
             }
-            
+
         }
 
         private bool ValidateBarcodeInput(string barcode)
@@ -276,10 +381,10 @@ namespace PharmacyApp.ViewModels.ForPages
         {
             try
             {
-                var bar = new Barcode(barcode, NetBarcode.Type.EAN13, true, 230, 100, LabelPosition.BottomCenter, AlignmentPosition.Center, Color.White, Color.Black, new Font("Courier New", 12));
+                var bar = new Barcode(barcode, NetBarcode.Type.EAN13, true, 230, 100, LabelPosition.BottomCenter, AlignmentPosition.Center, System.Drawing.Color.White, System.Drawing.Color.Black, new Font("Courier New", 12));
                 return bar;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Notification.ShowNotification("Коротий штрих код!", "Внимание", NotificationType.Error);
             }

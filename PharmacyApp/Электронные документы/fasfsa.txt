@@ -1,0 +1,14 @@
+<MediaElement x:Name="loaded" UnloadedBehavior="Manual" LoadedBehavior="Play" Stretch="Fill" Source="/PharmacyApp;component/Resources/AppResourses/loader.gif" Width="50" Height="50">
+                                        <MediaElement.Style>
+                                            <Style TargetType="{x:Type MediaElement}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsRunning}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsRunning}" Value="False">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </MediaElement.Style>
+                                    </MediaElement>

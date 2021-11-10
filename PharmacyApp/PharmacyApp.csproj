@@ -211,11 +211,15 @@
       <DependentUpon>PasswordUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Converters\AnalizerServicesConverter.cs" />
     <Compile Include="Helpers\Converters\ConvertTimeStamp.cs" />
     <Compile Include="Helpers\Converters\EnterStatusConverter.cs" />
+    <Compile Include="Helpers\Converters\IsBuzyConverter.cs" />
     <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\Notification.cs" />
     <Compile Include="Helpers\WindowNavigation.cs" />
+    <Compile Include="Models\ListViewModels\AnalizerView.cs" />
+    <Compile Include="Models\ListViewModels\RunningServiceModel.cs" />
     <Compile Include="Models\POCOModels\Analizer.cs" />
     <Compile Include="Models\POCOModels\AuthenticationLogger.cs" />
     <Compile Include="Models\POCOModels\BaseModel.cs" />
@@ -241,14 +245,17 @@
     <Compile Include="ViewModels\BaseWindowVM.cs" />
     <Compile Include="ViewModels\ForPages\AccountantVMMainPage.cs" />
     <Compile Include="ViewModels\ForPages\AdministratorVMMainPage.cs" />
+    <Compile Include="ViewModels\ForPages\AnalizerWork.cs" />
     <Compile Include="ViewModels\ForPages\BaseMainPage.cs" />
     <Compile Include="ViewModels\ForPages\LaboratorianResearcherMainPageVM.cs" />
     <Compile Include="ViewModels\ForPages\LaboratorianMainPageVM.cs" />
+    <Compile Include="Models\POCOModels\LaboratoryServiceToAnalizer.cs" />
     <Compile Include="ViewModels\ForPages\LogginUsersLoginVM.cs" />
     <Compile Include="ViewModels\ForPages\ReceptionOfMaterialVM.cs" />
     <Compile Include="ViewModels\ForWindows\AccountantVM.cs" />
     <Compile Include="ViewModels\ForWindows\AddPatientVM.cs" />
     <Compile Include="ViewModels\ForWindows\AdministratorVM.cs" />
+    <Compile Include="ViewModels\ForWindows\AnalizerVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianResearcherVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianVM.cs" />
     <Compile Include="ViewModels\ForWindows\LoginWindowVM.cs" />
@@ -260,6 +267,9 @@
     </Compile>
     <Compile Include="Views\Pages\Administrator.xaml.cs">
       <DependentUpon>Administrator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AnalizerWork.xaml.cs">
+      <DependentUpon>AnalizerWork.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Laboratorian.xaml.cs">
       <DependentUpon>Laboratorian.xaml</DependentUpon>
@@ -275,6 +285,9 @@
     </Compile>
     <Compile Include="Views\Windows\AddPatient.xaml.cs">
       <DependentUpon>AddPatient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\Analizer.xaml.cs">
+      <DependentUpon>Analizer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -340,6 +353,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\AnalizerWork.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\Laboratorian.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -357,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\AddPatient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\Analizer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

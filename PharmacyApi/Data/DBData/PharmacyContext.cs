@@ -24,6 +24,7 @@ namespace PharmacyApi.Data.DBData
         public virtual DbSet<InsuranceСompany> InsuranceСompanies { get; set; }
         public virtual DbSet<InvoicesIssued> InvoicesIssueds { get; set; }
         public virtual DbSet<LaboratoryService> LaboratoryServices { get; set; }
+        public virtual DbSet<LaboratoryServiceToAnalizer> LaboratoryServiceToAnalizers { get; set; }
         public virtual DbSet<LaboratoryServicesToOrder> LaboratoryServicesToOrders { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
@@ -32,7 +33,9 @@ namespace PharmacyApi.Data.DBData
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            if (!optionsBuilder.IsConfigured)
+            {
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,6 +44,8 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<Analizer>(entity =>
             {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
                 entity.Property(e => e.AnalizerName)
                     .IsRequired()
                     .HasMaxLength(30)
@@ -156,6 +161,25 @@ namespace PharmacyApi.Data.DBData
                 entity.Property(e => e.Price).HasColumnType("money");
             });
 
+            modelBuilder.Entity<LaboratoryServiceToAnalizer>(entity =>
+            {
+                entity.HasKey(e => new { e.AnalizerId, e.LaboratoryServiceId });
+
+                entity.ToTable("LaboratoryServiceToAnalizer");
+
+                entity.HasOne(d => d.Analizer)
+                    .WithMany(p => p.LaboratoryServiceToAnalizers)
+                    .HasForeignKey(d => d.AnalizerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LaboratoryServiceToAnalizer_Analizers");
+
+                entity.HasOne(d => d.LaboratoryService)
+                    .WithMany(p => p.LaboratoryServiceToAnalizers)
+                    .HasForeignKey(d => d.LaboratoryServiceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LaboratoryServiceToAnalizer_LaboratoryServices");
+            });
+
             modelBuilder.Entity<LaboratoryServicesToOrder>(entity =>
             {
                 entity.HasKey(e => new { e.OrderId, e.LaboratoryServiceId });
@@ -163,8 +187,8 @@ namespace PharmacyApi.Data.DBData
                 entity.ToTable("LaboratoryServicesToOrder");
 
                 entity.Property(e => e.DateOfFinished)
-                    .IsRowVersion()
-                    .IsConcurrencyToken();
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Status)
                     .IsRequired()
@@ -185,7 +209,6 @@ namespace PharmacyApi.Data.DBData
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.LaboratoryServicesToOrders)
                     .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LaboratoryServicesToOrder_Order");
 
                 entity.HasOne(d => d.User)

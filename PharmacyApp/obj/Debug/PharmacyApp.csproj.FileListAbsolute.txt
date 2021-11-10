@@ -162,7 +162,6 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Aspose.BarCode.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\IronBarCode.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\NetBarcode.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\NetBarcode.xml
-C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.AssemblyReference.cache
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\AddPatient.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\PatientsList.g.cs
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\ServicesList.g.cs
@@ -172,3 +171,8 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\Service
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\bin\Debug\Newtonsoft.Json.xml
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.ResolveComReference.cache
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\AnalizerWork.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\Analizer.g.cs
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Pages\AnalizerWork.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\Views\Windows\Analizer.baml
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\PharmacyApp.csproj.AssemblyReference.cache

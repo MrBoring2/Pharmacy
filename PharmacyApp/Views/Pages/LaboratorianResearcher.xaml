@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Source="/PharmacyApp;component/Resources/AppResourses/laborant_2.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,20,0,0" Grid.Row="0"/>
         <GroupBox Header="Личные данные" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Margin="10,20,10,0">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" Background="#FF76E383">
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock FontSize="20" Text="Имя: "/>
                     <TextBlock FontSize="20" Text="{Binding Name}"/>

@@ -206,6 +206,6 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\dotnet-aspnet-
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
-C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\obj\Debug\net5.0\PharmacyApi.csproj.AssemblyReference.cache
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\bin\Debug\net5.0\System.Text.Encodings.Web.dll
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApi\obj\Debug\net5.0\PharmacyApi.csproj.AssemblyReference.cache
