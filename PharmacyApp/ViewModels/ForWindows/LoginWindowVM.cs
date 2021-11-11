@@ -163,7 +163,7 @@ namespace PharmacyApp.ViewModels.ForWindows
 
         private void LoginUser(TokenModel data)
         {
-            UserService.Instance.SetUser(data.user_name_surname, data.user_login, data.role_name,
+            UserService.Instance.SetUser( data.user_name_surname, Convert.ToInt32(data.user_id), data.user_login, data.role_name,
                                     (Roles)Convert.ToInt32(data.role_id), data.access_token);
 
             UserService.Instance.HubConnection.StartAsync();

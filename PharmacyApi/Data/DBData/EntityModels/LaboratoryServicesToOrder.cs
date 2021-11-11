@@ -9,7 +9,7 @@ namespace PharmacyApi.Data.DBData.EntityModels
     {
         public int OrderId { get; set; }
         public int LaboratoryServiceId { get; set; }
-        public double? Result { get; set; }
+        public string Result { get; set; }
         public string DateOfFinished { get; set; }
         public bool? Accepted { get; set; }
         public string Status { get; set; }

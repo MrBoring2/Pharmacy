@@ -45,7 +45,7 @@ namespace PharmacyApi.Controllers
         [HttpGet("notCompleted")]
         public async Task<ActionResult<IEnumerable<LaboratoryServicesToOrder>>> GetNotCompletedLaboratoryServicesToOrder()
         {
-            return await _context.LaboratoryServicesToOrders.Include(p => p.LaboratoryService).Where(p => p.Status.Equals("Not completed")).ToListAsync();
+            return await _context.LaboratoryServicesToOrders.Include(p => p.LaboratoryService).Include(p => p.Order).Where(p => p.Status.Equals("Not completed")).ToListAsync();
         }
 
 
@@ -55,7 +55,7 @@ namespace PharmacyApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLaboratoryServicesToOrder(int id, LaboratoryServicesToOrder laboratoryServicesToOrder)
         {
-            if (id != laboratoryServicesToOrder.OrderId)
+            if (id != laboratoryServicesToOrder.LaboratoryServiceId)
             {
                 return BadRequest();
             }

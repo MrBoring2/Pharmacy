@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PharmacyApp.Views.Windows"
+        xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
         Title="Анализатор" Height="458" MinHeight="450" MinWidth="800" Width="800">
     <Grid>
@@ -19,35 +20,13 @@
         <Grid Grid.Row="1">
             <TextBlock Text="Выполняющиеся услуги" Margin="5,5,5,0" VerticalAlignment="Top"/>
 
-            <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding NotComleteServices}" HorizontalAlignment="Stretch" Margin="5,30,5,0" VerticalAlignment="Top">
+            <DataGrid IsReadOnly="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding NotComleteServices, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" SelectedItem="{Binding SelectedService}" HorizontalAlignment="Stretch" Margin="5,30,5,0" VerticalAlignment="Top">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Услуга" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <TextBlock Text="{Binding LaboratoryService.Name}"/>
-                                    <MediaElement x:Name="loaded" UnloadedBehavior="Manual" LoadedBehavior="Play" Stretch="Fill" Source="/PharmacyApp;component/Resources/AppResourses/loader.gif" Width="50" Height="50">
-                                        <MediaElement.Style>
-                                            <Style TargetType="{x:Type MediaElement}">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsRunning}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding IsRunning}" Value="False">
-                                                        <Setter Property="Visibility" Value="Hidden"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </MediaElement.Style>
-                                    </MediaElement>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Номер заказа" Binding="{Binding OrderId}" Width="*"/>
-                    <DataGridTextColumn Header="Статус" Width="*" Binding="{Binding Status}"/>
-                    <DataGridTextColumn Header="Прогресс" Width="*" Binding="{Binding Progress}"/>
-                    <DataGridTextColumn Header="Результат" Width="*" Binding="{Binding Result}"/>
+                    <DataGridTextColumn Header="Услуга" Width="*" Binding="{Binding LaboratoryService.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <DataGridTextColumn Header="Номер заказа" Binding="{Binding Order.Id, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="*"/>
+                    <DataGridTextColumn Header="Статус" Width="*" Binding="{Binding Status, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <DataGridTextColumn Header="Прогресс" Width="*" Binding="{Binding Progress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <DataGridTextColumn Header="Результат" Width="*" Binding="{Binding Result, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Принять результат" Command="{Binding Accept}" Width="150" Margin="201,0,0,6"/>

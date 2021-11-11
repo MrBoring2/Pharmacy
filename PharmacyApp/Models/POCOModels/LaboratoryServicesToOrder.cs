@@ -14,14 +14,14 @@ namespace PharmacyApp.Models.POCOModels
         [JsonPropertyName("laboratoryServiceId")]
         public int LaboratoryServiceId { get; set; }
         [JsonPropertyName("result")]
-        public double? Result { get; set; }
+        public string Result { get; set; }
         [JsonPropertyName("dateOfFinished")]
-        public byte[] DateOfFinished { get; set; }
+        public string DateOfFinished { get; set; }
         [JsonPropertyName("accepted")]
         public bool? Accepted { get; set; }
         [JsonPropertyName("status")]
         public string Status { get; set; }
-        [JsonPropertyName("analizerId")]
+        [JsonPropertyName("analyzerId")]
         public int? AnalyzerId { get; set; }
         [JsonPropertyName("userId")]
         public int? UserId { get; set; }

@@ -13,7 +13,7 @@ namespace PharmacyApp.Models.ListViewModels
         {
             Services = new List<LaboratoryServiceToAnalizer>();
         }
-
+        public int AnalizerId { get; set; }
         public string AnalizerName { get; set; }
         public bool IsBuzy { get; set; }
         public List<LaboratoryServiceToAnalizer> Services { get; set; }

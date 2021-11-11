@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Models.ListViewModels
 {
-    public class NotCompleteService
+    public class NotCompleteService : BaseModel
     {
         public LaboratoryService LaboratoryService { get; set; }
-        public int OrderId {get;set;}
+        public Order Order {get;set;}
         public string Status { get; set; }
         public int Progress { get; set; }
-        public double Result { get; set; }
+        public string Result { get; set; }
         public bool IsRunning { get; set; }
 
     }

@@ -15,6 +15,7 @@ namespace PharmacyApp.Services.ApiServices
         private static UserService instance;
         public string UserNameSurname { get; private set; }
         public string UserLogin { get; private set; }
+        public int UserId { get; private set; }
 
         public Roles Role { get; private set; }
         public string RoleName { get; private set; }
@@ -36,8 +37,9 @@ namespace PharmacyApp.Services.ApiServices
             RestClient = restClient;
         }
 
-        public void SetUser(string user_name_surname, string login, string roleName, Roles role, string token)
+        public void SetUser(string user_name_surname, int id, string login, string roleName, Roles role, string token)
         {
+            UserId = id;
             UserNameSurname = user_name_surname;
             UserLogin = login;
             RoleName = roleName;

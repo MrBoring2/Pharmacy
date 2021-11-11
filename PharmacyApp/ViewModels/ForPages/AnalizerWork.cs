@@ -44,6 +44,7 @@ namespace PharmacyApp.ViewModels.ForPages
                     var newAnalizer = new AnalizerView();
                     newAnalizer.AnalizerName = analizer.AnalizerName;
                     newAnalizer.IsBuzy = false;
+                    newAnalizer.AnalizerId = analizer.Id;
                     foreach (var service in analizer.LaboratoryServiceToAnalizer)
                     {
                         newAnalizer.Services.Add(service);

@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PharmacyApp.Models.POCOModels
 {
-    public class BaseModel
+    public class BaseModel : ObservableObject
     {
         public object this[string propertyName]
         {
@@ -20,5 +22,7 @@ namespace PharmacyApp.Models.POCOModels
                 return null;
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

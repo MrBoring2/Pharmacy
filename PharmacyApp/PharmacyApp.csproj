@@ -190,6 +190,8 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -201,6 +203,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -218,9 +221,14 @@
     <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\Notification.cs" />
     <Compile Include="Helpers\WindowNavigation.cs" />
+    <Compile Include="Models\ListViewModels\AnalizerPostModel.cs" />
     <Compile Include="Models\ListViewModels\AnalizerView.cs" />
     <Compile Include="Models\ListViewModels\RunningServiceModel.cs" />
+    <Compile Include="Models\ListViewModels\ServiceModel.cs" />
+    <Compile Include="Models\ListViewModels\ServiceResultModel.cs" />
     <Compile Include="Models\POCOModels\Analizer.cs" />
+    <Compile Include="Models\POCOModels\AnalizerProgress.cs" />
+    <Compile Include="Models\POCOModels\AnalizerResearchFinish.cs" />
     <Compile Include="Models\POCOModels\AuthenticationLogger.cs" />
     <Compile Include="Models\POCOModels\BaseModel.cs" />
     <Compile Include="Models\POCOModels\InsuranceCompany.cs" />
@@ -255,6 +263,7 @@
     <Compile Include="ViewModels\ForWindows\AccountantVM.cs" />
     <Compile Include="ViewModels\ForWindows\AddPatientVM.cs" />
     <Compile Include="ViewModels\ForWindows\AdministratorVM.cs" />
+    <Compile Include="ViewModels\ForWindows\AnalizerResultVM.cs" />
     <Compile Include="ViewModels\ForWindows\AnalizerVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianResearcherVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianVM.cs" />
@@ -288,6 +297,9 @@
     </Compile>
     <Compile Include="Views\Windows\Analizer.xaml.cs">
       <DependentUpon>Analizer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\AnalizerResult.xaml.cs">
+      <DependentUpon>AnalizerResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -330,7 +342,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\AppResourses\loader.gif" />
+    <Resource Include="Resources\AppResourses\loader.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Page Include="CustomControls\PasswordUserControl.xaml">
@@ -381,6 +395,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\AnalizerResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -402,7 +420,9 @@
     <Resource Include="Resources\AppResourses\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\AppResourses\logo.ico" />
+    <Resource Include="Resources\AppResourses\logo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\AppResourses\laborant_2.png" />
