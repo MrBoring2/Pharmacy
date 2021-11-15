@@ -221,9 +221,9 @@ namespace PharmacyApp.ViewModels.ForPages
                     Services = new ObservableCollection<LaboratoryService>();
                     BarcodeImage = CreateBarcodeFromString("0000000000000").GetByteArray();
                     var temp = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-                    var orderDate = temp.AddMilliseconds(Convert.ToDouble(order.DateOfCreation));
-                    string line = $"https://wsrussia.ru/?data=base64(дата_заказа={orderDate.Year}-{date.Month}-{orderDate.Day}T{orderDate.Hour}:{orderDate.Minute}:{orderDate.Second}&номер_заказа={createdOrder.Id})\n";
-                    File.WriteAllText("../../Ссылки о заказах/link.txt", line);
+                    var orderDate = temp.AddSeconds(Convert.ToDouble(order.DateOfCreation));
+                    string line = $"https://wsrussia.ru/?data=base64(дата_заказа={orderDate.Year}-{orderDate.Month}-{orderDate.Day}T{orderDate.Hour}:{orderDate.Minute}:{orderDate.Second}&номер_заказа={createdOrder.Id})\n";
+                    File.AppendAllText("../../Ссылки о заказах/link.txt", line);
                 }
             }
             else Notification.ShowNotification("Не все поля заполнены!", "Внимание", NotificationType.Ok);

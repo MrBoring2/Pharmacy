@@ -25,7 +25,17 @@ namespace PharmacyApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-            return await _context.Orders.Include(p => p.LaboratoryServicesToOrders).Include("LaboratoryServicesToOrder.LaboratoryService").ToListAsync();
+            var orders = await _context.Orders.Include(p => p.LaboratoryServicesToOrders).ToListAsync();
+            foreach (var item in orders)
+            {
+               
+                foreach (var service in item.LaboratoryServicesToOrders)
+                {
+                    _context.Entry(service).Reference(p => p.LaboratoryService).Load();
+                }
+            }
+
+            return orders;
         }
 
         // GET: api/Orders/5
@@ -33,7 +43,12 @@ namespace PharmacyApi.Controllers
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
             var order = await _context.Orders.FindAsync(id);
-
+            _context.Entry(order).Collection(p => p.LaboratoryServicesToOrders).Load();
+            _context.Entry(order).Reference(p => p.Patient).Load();
+            foreach (var service in order.LaboratoryServicesToOrders)
+            {
+                _context.Entry(service).Reference(p => p.LaboratoryService).Load();
+            }
             if (order == null)
             {
                 return NotFound();
@@ -41,6 +56,26 @@ namespace PharmacyApi.Controllers
 
             return order;
         }
+        [HttpGet("getByDate")]
+        public async Task<ActionResult<List<Order>>> GetOrdersByDateAndCompany(int insuranceCompanyId, string dateStart, string dateEnd)
+        {
+            var orders = await _context.Orders
+                .Include(p => p.LaboratoryServicesToOrders)
+                .Where(p => p.Patient.InsuranceCompanyId == insuranceCompanyId)
+                .Where(p => Convert.ToDouble(p.DateOfCreation)>= Convert.ToDouble(dateStart) 
+                && Convert.ToDouble(p.DateOfCreation) <= Convert.ToDouble(dateEnd)).ToListAsync();
+            foreach (var item in orders)
+            {
+                _context.Entry(item).Reference(p => p.Patient).Load();
+
+                foreach (var service in item.LaboratoryServicesToOrders)
+                {
+                    _context.Entry(service).Reference(p => p.LaboratoryService).Load();
+                }
+            }
+            return orders;
+        }
+
 
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

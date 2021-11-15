@@ -43,9 +43,33 @@ namespace PharmacyApi.Controllers
         }
 
         [HttpGet("notCompleted")]
-        public async Task<ActionResult<IEnumerable<LaboratoryServicesToOrder>>> GetNotCompletedLaboratoryServicesToOrder()
+        public async Task<ActionResult<IEnumerable<LaboratoryServicesToOrder>>> GetNotCompletedLaboratoryServicesToOrder(int analizerId)
         {
-            return await _context.LaboratoryServicesToOrders.Include(p => p.LaboratoryService).Include(p => p.Order).Where(p => p.Status.Equals("Not completed")).ToListAsync();
+            var allServiceOrders = await _context.LaboratoryServicesToOrders
+                .Include(p => p.LaboratoryService)
+                .Include(p => p.Order)
+                .Where(p => p.Status.Equals("Not completed"))
+                .ToListAsync();
+
+            var analizerServices = await _context.LaboratoryServiceToAnalizers
+                .Where(p => p.AnalizerId == analizerId)
+                .ToListAsync();
+
+            var finalServiceOrders = new List<LaboratoryServicesToOrder>();
+
+            foreach (var serviceOrder in allServiceOrders)
+            {
+                foreach (var analzierService in analizerServices)
+                {
+                    if (analzierService.LaboratoryServiceId == serviceOrder.LaboratoryServiceId)
+                    {
+                        finalServiceOrders.Add(serviceOrder);
+                        break;
+                    }
+                }
+            }
+
+            return finalServiceOrders;
         }
 
 

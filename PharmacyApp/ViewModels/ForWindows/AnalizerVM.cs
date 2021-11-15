@@ -52,7 +52,7 @@ namespace PharmacyApp.ViewModels.ForWindows
                     changedService.Status = "On research";
                     changedService.IsRunning = true;
                     Analizer.IsBuzy = true;
-                    OnPropertyChanged(nameof(NotComleteServices));
+                    UpdateServices();
                 }
                 timer.Elapsed += async (sender, e) => await UpdateProgress(client);
                 timer.Start();
@@ -76,18 +76,19 @@ namespace PharmacyApp.ViewModels.ForWindows
                         {
                             changedService.IsRunning = false;
                             changedService.Progress = 100;
+
                             changedService.Result = data.services[0].result.ToString();
                             Analizer.IsBuzy = false;
 
-                           // OnPropertyChanged(nameof(NotComleteServices));
-                            App.Current.Dispatcher.Invoke(()=> UpdateServices());
+                            App.Current.Dispatcher.Invoke(() => UpdateServices());
+
 
                             var resultDialogVM = new AnalizerResultVM(data.services[0].result.ToString());
                             await Task.Run(() => { WindowNavigation.Instance.OpenModalWindow(resultDialogVM); });
                             if(resultDialogVM.DialogResult == true)
                             {
                                 changedService.Status = "Finished";
-
+                                
                                 var serviceOrder = new LaboratoryServicesToOrder
                                 {
                                     Accepted = true,
@@ -139,8 +140,6 @@ namespace PharmacyApp.ViewModels.ForWindows
                                 {
                                     MessageBox.Show("Исследование отклонено!");
                                 }
-
-
                             }
                             OnPropertyChanged("NotComleteServices");
 
@@ -154,8 +153,7 @@ namespace PharmacyApp.ViewModels.ForWindows
                         {
                             changedService.Progress = data.progress;
                         }
-                        OnPropertyChanged(nameof(NotComleteServices));
-
+                        App.Current.Dispatcher.Invoke(() => UpdateServices());
                     }
                 }
                 else timer.Stop();
@@ -165,12 +163,15 @@ namespace PharmacyApp.ViewModels.ForWindows
         private void UpdateServices()
         {
             var services = new ObservableCollection<NotCompleteService>(NotComleteServices);
+            var seelctedService = SelectedService;
             NotComleteServices.Clear();
+            
             foreach (var item in services)
             {
                 if(item.Status != "Finished" && item.Status != "Rejected")
                     NotComleteServices.Add(item);
             }
+            SelectedService = seelctedService;
         }
 
         private string title;
@@ -183,7 +184,9 @@ namespace PharmacyApp.ViewModels.ForWindows
         {
             NotComleteServices = new ObservableCollection<NotCompleteService>();
             var services = new List<LaboratoryServicesToOrder>();
-            var request = new RestRequest("api/LaboratoryServicesToOrders/notCompleted", Method.GET);
+            var request = new RestRequest("api/LaboratoryServicesToOrders/notCompleted", Method.GET)
+                .AddParameter("analizerId", Analizer.AnalizerId);
+
             var response = restService.SendRequest(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
@@ -191,7 +194,7 @@ namespace PharmacyApp.ViewModels.ForWindows
 
                 foreach (var item in services)
                 {
-                    NotComleteServices.Add(new NotCompleteService { Order = item.Order, LaboratoryService = item.LaboratoryService, Status = "Not Complete", IsRunning = true, Progress = 0, Result = "Нет результата" });
+                    NotComleteServices.Add(new NotCompleteService { Order = item.Order, LaboratoryService = item.LaboratoryService, Status = "Not Complete", IsRunning = false, Progress = 0, Result = "Нет результата" });
                 }
             }
         }

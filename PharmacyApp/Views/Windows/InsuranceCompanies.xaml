@@ -1,0 +1,29 @@
+﻿<Window x:Class="PharmacyApp.Views.Windows.InsuranceCompanies"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PharmacyApp.Views.Windows"
+        xmlns:closer="clr-namespace:PharmacyApp.Services.Common"
+        mc:Ignorable="d"
+        Title="Страховые компании" Height="450" Width="800" MinHeight="450" MinWidth="800"
+        closer:DialogCloser.DialogResult="{Binding DialogResult}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="364*"/>
+            <RowDefinition Height="55*"/>
+        </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding InsuranceCompanies}" SelectedItem="{Binding SelectedCompany}" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="*"/>
+                <DataGridTextColumn Header="ИНН" Binding="{Binding Inn}" Width="*"/>
+                <DataGridTextColumn Header="Счёт" Binding="{Binding CheckingAccount}" Width="*"/>
+                <DataGridTextColumn Header="БИК" Binding="{Binding Bic}" Width="*"/>
+                <DataGridTextColumn Header="Страна" Binding="{Binding Country}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Command="{Binding Select}" Content="Выбрать" HorizontalAlignment="Left" Margin="10,0,0,10" Grid.Row="1" VerticalAlignment="Bottom" Width="75"/>
+
+    </Grid>
+</Window>

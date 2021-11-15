@@ -26,6 +26,7 @@ namespace PharmacyApp
             WindowNavigation.Instance.RegisterWindow<ServicesListVM, ServicesList>();
             WindowNavigation.Instance.RegisterWindow<AnalizerVM, Analizer>();
             WindowNavigation.Instance.RegisterWindow<AnalizerResultVM, AnalizerResult>();
+            WindowNavigation.Instance.RegisterWindow<InsuranceCompaniesVM, InsuranceCompanies>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

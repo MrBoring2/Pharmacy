@@ -1,0 +1,33 @@
+﻿<Page x:Class="PharmacyApp.Views.Pages.InvoiceIssue"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PharmacyApp.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450"
+      Title="InvoiceIssue" Background="White" Height="auto" Width="auto">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="14*"/>
+            <RowDefinition Height="61*"/>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Страховая компания" VerticalAlignment="Top" Width="142"/>
+        <TextBox HorizontalAlignment="Stretch" Height="23" Margin="10,34,100,0" TextWrapping="Wrap" Text="{Binding InsuranceCompany.Name}" VerticalAlignment="Top"/>
+        <Button Command="{Binding SelectCompany, UpdateSourceTrigger=PropertyChanged}"  Content="Bыбрать" HorizontalAlignment="Right" Margin="0,30,5,5" VerticalAlignment="Top" Width="75"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Период для оплаты" VerticalAlignment="Top" Width="309" Grid.Row="1"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,0,0,253">
+            <TextBlock HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="Начало" VerticalAlignment="Top"/>
+            <DatePicker SelectedDate="{Binding StartDate}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Margin="200,0,0,253">
+            <TextBlock HorizontalAlignment="Left" Margin="0,35,10,0" Grid.Row="1" TextWrapping="Wrap" Text="Конец" VerticalAlignment="Top"/>
+            <DatePicker SelectedDate="{Binding EndDate}" HorizontalAlignment="Left" Margin="0,0,10,0" VerticalAlignment="Top" Height="36" Grid.Row="1"/>
+        </StackPanel>
+        <Button Command="{Binding CreateIssue}" Content="Сформировать счёт" HorizontalAlignment="Left" Margin="5,170,0,0" VerticalAlignment="Top" Width="196" Grid.Row="1"/>
+    </Grid>
+</Page>

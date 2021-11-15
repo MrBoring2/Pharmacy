@@ -160,7 +160,7 @@ namespace PharmacyApi.Data.DBData
 
                 entity.Property(e => e.Price).HasColumnType("money");
             });
-
+                
             modelBuilder.Entity<LaboratoryServiceToAnalizer>(entity =>
             {
                 entity.HasKey(e => new { e.AnalizerId, e.LaboratoryServiceId });

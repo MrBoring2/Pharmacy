@@ -232,6 +232,8 @@
     <Compile Include="Models\POCOModels\AuthenticationLogger.cs" />
     <Compile Include="Models\POCOModels\BaseModel.cs" />
     <Compile Include="Models\POCOModels\InsuranceCompany.cs" />
+    <Compile Include="Models\POCOModels\InsuranceСompany.cs" />
+    <Compile Include="Models\POCOModels\InvoiceIssue.cs" />
     <Compile Include="Models\POCOModels\LaboratoryService.cs" />
     <Compile Include="Models\POCOModels\LaboratoryServicesToOrder.cs" />
     <Compile Include="Models\POCOModels\Order.cs" />
@@ -255,6 +257,7 @@
     <Compile Include="ViewModels\ForPages\AdministratorVMMainPage.cs" />
     <Compile Include="ViewModels\ForPages\AnalizerWork.cs" />
     <Compile Include="ViewModels\ForPages\BaseMainPage.cs" />
+    <Compile Include="ViewModels\ForPages\InvoiceIssueVM.cs" />
     <Compile Include="ViewModels\ForPages\LaboratorianResearcherMainPageVM.cs" />
     <Compile Include="ViewModels\ForPages\LaboratorianMainPageVM.cs" />
     <Compile Include="Models\POCOModels\LaboratoryServiceToAnalizer.cs" />
@@ -265,6 +268,7 @@
     <Compile Include="ViewModels\ForWindows\AdministratorVM.cs" />
     <Compile Include="ViewModels\ForWindows\AnalizerResultVM.cs" />
     <Compile Include="ViewModels\ForWindows\AnalizerVM.cs" />
+    <Compile Include="ViewModels\ForWindows\InsuranceCompaniesVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianResearcherVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianVM.cs" />
     <Compile Include="ViewModels\ForWindows\LoginWindowVM.cs" />
@@ -279,6 +283,9 @@
     </Compile>
     <Compile Include="Views\Pages\AnalizerWork.xaml.cs">
       <DependentUpon>AnalizerWork.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\InvoiceIssue.xaml.cs">
+      <DependentUpon>InvoiceIssue.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Laboratorian.xaml.cs">
       <DependentUpon>Laboratorian.xaml</DependentUpon>
@@ -300,6 +307,9 @@
     </Compile>
     <Compile Include="Views\Windows\AnalizerResult.xaml.cs">
       <DependentUpon>AnalizerResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\InsuranceCompanies.xaml.cs">
+      <DependentUpon>InsuranceCompanies.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -371,6 +381,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\InvoiceIssue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\Laboratorian.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -396,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\AnalizerResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\InsuranceCompanies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
