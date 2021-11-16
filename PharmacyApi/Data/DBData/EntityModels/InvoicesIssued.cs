@@ -7,6 +7,7 @@ namespace PharmacyApi.Data.DBData.EntityModels
 {
     public partial class InvoicesIssued
     {
+        public int Id { get; set; }
         public int InsuranceCompanyId { get; set; }
         public int UserId { get; set; }
         public double StartPeriod { get; set; }

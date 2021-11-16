@@ -129,15 +129,15 @@ namespace PharmacyApi.Data.DBData
 
             modelBuilder.Entity<InvoicesIssued>(entity =>
             {
-                entity.HasKey(e => new { e.InsuranceCompanyId, e.UserId });
+                entity.HasKey(e => e.Id);
 
                 entity.ToTable("InvoicesIssued");
 
-                entity.Property(e => e.EndPeriod).HasColumnType("date");
+                entity.Property(e => e.EndPeriod).HasColumnType("float");
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
-                entity.Property(e => e.StartPeriod).HasColumnType("date");
+                entity.Property(e => e.StartPeriod).HasColumnType("float");
 
                 entity.HasOne(d => d.InsuranceCompany)
                     .WithMany(p => p.InvoicesIssueds)
