@@ -263,6 +263,7 @@
     <Compile Include="Models\POCOModels\LaboratoryServiceToAnalizer.cs" />
     <Compile Include="ViewModels\ForPages\LogginUsersLoginVM.cs" />
     <Compile Include="ViewModels\ForPages\ReceptionOfMaterialVM.cs" />
+    <Compile Include="ViewModels\ForPages\ReportPageVM.cs" />
     <Compile Include="ViewModels\ForWindows\AccountantVM.cs" />
     <Compile Include="ViewModels\ForWindows\AddPatientVM.cs" />
     <Compile Include="ViewModels\ForWindows\AdministratorVM.cs" />
@@ -298,6 +299,9 @@
     </Compile>
     <Compile Include="Views\Pages\ReceptionOfMaterial.xaml.cs">
       <DependentUpon>ReceptionOfMaterial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ReportPage.xaml.cs">
+      <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\AddPatient.xaml.cs">
       <DependentUpon>AddPatient.xaml</DependentUpon>
@@ -398,6 +402,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\ReceptionOfMaterial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

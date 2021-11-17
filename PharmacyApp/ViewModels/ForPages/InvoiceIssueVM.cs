@@ -116,21 +116,27 @@ namespace PharmacyApp.ViewModels.ForPages
                     totalPriceParagraph.Range.Font.Size = 25;
                     totalPriceParagraph.Range.Text = $"Полная стоиомть: {totalPrice} руб.";
 
-                    document.SaveAs2(AppDomain.CurrentDomain.BaseDirectory + $@"../../Счета страховых компаний/Счёт на команию №{Guid.NewGuid()}_ИНН-{InsuranceCompany.Inn}_Название-{InsuranceCompany.Name}.pdf", Word.WdExportFormat.wdExportFormatPDF);
+
+                    var postRequest = new RestRequest("api/InvoicesIssueds", Method.POST)
+                        .AddJsonBody(new InvoiceIssue
+                        {
+                            InsuranceCompanyId = InsuranceCompany.Id,
+                            Price = totalPrice,
+                            StartPeriod = new DateTimeOffset(StartDate.Year, StartDate.Month, StartDate.Day, StartDate.Hour, StartDate.Minute, StartDate.Second, TimeSpan.Zero).ToUnixTimeSeconds(),
+                            EndPeriod = new DateTimeOffset(EndDate.Year, EndDate.Month, EndDate.Day, EndDate.Hour, EndDate.Minute, EndDate.Second, TimeSpan.Zero).ToUnixTimeSeconds(),
+                            UserId = UserService.Instance.UserId
+                        });
+
+                    var postResponse = restService.SendRequest(postRequest);
+                    if (postResponse.StatusCode == System.Net.HttpStatusCode.Created)
+                    {
+                        document.SaveAs2(AppDomain.CurrentDomain.BaseDirectory + $@"../../Счета страховых компаний/Счёт на команию №{Guid.NewGuid()}_ИНН-{InsuranceCompany.Inn}_Название-{InsuranceCompany.Name}.pdf", Word.WdExportFormat.wdExportFormatPDF);
+                        Notification.ShowNotification("Счёт успешно сформирован, электроннй вариант создан в папке Счета страховых компаний.", "Оповещение", NotificationType.Ok);
+
+                    }
                 });
 
-                var postRequest = new RestRequest("api/Orders", Method.POST)
-                    .AddJsonBody(new InvoiceIssue
-                    {
-                        InsuranceCompanyId = InsuranceCompany.Id,
-                        Price = totalPrice,
-                        StartPeriod = new DateTimeOffset(StartDate.Year, StartDate.Month, StartDate.Day, StartDate.Hour, StartDate.Minute, StartDate.Second, TimeSpan.Zero).ToUnixTimeSeconds(),
-                        EndPeriod = new DateTimeOffset(EndDate.Year, EndDate.Month, EndDate.Day, EndDate.Hour, EndDate.Minute, EndDate.Second, TimeSpan.Zero).ToUnixTimeSeconds(),
-                        UserId = UserService.Instance.UserId
-                    });
 
-
-                Notification.ShowNotification("Счёт успешно сформирован, электроннй вариант создан в папке Счета страховых компаний.", "Оповещение", NotificationType.Ok);
             }
         }
 

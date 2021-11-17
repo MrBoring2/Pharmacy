@@ -9,6 +9,8 @@ namespace PharmacyApp.Models.POCOModels
 {
     public class InvoiceIssue
     {
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
         [JsonPropertyName("insuranceCompanyId")]
         public int InsuranceCompanyId { get; set; }
         [JsonPropertyName("userId")]

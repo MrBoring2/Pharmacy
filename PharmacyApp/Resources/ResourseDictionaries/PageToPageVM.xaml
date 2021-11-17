@@ -26,4 +26,7 @@
     <DataTemplate DataType="{x:Type pagesvm:InvoiceIssueVM}">
         <pages:InvoiceIssue/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type pagesvm:ReportPageVM}">
+        <pages:ReportPage/>
+    </DataTemplate>
 </ResourceDictionary>

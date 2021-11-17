@@ -31,6 +31,7 @@ namespace PharmacyApp.Services.Common
                 case Roles.Accountant:
                     RolePages.Add(new AccountantVMMainPage());
                     RolePages.Add(new InvoiceIssueVM());
+                    RolePages.Add(new ReportPageVM());
                     break;
                 case Roles.Administrator:
                     RolePages.Add(new AdministratorVMMainPage());
