@@ -25,7 +25,7 @@ namespace PharmacyApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LaboratoryServicesToOrder>>> GetLaboratoryServicesToOrders()
         {
-            return await _context.LaboratoryServicesToOrders.Include(p=>p.LaboratoryService).ToListAsync();
+            return await _context.LaboratoryServicesToOrders.Include(p => p.LaboratoryService).ToListAsync();
         }
 
         // GET: api/LaboratoryServicesToOrders/5

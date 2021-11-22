@@ -13,8 +13,9 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.ViewModels.ForWindows
 {
-    public class AddPatientVM : BaseWindowVM
+    public class EditPatientVM : BaseWindowVM
     {
+        public Patient CurrentPatient { get; set; }
         private RestService restService;
         private bool? dialogResult { get; set; }
         private string fullName;
@@ -31,16 +32,27 @@ namespace PharmacyApp.ViewModels.ForWindows
         private InsuranceCompany selectedInsuranceCompany;
         private ObservableCollection<InsuranceCompany> insuranceCompanies;
         public ObservableCollection<InsuranceCompany> InsuranceCompanies { get => insuranceCompanies; set { insuranceCompanies = value; OnPropertyChanged(); } }
-        public ObservableCollection<InsuranceCompany> FilteredCompanies 
-        { 
-            get => new ObservableCollection<InsuranceCompany>(InsuranceCompanies
-            .Where(p => p.Name.Contains(SearchCompanyParameter) || p.Inn.Contains(SearchCompanyParameter))); 
-        }
-        public Patient NewPatient {get;set;}
-        public AddPatientVM()
+        public ObservableCollection<InsuranceCompany> FilteredCompanies
         {
+            get => new ObservableCollection<InsuranceCompany>(InsuranceCompanies
+            .Where(p => p.Name.Contains(SearchCompanyParameter) || p.Inn.Contains(SearchCompanyParameter)));
+        }
+        public EditPatientVM(Patient patient)
+        {
+            CurrentPatient = patient;
             restService = new RestService();
-            DateOfBirth = DateTime.Today;
+            var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            DateOfBirth = dateTime.AddMilliseconds(CurrentPatient.DateOfBirth);
+            FullName = CurrentPatient.FullName;
+            Ein = CurrentPatient.Ein;
+            Email = CurrentPatient.Email;
+            PassportNumber = CurrentPatient.PassportNumber;
+            PassportSeries = CurrentPatient.PassportSeries;
+            Telephone = CurrentPatient.Telephone;
+            SosialSecNumber = CurrentPatient.SosialSecNumber;
+            SelectedSocialType = CurrentPatient.SosialType;
+           
+
             SocialTypes = new List<string>
             {
                 "oms",
@@ -49,7 +61,9 @@ namespace PharmacyApp.ViewModels.ForWindows
             SearchCompanyParameter = string.Empty;
             SelectedSocialType = SocialTypes[0];
             LoadCompanies();
-            Add = new RelayCommand(AddNewPatient);
+
+            SelectedInsuranceCompany = InsuranceCompanies.FirstOrDefault(p => p.Id == CurrentPatient.InsuranceCompany.Id);
+            Add = new RelayCommand(EditPatient);
             Cancel = new RelayCommand(CancelWindow);
         }
 
@@ -62,52 +76,30 @@ namespace PharmacyApp.ViewModels.ForWindows
         {
             var request = new RestRequest("api/InsuranceСompanies", Method.GET);
             var respons = restService.SendRequest(request);
-            if(respons.StatusCode == System.Net.HttpStatusCode.OK)
+            if (respons.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 InsuranceCompanies = JsonSerializer.Deserialize<ObservableCollection<InsuranceCompany>>(respons.Content);
             }
         }
 
-        private void AddNewPatient(object obj)
+        private void EditPatient(object obj)
         {
             if (Validate())
             {
-                CreateLoginAndPassword();
-                NewPatient = new Patient
-                {
-                    FullName = this.FullName,
-                    Guid = Guid.NewGuid().ToString(),
-                    Login = this.Login,
-                    Password = this.Passwrod,
-                    DateOfBirth = new DateTimeOffset(DateOfBirth.Year, DateOfBirth.Month, DateOfBirth.Day, 0, 0, 0, TimeSpan.Zero).ToUnixTimeMilliseconds(),
-                    Ein = this.Ein,
-                    Email = this.Email,
-                    PassportNumber = this.PassportNumber,
-                    PassportSeries = this.PassportSeries,
-                    Telephone = this.Telephone,
-                    SosialSecNumber = this.SosialSecNumber,
-                    SosialType = this.SelectedSocialType,
-                    InsuranceCompanyId = this.SelectedInsuranceCompany.Id
-                };
+                CurrentPatient.FullName = FullName;
+                CurrentPatient.Ein = Ein;
+                CurrentPatient.Email = Email;
+                CurrentPatient.InsuranceCompanyId = SelectedInsuranceCompany.Id;
+                CurrentPatient.PassportNumber = PassportNumber;
+                CurrentPatient.PassportSeries = PassportSeries;
+                CurrentPatient.SosialSecNumber = SosialSecNumber;
+                CurrentPatient.Telephone = Telephone;
+                CurrentPatient.SosialType = SelectedSocialType;
+                CurrentPatient.DateOfBirth = new DateTimeOffset(DateOfBirth.Year, DateOfBirth.Month, DateOfBirth.Day, 0, 0, 0, TimeSpan.Zero).ToUnixTimeSeconds();
+
                 DialogResult = true;
             }
             else Notification.ShowNotification("Не все данные заполнены!", "Внимание", NotificationType.Warning);
-        }
-
-        private void CreateLoginAndPassword()
-        {
-            string keys = "abcdefghijklmnopqarstuvwxyzABCDEFGHIJKLMNOPQARSUVWXYZ0123456789";
-            Random random = new Random();
-            var loginLenght = random.Next(6, 12);
-            var passwordLength = random.Next(6, 12);
-            for (int i = 0; i < loginLenght; i++)
-            {
-                Login += keys[random.Next(0, keys.Length)];
-            }
-            for (int i = 0; i < passwordLength; i++)
-            {
-                Passwrod += keys[random.Next(0, keys.Length)];
-            }
         }
 
         private bool Validate()
@@ -123,11 +115,11 @@ namespace PharmacyApp.ViewModels.ForWindows
                 return true;
             else return false;
         }
-        public bool? DialogResult { get=>dialogResult; set { dialogResult = value; OnPropertyChanged(); } }
+        public bool? DialogResult { get => dialogResult; set { dialogResult = value; OnPropertyChanged(); } }
         public string Login { get; set; }
         public string Passwrod { get; set; }
         public List<string> SocialTypes { get; set; }
-        public InsuranceCompany SelectedInsuranceCompany { get => selectedInsuranceCompany; set { selectedInsuranceCompany = value;OnPropertyChanged(); } }
+        public InsuranceCompany SelectedInsuranceCompany { get => selectedInsuranceCompany; set { selectedInsuranceCompany = value; OnPropertyChanged(); } }
         public string FullName { get => fullName; set { fullName = value; OnPropertyChanged(); } }
         public DateTime DateOfBirth { get => dateOfBirth; set { dateOfBirth = value; OnPropertyChanged(); } }
         public string PassportNumber { get => passportNumber; set { passportNumber = value; OnPropertyChanged(); } }

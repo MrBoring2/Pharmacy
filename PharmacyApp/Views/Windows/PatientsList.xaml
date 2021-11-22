@@ -53,7 +53,8 @@
             </GroupBox>
         </Grid>
         <Button Command="{Binding Select}" Content="Выбрать" HorizontalAlignment="Left" Margin="10,0,0,10" Grid.Row="2" VerticalAlignment="Bottom" Width="124"/>
-        <Button Command="{Binding Cancel}" Content="Отмена" HorizontalAlignment="Left" Margin="150,0,0,10" Grid.Row="2" VerticalAlignment="Bottom" Width="124"/>
+        <Button Command="{Binding Cancel}" Content="Отмена" HorizontalAlignment="Left" Margin="268,0,0,10" Grid.Row="2" VerticalAlignment="Bottom" Width="124"/>
         <Button Command="{Binding AddPatient}" Content="Добавить пациента" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" VerticalAlignment="Bottom" Width="140"/>
+        <Button Command="{Binding Edit}" Content="Редактировать" HorizontalAlignment="Left" Margin="139,0,0,10" Grid.Row="2" VerticalAlignment="Bottom" Width="124"/>
     </Grid>
 </Window>

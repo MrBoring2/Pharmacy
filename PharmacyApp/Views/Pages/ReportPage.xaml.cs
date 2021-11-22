@@ -4,7 +4,9 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -24,21 +26,29 @@ namespace PharmacyApp.Views.Pages
     /// <summary>
     /// Логика взаимодействия для ReportPage.xaml
     /// </summary>
-    public partial class ReportPage
+    public partial class ReportPage : INotifyPropertyChanged
     {
         public ObservableCollection<LaboratoryServicesToOrder> LaboratoryServicesToOrders { get; set; }
         public ObservableCollection<LaboratoryService> LaboratoryServices { get; set; }
         private RestService restService;
+        private DateTime startDate;
+        private DateTime endDate;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string property = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
         public ReportPage()
         {
             
             restService = new RestService();
             InitializeComponent();
             ChartServices.ChartAreas.Add(new ChartArea("Main"));
-            ChartServicesByTime.ChartAreas.Add(new ChartArea("Main"));
+            AvgPeopleAmount.ChartAreas.Add(new ChartArea("Main"));
             ChartResultResearch.ChartAreas.Add(new ChartArea("Main"));
-
-
+            LoadCharts();
             ChartServices.Legends.Add(new Legend("MainLegend"));
             var currentSeries = new Series("Services")
             {
@@ -50,8 +60,32 @@ namespace PharmacyApp.Views.Pages
             var resultSeries = new Series("ResultSeries");
 
             ChartServices.Series.Add(currentSeries);
-            ChartServicesByTime.Series.Add(currentSeries);
+           // ChartServicesByTime.Series.Add(currentSeries);
             ChartResultResearch.Series.Add(currentSeries);
+        }
+
+        private void LoadCharts()
+        {
+            var request = new RestRequest("api/LaboratoryServices", Method.GET);
+            var response = restService.SendRequest(request);
+            AvgPeopleAmount.Legends.Add("MainLegend");
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var services = new ObservableCollection<LaboratoryService>
+                    (JsonSerializer.Deserialize<List<LaboratoryService>>(response.Content));
+                foreach (var item in services)
+                {
+                    var countSeries = AvgPeopleAmount.Series.Add($"Service_{item.Code}");
+                    countSeries.ChartType = SeriesChartType.Line;
+                    var resSeries = ChartResultResearch.Series.Add($"Service_{item.Code}");
+                    resSeries.ChartType = SeriesChartType.Line;
+                    resSeries.IsVisibleInLegend = true;
+                    countSeries.IsVisibleInLegend = true;
+                }
+            }
+
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -126,48 +160,99 @@ namespace PharmacyApp.Views.Pages
             }
         }
 
+
+        private IEnumerable<DateTime> EachDay(DateTime start, DateTime end)
+        {
+            for (var day = start.Date; day.Date <=end.Date;day = day.AddDays(1))
+            {
+                yield return day;
+            }
+        }
+
+        private IEnumerable<DateTime> GetDateList(DateTime start, DateTime end)
+        {
+            var list = new List<DateTime>();
+            for (var day = start.Date; day.Date <= end.Date; day = day.AddDays(1))
+            {
+                list.Add(day);
+            }
+            return list;
+        }
+
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             var service = servicesList_Copy.SelectedItem as LaboratoryService;
             var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             
-
-
-            var request = new RestRequest("api/LaboratoryServices", Method.GET);
-            var response = restService.SendRequest(request);
-            var responseLab = restService.SendRequest(request);
+            var requestLab = new RestRequest("api/LaboratoryServicesToOrders", Method.GET);
+            var responseLab = restService.SendRequest(requestLab);
+          
             if (responseLab.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 LaboratoryServicesToOrders = new ObservableCollection<LaboratoryServicesToOrder>
-                    (JsonSerializer.Deserialize<List<LaboratoryServicesToOrder>>(response.Content));
+                    (JsonSerializer.Deserialize<List<LaboratoryServicesToOrder>>(responseLab.Content));
             }
 
+            var request = new RestRequest("api/LaboratoryServices", Method.GET);
+            var response = restService.SendRequest(request);
 
-            var requestLab = new RestRequest("api/LaboratoryServicesToOrders", Method.GET);
-           
-
+            
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 LaboratoryServices = new ObservableCollection<LaboratoryService>
                     (JsonSerializer.Deserialize<List<LaboratoryService>>(response.Content));
-              
-                Series resultSeries = ChartResultResearch.Series.FirstOrDefault();
+                PatientsAmount.Text = LaboratoryServicesToOrders.Count(p =>
+                    dateTime.AddMilliseconds(Convert.ToDouble(p.DateOfFinished)) >= StartDate.SelectedDate.Value
+                        && dateTime.AddMilliseconds(Convert.ToDouble(p.DateOfFinished)) <= EndDate.SelectedDate.Value).ToString();
+                AmountOfServices.Text = LaboratoryServicesToOrders.Count(p =>
+                    dateTime.AddMilliseconds(Convert.ToDouble(p.DateOfFinished)) >= StartDate.SelectedDate.Value
+                        && dateTime.AddMilliseconds(Convert.ToDouble(p.DateOfFinished)) <= EndDate.SelectedDate.Value).ToString();
+
+                ServicesListText.Text = "";
                 foreach (var item in LaboratoryServices)
                 {
-                    var list = new List<LaboratoryServicesToOrder>();
                     foreach (var item1 in LaboratoryServicesToOrders)
                     {
-                        if(item.Name.Equals(item1.LaboratoryService.Name))
+                        if (dateTime.AddMilliseconds(Convert.ToDouble(item1.DateOfFinished)) >= StartDate.SelectedDate.Value
+                        && dateTime.AddMilliseconds(Convert.ToDouble(item1.DateOfFinished)) <= EndDate.SelectedDate.Value
+                        && item.Code.Equals(item1.LaboratoryService.Code))
                         {
-                            list.Add(item1);
+                            ServicesListText.Text += item.Name + ", ";
+                            break;
                         }
                     }
+                    
+                }
 
-
-                    foreach (var listItem in list)
+                foreach (var item in LaboratoryServices)
+                {
+                    
+                    var list = new List<LaboratoryServicesToOrder>();
+                
+                    AvgPeopleAmount.Series.FindByName($"Service_{item.Code}").Points.Clear();
+                    foreach (var date in EachDay(StartDate.SelectedDate.Value, EndDate.SelectedDate.Value))
                     {
-                       // resultSeries.Points.AddXY(listItem.Analyzer)
+                        int count = LaboratoryServicesToOrders.Count(p => p.LaboratoryService.Code.Equals(item.Code)
+                        && dateTime.AddMilliseconds(Convert.ToDouble(p.DateOfFinished)) >= date
+                        && dateTime.AddMilliseconds(Convert.ToDouble(p.DateOfFinished)) <= date.AddDays(1));
+                        AvgPeopleAmount.Series.FindByName($"Service_{item.Code}").Points.AddXY(date.Date.ToString(), count);
                     }
+
+                    
+
+                    //foreach (var item1 in LaboratoryServicesToOrders)
+                    //{
+                    //    if(item.Name.Equals(item1.LaboratoryService.Name))
+                    //    {
+                    //        count++;
+                    //    }
+                    //}
+                    //resSeries
+
+                    //foreach (var listItem in list)
+                    //{
+                    //    resultSeries.Points.AddXY(dateTime.AddMilliseconds(Convert.ToDouble(listItem.DateOfFinished)).ToString(), listItem.Result);
+                    //}
                    // resultSeries.Points.AddXY(item.Result, );
                 }
             }

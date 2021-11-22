@@ -48,14 +48,14 @@
                         <ColumnDefinition Width="150*"/>
                         <ColumnDefinition Width="150*"/>
                     </Grid.ColumnDefinitions>
-                    <DatePicker HorizontalAlignment="Left" Margin="131,48,0,0" VerticalAlignment="Top" Height="36" Width="100"/>
-                    <DatePicker HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Height="36" Width="100"/>
+                    <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="131,48,0,0" VerticalAlignment="Top" Height="36" Width="100"/>
+                    <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Height="36" Width="100"/>
                     <TextBlock x:Name="Start" HorizontalAlignment="Left" Margin="10,26,0,0" TextWrapping="Wrap" Text="Начало" VerticalAlignment="Top" Width="77"/>
                     <TextBlock x:Name="End" HorizontalAlignment="Left" Margin="131,26,0,0" TextWrapping="Wrap" Text="Конец" VerticalAlignment="Top" Width="55"/>
                     <ComboBox x:Name="servicesList_Copy" ItemsSource="{Binding ServicesNames}" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="259" Height="22"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,89,0,0" TextWrapping="Wrap" Text="Услуга" VerticalAlignment="Top" Width="43"/>
                     <WindowsFormsHost HorizontalAlignment="Stretch" Margin="10,15,10,45" VerticalAlignment="Stretch" Grid.Row="1">
-                        <charts:Chart x:Name="ChartServicesByTime"/>
+                        <charts:Chart x:Name="AvgPeopleAmount"/>
                     </WindowsFormsHost>
                     <TextBlock HorizontalAlignment="Left" Margin="15,42,0,0" TextWrapping="Wrap" Text="Кол-во услуг: " VerticalAlignment="Top" Width="90" Grid.Column="1"/>
                     <TextBlock x:Name="AmountOfServices" HorizontalAlignment="Left" Margin="110,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="1"/>
@@ -63,7 +63,7 @@
                         <charts:Chart x:Name="ChartResultResearch"/>
                     </WindowsFormsHost>
                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,72,0,0" TextWrapping="Wrap" Text="Перечень услуг: " VerticalAlignment="Top" Width="115"/>
-                    <TextBlock x:Name="ServicesListText" Grid.Column="1" HorizontalAlignment="Left" Margin="123,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="auto"/>
+                    <TextBlock x:Name="ServicesListText" Grid.Column="1" HorizontalAlignment="Left" Margin="123,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="auto" Width="auto"/>
                     <TextBlock HorizontalAlignment="Left" Margin="15,12,0,0" TextWrapping="Wrap" Text="Кол-во пациентов: " VerticalAlignment="Top" Width="125" Grid.Column="1"/>
                     <TextBlock x:Name="PatientsAmount" HorizontalAlignment="Left" Margin="145,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.Column="1"/>
                     <Button x:Name="Create" Content="Сформировать отчёт" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="185" Click="Create_Click" Grid.Row="1"/>

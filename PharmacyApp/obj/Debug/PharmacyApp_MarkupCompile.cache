@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\App.xaml
-201846447530
+21-1798664416
 
-81643744392
+83365472229
 161-503387109
-CustomControls\PasswordUserControl.xaml;Resources\ResourseDictionaries\MainThemeStyle.xaml;Resources\ResourseDictionaries\PageToPageVM.xaml;Views\Pages\Accountant.xaml;Views\Pages\Administrator.xaml;Views\Pages\AnalizerWork.xaml;Views\Pages\InvoiceIssue.xaml;Views\Pages\Laboratorian.xaml;Views\Pages\LaboratorianResearcher.xaml;Views\Pages\LoggingUsersLogin.xaml;Views\Pages\ReceptionOfMaterial.xaml;Views\Pages\ReportPage.xaml;Views\Windows\AddPatient.xaml;Views\Windows\Analizer.xaml;Views\Windows\AnalizerResult.xaml;Views\Windows\InsuranceCompanies.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\MainAppWindow.xaml;Views\Windows\PatientsList.xaml;Views\Windows\ServicesList.xaml;
+CustomControls\PasswordUserControl.xaml;Resources\ResourseDictionaries\MainThemeStyle.xaml;Resources\ResourseDictionaries\PageToPageVM.xaml;Views\Pages\Accountant.xaml;Views\Pages\Administrator.xaml;Views\Pages\AnalizerWork.xaml;Views\Pages\InvoiceIssue.xaml;Views\Pages\Laboratorian.xaml;Views\Pages\LaboratorianResearcher.xaml;Views\Pages\LoggingUsersLogin.xaml;Views\Pages\ReceptionOfMaterial.xaml;Views\Pages\ReportPage.xaml;Views\Windows\AddPatient.xaml;Views\Windows\Analizer.xaml;Views\Windows\AnalizerResult.xaml;Views\Windows\EditPatient.xaml;Views\Windows\InsuranceCompanies.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\MainAppWindow.xaml;Views\Windows\PatientsList.xaml;Views\Windows\ServicesList.xaml;
 
 False
 

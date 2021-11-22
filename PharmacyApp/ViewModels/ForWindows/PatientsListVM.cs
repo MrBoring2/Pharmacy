@@ -17,7 +17,7 @@ namespace PharmacyApp.ViewModels.ForWindows
     public class PatientsListVM : BaseWindowVM
     {
         private bool? dialogResult;
-        public bool? DialogResult { get=>dialogResult; set { dialogResult = value; OnPropertyChanged(); } }
+        public bool? DialogResult { get => dialogResult; set { dialogResult = value; OnPropertyChanged(); } }
         private string seartchText;
         private Patient selectedPatient;
         private Filter searchParameter;
@@ -42,12 +42,34 @@ namespace PharmacyApp.ViewModels.ForWindows
                 new Filter("Телефон", "Telephone"),
                 new Filter("Серия паспорта", "PassportSeries"),
                 new Filter("Номер паспорта", "PassportNumber"),
-                new Filter("Дата рождения", "DateOfBirth")           
+                new Filter("Дата рождения", "DateOfBirth")
             };
 
             LoadPatients();
             SearchText = string.Empty;
             AddPatient = new RelayCommand(AddPatientAsync);
+            Edit = new RelayCommand(EditPatientAsync);
+        }
+
+        private async void EditPatientAsync(object obj)
+        {
+            if (SelectedPatient != null)
+            {
+                var editPatientVM = new EditPatientVM(SelectedPatient);
+                await Task.Run(() => WindowNavigation.Instance.OpenModalWindow(editPatientVM));
+
+                if (editPatientVM.DialogResult == true)
+                {
+                    var request = new RestRequest($"api/Patients/{editPatientVM.CurrentPatient.PatientId}", Method.PUT);
+                    request.AddJsonBody(JsonSerializer.Serialize(editPatientVM.CurrentPatient));
+                    var response = restService.SendRequest(request);
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        LoadPatients();
+                        OnPropertyChanged(nameof(FilteredPatients));
+                    }
+                }
+            }
         }
 
         private async void AddPatientAsync(object obj)
@@ -55,11 +77,11 @@ namespace PharmacyApp.ViewModels.ForWindows
             var addPatientVM = new AddPatientVM();
             await Task.Run(() => WindowNavigation.Instance.OpenModalWindow(addPatientVM));
 
-            if(addPatientVM.DialogResult == true)
+            if (addPatientVM.DialogResult == true)
             {
                 var request = new RestRequest("api/patients", Method.POST).AddJsonBody(JsonSerializer.Serialize(addPatientVM.NewPatient));
                 var response = restService.SendRequest(request);
-                if(response.StatusCode == System.Net.HttpStatusCode.Created)
+                if (response.StatusCode == System.Net.HttpStatusCode.Created)
                 {
                     LoadPatients();
                     OnPropertyChanged(nameof(FilteredPatients));
@@ -76,7 +98,7 @@ namespace PharmacyApp.ViewModels.ForWindows
         {
             RestRequest request = new RestRequest($"{Constants.apiAddress}/api/Patients", Method.GET);
             var response = restService.SendRequest(request);
-            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var data = JsonSerializer.Deserialize<List<Patient>>(response.Content);
                 Patients = new ObservableCollection<Patient>(data);
@@ -101,7 +123,7 @@ namespace PharmacyApp.ViewModels.ForWindows
             {
                 selectedPatient = value;
                 OnPropertyChanged();
-               
+
 
             }
         }
@@ -119,11 +141,12 @@ namespace PharmacyApp.ViewModels.ForWindows
         }
         public ObservableCollection<Patient> FilteredPatients
         {
-            get => SearchParameter != null && SearchParameter.Property != string.Empty ? 
-                new ObservableCollection<Patient>(Patients.Where(p => SearchParameter.IsEqual(p, SearchText))) 
+            get => SearchParameter != null && SearchParameter.Property != string.Empty ?
+                new ObservableCollection<Patient>(Patients.Where(p => SearchParameter.IsEqual(p, SearchText)))
                 : new ObservableCollection<Patient>(Patients);
         }
         public RelayCommand AddPatient { get; set; }
+        public RelayCommand Edit { get; set; }
         public RelayCommand Select
         {
             get

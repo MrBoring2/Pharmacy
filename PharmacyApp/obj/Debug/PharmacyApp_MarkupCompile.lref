@@ -1,4 +1,4 @@
-﻿C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FC:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\App.xaml;;
 FC:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\CustomControls\PasswordUserControl.xaml;;
 FC:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\Resources\ResourseDictionaries\PageToPageVM.xaml;;
@@ -19,4 +19,5 @@ FC:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\Views\Windows\LoginWindow.xaml
 FC:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\Views\Windows\MainAppWindow.xaml;;
 FC:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\Views\Windows\PatientsList.xaml;;
 FC:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\Views\Windows\ServicesList.xaml;;
+FC:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyApp\Views\Windows\EditPatient.xaml;;
 

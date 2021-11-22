@@ -269,6 +269,7 @@
     <Compile Include="ViewModels\ForWindows\AdministratorVM.cs" />
     <Compile Include="ViewModels\ForWindows\AnalizerResultVM.cs" />
     <Compile Include="ViewModels\ForWindows\AnalizerVM.cs" />
+    <Compile Include="ViewModels\ForWindows\EditPatientVM.cs" />
     <Compile Include="ViewModels\ForWindows\InsuranceCompaniesVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianResearcherVM.cs" />
     <Compile Include="ViewModels\ForWindows\LaboratorianVM.cs" />
@@ -311,6 +312,9 @@
     </Compile>
     <Compile Include="Views\Windows\AnalizerResult.xaml.cs">
       <DependentUpon>AnalizerResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\EditPatient.xaml.cs">
+      <DependentUpon>EditPatient.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\InsuranceCompanies.xaml.cs">
       <DependentUpon>InsuranceCompanies.xaml</DependentUpon>
@@ -418,6 +422,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\AnalizerResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\EditPatient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
