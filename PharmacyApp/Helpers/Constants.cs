@@ -8,7 +8,7 @@ namespace PharmacyApp.Helpers
 {
     public class Constants
     {
-        public const string apiAddress = "http://localhost:50764";
+        public const string apiAddress = "http://172.20.1.144:50765";
         public const int seans_end_notification = 15;
         public const int quartzization_time_minutes = 30;
         public static readonly TimeSpan seans_time = new TimeSpan(2, 30, 0);

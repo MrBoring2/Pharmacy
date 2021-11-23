@@ -1218,3 +1218,4 @@ C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile.Android\obj\D
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile.Android\obj\Debug\110\stamp\_GenerateJavaStubs.stamp
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile.Android\obj\Debug\110\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile.Android\obj\Debug\110\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\user452.CHENK\.ssh\Pharmacy\PharmacyMobile\PharmacyMobile.Android\bin\Debug\Resources\Data_News.json

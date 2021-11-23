@@ -30,6 +30,14 @@ namespace PharmacyApi.Controllers
             _context = context;
             _hubContext = hubContext;
         }
+        [HttpPost("/authPatient")]
+        public async Task<IActionResult> AuthPatient(string login, string password)
+        {
+            Patient patient = await _context.Patients.Include(r => r.InsuranceCompany)
+               .FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
+            return Ok();
+        }
+
 
         // POST api/<AuthenticationController>
         [HttpPost("/token")]

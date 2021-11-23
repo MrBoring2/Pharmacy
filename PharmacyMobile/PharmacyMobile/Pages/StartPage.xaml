@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PharmacyMobile.Pages.StartPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="#FF76E383" Padding="24" CornerRadius="0"/>
+
+        <Button Text="Новости" BackgroundColor="#FF76E383" x:Name="News" Clicked="News_Clicked"/>
+        <Button Text="Услуги" BackgroundColor="#FF76E383" x:Name="Services" Clicked="Services_Clicked"/>
+    </StackLayout>
+
+</ContentPage>
