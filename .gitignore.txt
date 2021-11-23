@@ -1,1 +1,1 @@
-/aaa.txt
+aaa.txt
