@@ -1,7 +1,10 @@
-﻿using System;
+﻿using PharmacyMobile.Models.POCO_classes;
+using PharmacyMobile.Services;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -12,30 +15,32 @@ namespace PharmacyMobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ServicesPage : ContentPage
     {
-        public ObservableCollection<string> Items { get; set; }
+        public ObservableCollection<LaboratoryService> Services { get; set; }
 
         public ServicesPage()
         {
             InitializeComponent();
+            LoadServices();
 
-            Items = new ObservableCollection<string>
-            {
-                "Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-                "Item 5"
-            };
+            BindingContext = this;
 
-            MyListView.ItemsSource = Items;
         }
 
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void LoadServices()
+        {
+            var response = await ClientService.Instance.GetRequest("api/LaboratoryServices");
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                Services = JsonSerializer.Deserialize<ObservableCollection<LaboratoryService>>(response.Content.ReadAsStringAsync().Result);
+            }
+            ServicesListView.ItemsSource = Services;
+        }
+
+        private void ServicesListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
                 return;
 
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;

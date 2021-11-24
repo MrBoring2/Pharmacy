@@ -12,10 +12,10 @@
                 <ViewCell>
                     <StackLayout Orientation="Vertical" Padding="10">
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" FontFamily="Comic Sans MS"/>
-                            <Label Text="{Binding Date}" MinimumWidthRequest="100" FontSize="14" HorizontalTextAlignment="End" FontFamily="Comic Sans MS"/>
+                            <Label Text="{Binding Title}" Style="{StaticResource LabelTitle}"/>
+                            <Label Text="{Binding Date}" MinimumWidthRequest="100" HorizontalTextAlignment="End"/>
                         </StackLayout>
-                        <Label Text="{Binding Text}" FontSize="16" FontFamily="Comic Sans MS"/>
+                        <Label Text="{Binding Text}" Style="{StaticResource LabelText}"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

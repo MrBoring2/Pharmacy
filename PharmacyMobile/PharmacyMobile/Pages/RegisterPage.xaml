@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PharmacyMobile.Pages.RegisterPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <TableView>
+                <TableView.Root>
+                    <TableRoot>
+                        <TableSection Title="Персональные данные">
+                            <EntryCell Label="ФИО" Text="{Binding FIO}"/>
+                            <EntryCell Label="Логин" Text="{Binding Login}"/>
+                            <EntryCell Label="Пароль" Text="{Binding Password}"/>
+                            <EntryCell Label="Повторите пароль" Text="{Binding RepeatPassword}"/>
+                            <EntryCell Label="Номер страхового полиса" Text="{Binding SequrityNumber}"/>
+                            <ViewCell>
+                                <StackLayout Margin="15,0,0,0" Orientation="Horizontal">
+                                    <Label VerticalOptions="CenterAndExpand" HorizontalOptions="End" Text="Дата рождения"/>
+                                    <DatePicker Date="{Binding DateOfBirth}" HorizontalOptions="FillAndExpand" Margin="0,0,10,0"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                        <TableSection Title="Пасспортные данные">
+                            <EntryCell Label="Номер" Text="{Binding PassportNumber}"/>
+                            <EntryCell Label="Серия" Text="{Binding PassportSeries}"/>
+                        </TableSection>
+                        <TableSection Title="Контакты">
+                            <EntryCell Label="Телефон" Text="{Binding Phone}"/>
+                            <EntryCell Label="Email" Text="{Binding Email}"/>
+                        </TableSection>
+                    </TableRoot>
+                </TableView.Root>
+            </TableView>
+
+            <Button x:Name="register" Text="Зарегистрироваться" Margin="10" Clicked="register_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="BackgroundColor" Value="#FF76E383"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="BorderColor" Value="#1C8C51"/>
+        <Setter Property="BorderWidth" Value="1"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}">
+        <Setter Property="FontFamily" Value="Comic Sans MS"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="LabelTitle">
+        <Setter Property="FontFamily" Value="Comic Sans MS"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="LabelText">
+        <Setter Property="FontFamily" Value="Comic Sans MS"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <Style TargetType="{x:Type Entry}">
+        <Setter Property="FontFamily" Value="Comic Sans MS"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+</ResourceDictionary>

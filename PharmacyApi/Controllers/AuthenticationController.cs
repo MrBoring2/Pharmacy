@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using PharmacyApi.Data.DBData;
 using PharmacyApi.Data.DBData.EntityModels;
 using PharmacyApi.Helpers;
+using PharmacyApi.Models;
 using PharmacyApi.Services.Hubs;
 using System;
 using System.Collections.Generic;
@@ -30,11 +31,11 @@ namespace PharmacyApi.Controllers
             _context = context;
             _hubContext = hubContext;
         }
-        [HttpPost("/authPatient")]
-        public async Task<IActionResult> AuthPatient(string login, string password)
+        [HttpPost("api/authPatient")]
+        public async Task<IActionResult> AuthPatient(LoginModel loginModel)
         {
             Patient patient = await _context.Patients.Include(r => r.InsuranceCompany)
-               .FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
+               .FirstOrDefaultAsync(x => x.Login == loginModel.Login && x.Password == loginModel.Password);;
             return Ok();
         }
 

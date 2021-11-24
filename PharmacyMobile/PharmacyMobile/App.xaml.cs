@@ -11,7 +11,7 @@ namespace PharmacyMobile
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new StartPage());
+            MainPage = new NavigationPage(new StartPage()) { BarBackgroundColor = Color.FromHex("FF76E383") };
         }
 
         protected override void OnStart()

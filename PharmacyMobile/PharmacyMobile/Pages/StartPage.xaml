@@ -4,10 +4,11 @@
              x:Class="PharmacyMobile.Pages.StartPage">
 
     <StackLayout>
-        <Frame BackgroundColor="#FF76E383" Padding="24" CornerRadius="0"/>
+        <Image Source="logo.png"/>
+        <Button Text="Новости" x:Name="News" Clicked="News_Clicked"/>
+        <Button Text="Услуги" x:Name="Services" Clicked="Services_Clicked"/>
 
-        <Button Text="Новости" BackgroundColor="#FF76E383" x:Name="News" Clicked="News_Clicked"/>
-        <Button Text="Услуги" BackgroundColor="#FF76E383" x:Name="Services" Clicked="Services_Clicked"/>
+        <Button Text="Авторизация" VerticalOptions="EndAndExpand" x:Name="Login" Clicked="Login_Clicked"/>
     </StackLayout>
 
 </ContentPage>

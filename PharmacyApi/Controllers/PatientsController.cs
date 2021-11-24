@@ -89,7 +89,7 @@ namespace PharmacyApi.Controllers
                 _context.Entry(patient).State = EntityState.Added;
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
                 if (PatientExists(patient.PatientId))
                 {

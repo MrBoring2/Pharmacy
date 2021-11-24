@@ -2,31 +2,29 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PharmacyMobile.Pages.ServicesPage">
-  <ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+    <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Услуга" HorizontalOptions="StartAndExpand" Style="{StaticResource LabelText}" Margin="10,0,10,0"/>
+            <Label Text="Стоимость" HorizontalOptions="EndAndExpand" Style="{StaticResource LabelText}" Margin="10,0,10,0"/>
+        </StackLayout>
+        <ListView x:Name="ServicesListView"
+            ItemsSource="{Binding Services}"
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True" SeparatorColor="#FF76E383" ItemTapped="ServicesListView_ItemTapped">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+
+                            <Label Text="{Binding Path=Name}" Style="{StaticResource LabelTitle}"  HorizontalOptions="StartAndExpand"/>
+                            <Label Text="{Binding  Path=Price, StringFormat='{0:F2} руб.'}" HorizontalOptions="EndAndExpand"/>
+
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
 </ContentPage>

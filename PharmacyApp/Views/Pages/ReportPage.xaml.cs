@@ -48,6 +48,8 @@ namespace PharmacyApp.Views.Pages
             ChartServices.ChartAreas.Add(new ChartArea("Main"));
             AvgPeopleAmount.ChartAreas.Add(new ChartArea("Main"));
             ChartResultResearch.ChartAreas.Add(new ChartArea("Main"));
+
+            
             LoadCharts();
             ChartServices.Legends.Add(new Legend("MainLegend"));
             var currentSeries = new Series("Services")
@@ -58,6 +60,7 @@ namespace PharmacyApp.Views.Pages
 
             var serviceSeries = new Series("ServicesByTime");
             var resultSeries = new Series("ResultSeries");
+            
 
             ChartServices.Series.Add(currentSeries);
            // ChartServicesByTime.Series.Add(currentSeries);
@@ -148,7 +151,7 @@ namespace PharmacyApp.Views.Pages
                
                 foreach (var item in list)
                 {
-                   
+                  
                     currentSerise.Points.AddXY(dateTime.AddMilliseconds(Convert.ToDouble(item.DateOfFinished)).ToString(), item.Result); ;
                     
                 }
