@@ -29,6 +29,11 @@ namespace PharmacyMobile.Pages
         private async void LoadServices()
         {
             var response = await ClientService.Instance.GetRequest("api/LaboratoryServices");
+            if (response == null)
+            {
+                await DisplayAlert("Внимание", "Не удалось подлкючиться к серверу!", "ОК");
+                return;
+            }
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 Services = JsonSerializer.Deserialize<ObservableCollection<LaboratoryService>>(response.Content.ReadAsStringAsync().Result);

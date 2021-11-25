@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PharmacyMobile.Pages.PersonalAccountPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <TableView>
+                <TableView.Root>
+                    <TableRoot>
+                        <TableSection Title="Персональные данные">
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="ФИО" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding FIO}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Дата рождения" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding DateOfBirth}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Возраст" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding Age}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Номер страхового полиса" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding SequrityNumber}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Логин" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding Login}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Пароль" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding Password}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Номер страхового полиса" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding SequrityNumber}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                        <TableSection Title="Пасспортные данные">
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Номер" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding PassportNumber}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Серия" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding PassportSeries}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                        <TableSection Title="Контакты">
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Телефон" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding Phone}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Margin="10,0,0,0" Text="Email" Style="{StaticResource LabelTitle}"/>
+                                    <Label Margin="0,0,10,0" Text="{Binding Email}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView.Root>
+            </TableView>
+            <Button Text="Редактировать информацию" x:Name="Edit" Clicked="Edit_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--<LinearGradientBrush x:Key="gradient">
+        <GradientStop Color="Yellow" Offset="0.1"/>
+        <GradientStop Color="Orange" Offset="1.0"/>
+    </LinearGradientBrush>
+    
+    <Style TargetType="{x:Type StackLayout}">
+        <Setter Property="Background" Value="{DynamicResource gradient}"/>
+    </Style>-->
+    
     <Style TargetType="{x:Type Button}">
         <Setter Property="BackgroundColor" Value="#FF76E383"/>
         <Setter Property="Margin" Value="10"/>

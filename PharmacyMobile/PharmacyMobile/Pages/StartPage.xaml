@@ -7,7 +7,8 @@
         <Image Source="logo.png"/>
         <Button Text="Новости" x:Name="News" Clicked="News_Clicked"/>
         <Button Text="Услуги" x:Name="Services" Clicked="Services_Clicked"/>
-
+        <Button Text="Личный кабинет" x:Name="ToPersonalAccount" Clicked="ToPersonalAccount_Clicked"/>
+        <Button Text="Выход" VerticalOptions="EndAndExpand" x:Name="Exit" Clicked="Exit_Clicked"/>
         <Button Text="Авторизация" VerticalOptions="EndAndExpand" x:Name="Login" Clicked="Login_Clicked"/>
     </StackLayout>
 

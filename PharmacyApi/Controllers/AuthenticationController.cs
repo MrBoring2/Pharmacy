@@ -32,11 +32,13 @@ namespace PharmacyApi.Controllers
             _hubContext = hubContext;
         }
         [HttpPost("api/authPatient")]
-        public async Task<IActionResult> AuthPatient(LoginModel loginModel)
+        public async Task<IActionResult> AuthPatient([FromBody] LoginModel loginModel)
         {
             Patient patient = await _context.Patients.Include(r => r.InsuranceCompany)
-               .FirstOrDefaultAsync(x => x.Login == loginModel.Login && x.Password == loginModel.Password);;
-            return Ok();
+               .FirstOrDefaultAsync(x => x.Login == loginModel.Login && x.Password == loginModel.Password);
+            if (patient != null)
+                return Ok(patient);
+            else return NotFound();
         }
 
 

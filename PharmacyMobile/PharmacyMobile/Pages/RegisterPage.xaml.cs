@@ -123,10 +123,15 @@ namespace PharmacyMobile.Pages
                     Ua = "",
                 }), Encoding.UTF8, "application/json");
 
-            var request = await ClientService.Instance.PostRequest(httpRequestMessage);
-            if (request.StatusCode == System.Net.HttpStatusCode.Created)
+            var response = await ClientService.Instance.PostRequest(httpRequestMessage);
+            if (response == null)
             {
-                await DisplayAlert("Вы услешно зарегистрировались!", "Оповещение", "ОК");
+                await DisplayAlert("Внимание", "Не удалось подлкючиться к серверу!", "ОК");
+                return;
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.Created)
+            {
+                await DisplayAlert("Оповещенеи!", "Вы успешно зарегистрировались", "ОК");
                 await Navigation.PushAsync(new LoginPage());
             }
         }

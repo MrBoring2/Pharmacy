@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PharmacyMobile.Pages.EditAccountPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Телефон"/>
+            <Entry Text="{Binding NewPhone}"/>
+            <Label Text="Email"/>
+            <Entry Text="{Binding NewEmail}"/>
+            <Label Text="Пароль"/>
+            <Entry Text="{Binding NewPassword}"/>
+            <Button x:Name="Save" Text="Сохранить" Clicked="Save_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

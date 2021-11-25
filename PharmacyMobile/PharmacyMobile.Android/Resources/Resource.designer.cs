@@ -10280,34 +10280,37 @@ namespace PharmacyMobile.Droid
 			public const int secondary_text_disabled_material_light = 2131034311;
 			
 			// aapt resource value: 0x7F0500C8
-			public const int switch_thumb_disabled_material_dark = 2131034312;
+			public const int splash_background = 2131034312;
 			
 			// aapt resource value: 0x7F0500C9
-			public const int switch_thumb_disabled_material_light = 2131034313;
+			public const int switch_thumb_disabled_material_dark = 2131034313;
 			
 			// aapt resource value: 0x7F0500CA
-			public const int switch_thumb_material_dark = 2131034314;
+			public const int switch_thumb_disabled_material_light = 2131034314;
 			
 			// aapt resource value: 0x7F0500CB
-			public const int switch_thumb_material_light = 2131034315;
+			public const int switch_thumb_material_dark = 2131034315;
 			
 			// aapt resource value: 0x7F0500CC
-			public const int switch_thumb_normal_material_dark = 2131034316;
+			public const int switch_thumb_material_light = 2131034316;
 			
 			// aapt resource value: 0x7F0500CD
-			public const int switch_thumb_normal_material_light = 2131034317;
+			public const int switch_thumb_normal_material_dark = 2131034317;
 			
 			// aapt resource value: 0x7F0500CE
-			public const int test_mtrl_calendar_day = 2131034318;
+			public const int switch_thumb_normal_material_light = 2131034318;
 			
 			// aapt resource value: 0x7F0500CF
-			public const int test_mtrl_calendar_day_selected = 2131034319;
+			public const int test_mtrl_calendar_day = 2131034319;
 			
 			// aapt resource value: 0x7F0500D0
-			public const int tooltip_background_dark = 2131034320;
+			public const int test_mtrl_calendar_day_selected = 2131034320;
 			
 			// aapt resource value: 0x7F0500D1
-			public const int tooltip_background_light = 2131034321;
+			public const int tooltip_background_dark = 2131034321;
+			
+			// aapt resource value: 0x7F0500D2
+			public const int tooltip_background_light = 2131034322;
 			
 			static Color()
 			{
@@ -11785,13 +11788,16 @@ namespace PharmacyMobile.Droid
 			public const int notify_panel_notification_icon_bg = 2131165325;
 			
 			// aapt resource value: 0x7F07008E
-			public const int test_custom_background = 2131165326;
+			public const int splash_screen = 2131165326;
 			
 			// aapt resource value: 0x7F07008F
-			public const int tooltip_frame_dark = 2131165327;
+			public const int test_custom_background = 2131165327;
 			
 			// aapt resource value: 0x7F070090
-			public const int tooltip_frame_light = 2131165328;
+			public const int tooltip_frame_dark = 2131165328;
+			
+			// aapt resource value: 0x7F070091
+			public const int tooltip_frame_light = 2131165329;
 			
 			static Drawable()
 			{
