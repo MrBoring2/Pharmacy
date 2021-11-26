@@ -331,7 +331,7 @@ namespace PharmacyApp.ViewModels.ForPages
             Word.Paragraph priceParagraph = document.Paragraphs.Add();
             priceParagraph.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
             priceParagraph.Range.Font.Size = 25;
-            priceParagraph.Range.Text = $"Полная стоиомть: {order.LaboratoryServicesToOrders.Sum(p => p.LaboratoryService.Price)} руб.";
+            priceParagraph.Range.Text = $"Полная стоимость: {order.LaboratoryServicesToOrders.Sum(p => p.LaboratoryService.Price)} руб.";
 
             document.SaveAs2(AppDomain.CurrentDomain.BaseDirectory + $@"../../Электронные документы/Заказ №{order.Id}.pdf", Word.WdExportFormat.wdExportFormatPDF);
 

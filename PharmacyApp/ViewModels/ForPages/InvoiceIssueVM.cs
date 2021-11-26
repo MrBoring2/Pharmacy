@@ -106,7 +106,7 @@ namespace PharmacyApp.ViewModels.ForPages
                         var priceParagraph = document.Paragraphs.Add();
                         priceParagraph.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
                         priceParagraph.Range.Font.Size = 18;
-                        priceParagraph.Range.Text = $"Полная стоиомть услуг пациента: {order.LaboratoryServicesToOrders.Sum(p => p.LaboratoryService.Price)} руб.";
+                        priceParagraph.Range.Text = $"Полная стоимость услуг пациента: {order.LaboratoryServicesToOrders.Sum(p => p.LaboratoryService.Price)} руб.";
                         priceParagraph.Range.InsertParagraphAfter();
                         totalPrice += order.LaboratoryServicesToOrders.Sum(p => p.LaboratoryService.Price);
 
@@ -114,7 +114,7 @@ namespace PharmacyApp.ViewModels.ForPages
                     var totalPriceParagraph = document.Paragraphs.Add();
                     totalPriceParagraph.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
                     totalPriceParagraph.Range.Font.Size = 25;
-                    totalPriceParagraph.Range.Text = $"Полная стоиомть: {totalPrice} руб.";
+                    totalPriceParagraph.Range.Text = $"Полная стоимость: {totalPrice} руб.";
 
 
                     var postRequest = new RestRequest("api/InvoicesIssueds", Method.POST)

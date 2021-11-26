@@ -67,6 +67,10 @@ namespace PharmacyMobile.Pages
                 await DisplayAlert("Оповещение", "Вы вошли!", "ОК");
                 await Navigation.PopAsync();
             }
+            else
+            {
+                await DisplayAlert("Оповещение", "Неверный логин или пароль!", "ОК");
+            }
         }
       
     }

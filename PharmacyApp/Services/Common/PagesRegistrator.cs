@@ -23,6 +23,7 @@ namespace PharmacyApp.Services.Common
                 case Roles.Laboratorian:
                     RolePages.Add(new LaboratorianMainPageVM());
                     RolePages.Add(new ReceptionOfMaterialVM());
+                    RolePages.Add(new ReportPageVM());
                     break;
                 case Roles.LaboratorianResearcher:
                     RolePages.Add(new LaboratorianResearcherMainPageVM());
@@ -36,6 +37,7 @@ namespace PharmacyApp.Services.Common
                 case Roles.Administrator:
                     RolePages.Add(new AdministratorVMMainPage());
                     RolePages.Add(new LogginUsersLoginVM());
+                    RolePages.Add(new ReportPageVM());
                     break;
                 default:
                     break;

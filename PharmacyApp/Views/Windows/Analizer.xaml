@@ -29,8 +29,6 @@
                     <DataGridTextColumn Header="Результат" Width="*" Binding="{Binding Result, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Принять результат" Command="{Binding Accept}" Width="150" Margin="201,0,0,6"/>
-            <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Отклонить результат" Command="{Binding Reject}" Width="150" Margin="356,0,0,6"/>
 
             <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Отправить на исследование" Command="{Binding Send}" Margin="5,0,0,5"/>
         </Grid>

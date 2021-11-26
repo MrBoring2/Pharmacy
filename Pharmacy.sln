@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyApi", "PharmacyApi\PharmacyApi.csproj", "{0D10D403-ACA0-4929-B669-FB5957C140C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyApi", "PharmacyApi\PharmacyApi.csproj", "{0D10D403-ACA0-4929-B669-FB5957C140C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyApp", "PharmacyApp\PharmacyApp.csproj", "{014FF2D7-F151-4DD4-A84C-7BA3979C913A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyMobile.Android", "PharmacyMobile\PharmacyMobile.Android\PharmacyMobile.Android.csproj", "{52EB7DC2-91B7-454C-9B3A-47030968BA67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyMobile", "PharmacyMobile\PharmacyMobile\PharmacyMobile.csproj", "{E33DFC9D-21DB-4D50-9BCA-487919C58D3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyMobile", "PharmacyMobile\PharmacyMobile\PharmacyMobile.csproj", "{E33DFC9D-21DB-4D50-9BCA-487919C58D3B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analizer", "Analizer\Analizer.csproj", "{BC1C6F34-B820-40E0-9DD6-788AA4810149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalizerTest", "AnalizerTest\AnalizerTest.csproj", "{FF9EB515-3B42-4604-89B3-320210C11879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,14 @@ Global
 		{E33DFC9D-21DB-4D50-9BCA-487919C58D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E33DFC9D-21DB-4D50-9BCA-487919C58D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E33DFC9D-21DB-4D50-9BCA-487919C58D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC1C6F34-B820-40E0-9DD6-788AA4810149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1C6F34-B820-40E0-9DD6-788AA4810149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1C6F34-B820-40E0-9DD6-788AA4810149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1C6F34-B820-40E0-9DD6-788AA4810149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF9EB515-3B42-4604-89B3-320210C11879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF9EB515-3B42-4604-89B3-320210C11879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF9EB515-3B42-4604-89B3-320210C11879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF9EB515-3B42-4604-89B3-320210C11879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
