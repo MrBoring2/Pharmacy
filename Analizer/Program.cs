@@ -16,9 +16,11 @@ namespace Analizer
         public static List<Analizer> Analizers { get; set; }
         public static void Main(string[] args)
         {
-            Timer = new Timer();
-            Timer.Interval = 1000;
-            Timer.AutoReset = true;
+            Timer = new Timer
+            {
+                Interval = 1000,
+                AutoReset = true
+            };
             Analizers = new List<Analizer>()
             {
                 new Analizer()

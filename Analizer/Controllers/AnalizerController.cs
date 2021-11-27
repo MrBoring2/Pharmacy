@@ -43,7 +43,7 @@ namespace Analizer.Controllers
                 return BadRequest($"Analizer is busy");
             foreach (var item in services)
             {
-                if(services.FirstOrDefault(p=>p.Equals(item)) == null)
+                if(analizer.AvailableLaboratoryServicesCode.FirstOrDefault(p=>p.Equals(item)) == null)
                     return BadRequest($"Analyzer can not do this order.May be order contains services which analyzer does not support");
             }
 
@@ -53,7 +53,8 @@ namespace Analizer.Controllers
            // var b = Program.Analizers.FirstOrDefault(p => p.Name.Equals(name));
             return Ok();
         }
-        private Task HandleTimer(string name)
+
+        private static Task HandleTimer(string name)
         {
             return Task.Run(() =>
             {

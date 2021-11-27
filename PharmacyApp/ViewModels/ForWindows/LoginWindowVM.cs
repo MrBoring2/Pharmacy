@@ -26,7 +26,7 @@ namespace PharmacyApp.ViewModels.ForWindows
         private bool capchaCheck;
         private bool isNotBlock;
         private TimeSpan time;
-        private Dispatcher dispatcher;
+        private readonly Dispatcher dispatcher;
 
         public LoginWindowVM()
         {
